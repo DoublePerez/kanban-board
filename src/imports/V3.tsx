@@ -19,7 +19,7 @@ function Svg() {
 function Heading1() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Heading 3">
-      <div className="flex flex-col font-['Basis_Grotesque_Arabic_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-center text-white tracking-[-0.72px] whitespace-nowrap">
+      <div className="flex flex-col font-['Basis_Grotesque_Arabic_Pro',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-center text-white tracking-[-0.72px] whitespace-nowrap">
         <p className="leading-[24px]">Projects</p>
       </div>
     </div>
@@ -69,7 +69,7 @@ function Button() {
 function Container2() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Light',sans-serif] font-light justify-center leading-[0] relative shrink-0 text-[#28e413] text-[14px] text-center tracking-[-0.14px] w-[153px]">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-light justify-center leading-[0] relative shrink-0 text-[#28e413] text-[14px] text-center tracking-[-0.14px] w-[153px]">
         <p className="leading-[20px] whitespace-pre-wrap">Shrek Film Archive</p>
       </div>
     </div>
@@ -79,7 +79,7 @@ function Container2() {
 function Container3() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
         <p className="leading-[16px]">0</p>
       </div>
     </div>
@@ -106,7 +106,7 @@ function Container1() {
 function Container5() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
         <p className="leading-[20px]">Ironhack</p>
       </div>
     </div>
@@ -116,7 +116,7 @@ function Container5() {
 function Container6() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
         <p className="leading-[16px]">0</p>
       </div>
     </div>
@@ -143,7 +143,7 @@ function Container4() {
 function Container8() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
         <p className="leading-[20px]">Personal</p>
       </div>
     </div>
@@ -153,7 +153,7 @@ function Container8() {
 function Container9() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
         <p className="leading-[16px]">0</p>
       </div>
     </div>
@@ -180,7 +180,7 @@ function Container7() {
 function Container11() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[14px] text-center tracking-[-0.14px] whitespace-nowrap">
         <p className="leading-[20px]">Root Radio</p>
       </div>
     </div>
@@ -190,7 +190,7 @@ function Container11() {
 function Container12() {
   return (
     <div className="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1aa] text-[12px] text-center whitespace-nowrap">
         <p className="leading-[16px]">0</p>
       </div>
     </div>
@@ -260,7 +260,7 @@ function Frame3() {
     <div className="bg-[rgba(70,70,70,0.3)] content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[8px] relative rounded-[8px] shrink-0">
       <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.05)] border-solid inset-0 pointer-events-none rounded-[8px]" />
       <Svg2 />
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[14px] text-center text-white tracking-[2.52px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[14px] text-center text-white tracking-[2.52px] whitespace-nowrap">
         <p className="leading-[20px]">NEW</p>
       </div>
     </div>
@@ -280,7 +280,7 @@ function Frame4() {
 function Heading() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Heading 2">
-      <div className="flex flex-col font-['JetBrains_Mono:Bold',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white tracking-[0.24px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white tracking-[0.24px] whitespace-nowrap">
         <p className="leading-[24px]">TO DO</p>
       </div>
     </div>
@@ -290,7 +290,7 @@ function Heading() {
 function Container18() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[14px] text-[rgba(246,246,246,0.76)] tracking-[0.28px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[14px] text-[rgba(246,246,246,0.76)] tracking-[0.28px] whitespace-nowrap">
         <p className="leading-[20px]">[2]</p>
       </div>
     </div>
@@ -356,7 +356,7 @@ function Margin() {
 function Container19() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">DESIGN DOCUMENTATION</p>
       </div>
     </div>
@@ -366,7 +366,7 @@ function Container19() {
 function Container20() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">{`Style Tile `}</p>
       </div>
     </div>
@@ -385,7 +385,7 @@ function Frame6() {
 function Overlay() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -410,7 +410,7 @@ function Svg4() {
 function Container23() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -454,7 +454,7 @@ function OverlayBorderShadowOverlayBlur() {
 function Container24() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">DESIGN DOCUMENTATION</p>
       </div>
     </div>
@@ -464,7 +464,7 @@ function Container24() {
 function Container25() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">{`Style Tile `}</p>
       </div>
     </div>
@@ -483,7 +483,7 @@ function Frame8() {
 function Overlay1() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -508,7 +508,7 @@ function Svg5() {
 function Container28() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 24</p>
       </div>
     </div>
@@ -552,7 +552,7 @@ function OverlayBorderShadowOverlayBlur1() {
 function Container29() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">EXCEL FILM ARCHIVE</p>
       </div>
     </div>
@@ -562,7 +562,7 @@ function Container29() {
 function Container30() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">{`Compile list & posters`}</p>
       </div>
     </div>
@@ -581,7 +581,7 @@ function Frame9() {
 function Overlay2() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -606,7 +606,7 @@ function Svg6() {
 function Container33() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -650,7 +650,7 @@ function OverlayBorderShadowOverlayBlur2() {
 function Container34() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">EXCEL FILM ARCHIVE</p>
       </div>
     </div>
@@ -660,7 +660,7 @@ function Container34() {
 function Container35() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">{`Compile list & posters`}</p>
       </div>
     </div>
@@ -679,7 +679,7 @@ function Frame10() {
 function Overlay3() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -704,7 +704,7 @@ function Svg7() {
 function Container38() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 24</p>
       </div>
     </div>
@@ -763,7 +763,7 @@ function Container15() {
 function Heading2() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Heading 2">
-      <div className="flex flex-col font-['JetBrains_Mono:Bold',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white tracking-[0.24px] uppercase whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white tracking-[0.24px] uppercase whitespace-nowrap">
         <p className="leading-[24px]">In Progress</p>
       </div>
     </div>
@@ -773,7 +773,7 @@ function Heading2() {
 function Container42() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#f6f6f6] text-[14px] tracking-[0.28px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#f6f6f6] text-[14px] tracking-[0.28px] whitespace-nowrap">
         <p className="leading-[20px]">[2]</p>
       </div>
     </div>
@@ -831,7 +831,7 @@ function Margin1() {
 function Container43() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
         <p className="leading-[20px] whitespace-pre-wrap">INTERACTIVE PROTOTYPE</p>
       </div>
     </div>
@@ -841,7 +841,7 @@ function Container43() {
 function Container44() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Log in, d.specification, delete/edit</p>
       </div>
     </div>
@@ -860,7 +860,7 @@ function Frame12() {
 function Overlay4() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -885,7 +885,7 @@ function Svg9() {
 function Container47() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -929,7 +929,7 @@ function OverlayBorderShadowOverlayBlur4() {
 function Container48() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
         <p className="leading-[20px] whitespace-pre-wrap">INTERACTIVE PROTOTYPE</p>
       </div>
     </div>
@@ -939,7 +939,7 @@ function Container48() {
 function Container49() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Log in, d.specification, delete/edit</p>
       </div>
     </div>
@@ -958,7 +958,7 @@ function Frame13() {
 function Overlay5() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -983,7 +983,7 @@ function Svg10() {
 function Container52() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 22</p>
       </div>
     </div>
@@ -1027,7 +1027,7 @@ function OverlayBorderShadowOverlayBlur5() {
 function Container53() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
         <p className="leading-[20px] whitespace-pre-wrap">FIGMA DESIGN</p>
       </div>
     </div>
@@ -1037,7 +1037,7 @@ function Container53() {
 function Container54() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Log in, d.specification, delete/edit</p>
       </div>
     </div>
@@ -1056,7 +1056,7 @@ function Frame14() {
 function Overlay6() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1081,7 +1081,7 @@ function Svg11() {
 function Container57() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -1125,7 +1125,7 @@ function OverlayBorderShadowOverlayBlur6() {
 function Container58() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white">
         <p className="leading-[20px] whitespace-pre-wrap">FIGMA DESIGN</p>
       </div>
     </div>
@@ -1135,7 +1135,7 @@ function Container58() {
 function Container59() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Log in, d.specification, delete/edit</p>
       </div>
     </div>
@@ -1154,7 +1154,7 @@ function Frame15() {
 function Overlay7() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1179,7 +1179,7 @@ function Svg12() {
 function Container62() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 22</p>
       </div>
     </div>
@@ -1238,7 +1238,7 @@ function Container39() {
 function Heading3() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Heading 2">
-      <div className="flex flex-col font-['JetBrains_Mono:Bold',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white uppercase whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-bold justify-center leading-[0] relative shrink-0 text-[12px] text-white uppercase whitespace-nowrap">
         <p className="leading-[24px]">Done</p>
       </div>
     </div>
@@ -1248,7 +1248,7 @@ function Heading3() {
 function Container66() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#f6f6f6] text-[14px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#f6f6f6] text-[14px] whitespace-nowrap">
         <p className="leading-[20px]">[2]</p>
       </div>
     </div>
@@ -1306,7 +1306,7 @@ function Margin2() {
 function Container67() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">WIREFRAMES</p>
       </div>
     </div>
@@ -1316,7 +1316,7 @@ function Container67() {
 function Container68() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Send Victor V1</p>
       </div>
     </div>
@@ -1335,7 +1335,7 @@ function Frame17() {
 function Overlay8() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1360,7 +1360,7 @@ function Svg14() {
 function Container71() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -1404,7 +1404,7 @@ function OverlayBorderShadowOverlayBlur8() {
 function Container72() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">WIREFRAMES</p>
       </div>
     </div>
@@ -1414,7 +1414,7 @@ function Container72() {
 function Container73() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Send Victor V3</p>
       </div>
     </div>
@@ -1433,7 +1433,7 @@ function Frame18() {
 function Overlay9() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1458,7 +1458,7 @@ function Svg15() {
 function Container76() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 21</p>
       </div>
     </div>
@@ -1502,7 +1502,7 @@ function OverlayBorderShadowOverlayBlur9() {
 function Container77() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">VISUAL RESEARCH</p>
       </div>
     </div>
@@ -1512,7 +1512,7 @@ function Container77() {
 function Container78() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Send Victor V1</p>
       </div>
     </div>
@@ -1531,7 +1531,7 @@ function Frame19() {
 function Overlay10() {
   return (
     <div className="bg-[rgba(250,84,28,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1556,7 +1556,7 @@ function Svg16() {
 function Container81() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Jan 27</p>
       </div>
     </div>
@@ -1600,7 +1600,7 @@ function OverlayBorderShadowOverlayBlur10() {
 function Container82() {
   return (
     <div className="content-stretch flex h-[20px] items-start pb-[4px] relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
+      <div className="flex flex-[1_0_0] flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] min-h-px min-w-px relative text-[14px] text-white tracking-[0.42px]">
         <p className="leading-[20px] whitespace-pre-wrap">VISUAL RESEARCH</p>
       </div>
     </div>
@@ -1610,7 +1610,7 @@ function Container82() {
 function Container83() {
   return (
     <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[10px] w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Dark Design Patterns</p>
       </div>
     </div>
@@ -1629,7 +1629,7 @@ function Frame20() {
 function Overlay11() {
   return (
     <div className="bg-[rgba(40,228,19,0.2)] content-stretch flex flex-col items-start px-[8px] py-[4px] relative rounded-[9999px] shrink-0" data-name="Overlay">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#28e413] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">High</p>
       </div>
     </div>
@@ -1654,7 +1654,7 @@ function Svg17() {
 function Container86() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-      <div className="flex flex-col font-['JetBrains_Mono:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#a1a1a1] text-[12px] whitespace-nowrap">
         <p className="leading-[16px]">Feb 21</p>
       </div>
     </div>
@@ -1732,7 +1732,7 @@ function Frame23() {
   return (
     <div className="bg-[rgba(70,70,70,0.3)] content-stretch flex items-center justify-center px-[16px] py-[8px] relative rounded-[8px] shrink-0">
       <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.05)] border-solid inset-0 pointer-events-none rounded-[8px]" />
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#f1f1f1] text-[14px] text-center tracking-[0.42px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#f1f1f1] text-[14px] text-center tracking-[0.42px] whitespace-nowrap">
         <p className="leading-[20px]">SHREK FILM ARCHIVE</p>
       </div>
     </div>
@@ -1742,7 +1742,7 @@ function Frame23() {
 function Frame24() {
   return (
     <div className="bg-[rgba(255,255,255,0.62)] content-stretch flex items-center justify-center px-[16px] py-[8px] relative rounded-[8px] shrink-0 w-[49px]">
-      <div className="flex flex-col font-['JetBrains_Mono:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[14px] text-black text-center tracking-[2.52px] whitespace-nowrap">
+      <div className="flex flex-col font-['JetBrains_Mono',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[14px] text-black text-center tracking-[2.52px] whitespace-nowrap">
         <p className="leading-[20px]">AP</p>
       </div>
     </div>
@@ -1761,7 +1761,7 @@ function Frame22() {
 function Frame21() {
   return (
     <div className="absolute content-stretch flex items-start justify-between left-[27px] top-[16px] w-[1367px]">
-      <div className="flex flex-col font-['Basis_Grotesque_Arabic_Pro:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[110px] text-white tracking-[-7px] whitespace-nowrap">
+      <div className="flex flex-col font-['Basis_Grotesque_Arabic_Pro',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[110px] text-white tracking-[-7px] whitespace-nowrap">
         <p className="leading-[130px]">Shrek Love</p>
       </div>
       <Frame22 />

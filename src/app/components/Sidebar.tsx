@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Plus, ChevronDown, ChevronUp, Trash2, Pencil, LayoutDashboard, CalendarDays, BarChart3 } from "lucide-react";
+import { Plus, ChevronDown, ChevronUp, X, Pencil, LayoutDashboard, CalendarDays, BarChart3 } from "lucide-react";
 import svgPaths from "../../imports/svg-o2n40tcai9";
 import { hexToRgba } from "@/utils/colors";
 
 export type ViewMode = "board" | "calendar" | "overview";
-export type AccentColor = "green" | "orange" | "blue" | "red";
+export type AccentColor = "green" | "orange" | "blue" | "red" | "lime";
 
 export const ACCENT_HEX: Record<AccentColor, string> = {
-  green: "#00FF00",
-  orange: "#FF8800",
-  blue: "#00BFFF",
-  red: "#FF2020",
+  green: "#34D399",
+  orange: "#F97316",
+  blue: "#60A5FA",
+  red: "#F87171",
+  lime: "#A3E635",
 };
 
 interface Project {
@@ -48,6 +49,7 @@ export function Sidebar({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const editInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export function Sidebar({
   ];
 
   return (
-    <div className="relative backdrop-blur-[12px] bg-[rgba(16,16,16,0.65)] flex flex-col gap-[28px] items-start pb-[28px] pt-[28px] px-[22px] rounded-[15px] w-[290px] shrink-0">
+    <div className="relative backdrop-blur-[12px] bg-[rgba(16,16,16,0.65)] flex flex-col gap-[28px] items-start pb-[28px] pt-[28px] px-[22px] rounded-[15px] w-full lg:w-[290px] shrink-0">
       <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[15px]" />
 
       {/* View Tabs */}
@@ -138,62 +140,93 @@ export function Sidebar({
         {/* Project List */}
         {!isCollapsed && (
           <div className="flex flex-col gap-[2px] w-full">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="flex items-center justify-between w-full rounded-[8px] group cursor-pointer px-[10px] py-[7px] transition-colors"
-                style={
-                  project.id === activeProjectId
-                    ? { backgroundColor: hexToRgba(accent, 0.06) }
-                    : {}
-                }
-                onClick={() => onSelectProject(project.id)}
-              >
-                {editingProjectId === project.id ? (
-                  <input
-                    ref={editInputRef}
-                    type="text"
-                    value={editingName}
-                    onChange={(e) => setEditingName(e.target.value)}
-                    onBlur={() => handleRenameSubmit(project.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") handleRenameSubmit(project.id);
-                      if (e.key === "Escape") { setEditingProjectId(null); setEditingName(""); }
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                    className="flex-1 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[2px] text-[14px] font-['JetBrains_Mono',monospace] font-light tracking-[-0.14px] outline-none"
-                    style={{ color: "#e0e0e0", borderColor: "rgba(255,255,255,0.2)", borderWidth: 1, borderStyle: "solid" }}
+            {projects.map((project) => {
+              const isActive = project.id === activeProjectId;
+              const count = taskCounts[project.id] || 0;
+
+              return (
+                <div
+                  key={project.id}
+                  className="flex items-center w-full rounded-[8px] group cursor-pointer px-[10px] py-[8px] transition-colors hover:bg-[rgba(255,255,255,0.03)]"
+                  style={isActive ? { backgroundColor: hexToRgba(accent, 0.06) } : {}}
+                  onClick={() => onSelectProject(project.id)}
+                >
+                  {/* Accent dot */}
+                  <div
+                    className="size-[5px] rounded-full shrink-0 mr-[10px] transition-colors"
+                    style={{ backgroundColor: isActive ? accent : "#333" }}
                   />
-                ) : (
-                  <span
-                    className="font-['JetBrains_Mono',monospace] font-light text-[14px] tracking-[-0.14px] leading-[20px] transition-colors truncate"
-                    style={{ color: project.id === activeProjectId ? "#e0e0e0" : "#666" }}
-                    onDoubleClick={(e) => { e.stopPropagation(); startEditing(project); }}
-                  >
-                    {project.name}
-                  </span>
-                )}
-                <div className="flex items-center gap-[6px] shrink-0 ml-[8px]">
-                  <span className="font-['JetBrains_Mono',monospace] font-normal text-[#555] text-[12px] leading-[16px]">
-                    {taskCounts[project.id] || 0}
-                  </span>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); startEditing(project); }}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity text-[#555] hover:text-white"
-                  >
-                    <Pencil size={11} />
-                  </button>
-                  {projects.length > 1 && (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); onDeleteProject(project.id); }}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity text-[#555] hover:text-red-400"
+
+                  {editingProjectId === project.id ? (
+                    <input
+                      ref={editInputRef}
+                      type="text"
+                      value={editingName}
+                      onChange={(e) => setEditingName(e.target.value)}
+                      onBlur={() => handleRenameSubmit(project.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") handleRenameSubmit(project.id);
+                        if (e.key === "Escape") { setEditingProjectId(null); setEditingName(""); }
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 min-w-0 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[2px] text-[13px] font-['JetBrains_Mono',monospace] font-light tracking-[-0.2px] outline-none border border-[rgba(255,255,255,0.2)] text-[#e0e0e0]"
+                    />
+                  ) : (
+                    <span
+                      className="font-['JetBrains_Mono',monospace] font-light text-[13px] tracking-[-0.2px] leading-[20px] transition-colors truncate flex-1 min-w-0"
+                      style={{ color: isActive ? "#ddd" : "#666" }}
+                      onDoubleClick={(e) => { e.stopPropagation(); startEditing(project); }}
                     >
-                      <Trash2 size={11} />
-                    </button>
+                      {project.name}
+                    </span>
                   )}
+
+                  {/* Right side: count + actions */}
+                  <div className="flex items-center gap-[4px] shrink-0 ml-[8px]">
+                    <span
+                      className="font-['JetBrains_Mono',monospace] text-[10px] tabular-nums min-w-[16px] text-right"
+                      style={{ color: isActive ? "#666" : "#444" }}
+                    >
+                      {count}
+                    </span>
+
+                    {confirmDeleteId === project.id ? (
+                      <div className="flex items-center gap-[6px] ml-[2px]" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          onClick={() => { onDeleteProject(project.id); setConfirmDeleteId(null); }}
+                          className="text-red-400 hover:text-red-300 transition-colors text-[10px] font-['JetBrains_Mono',monospace] font-medium"
+                        >
+                          YES
+                        </button>
+                        <button
+                          onClick={() => setConfirmDeleteId(null)}
+                          className="text-[#666] hover:text-white transition-colors text-[10px] font-['JetBrains_Mono',monospace]"
+                        >
+                          NO
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); startEditing(project); }}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity text-[#444] hover:text-[#aaa] p-[2px]"
+                        >
+                          <Pencil size={10} />
+                        </button>
+                        {projects.length > 1 && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(project.id); }}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity text-[#444] hover:text-red-400 p-[2px]"
+                          >
+                            <X size={11} />
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {showNewProject ? (
               <form onSubmit={handleSubmit} className="px-[4px] pt-[8px]">
@@ -216,7 +249,7 @@ export function Sidebar({
               >
                 <Plus size={12} />
                 <span className="font-['JetBrains_Mono',monospace] text-[11px] tracking-[0.5px]">
-                  New project
+                  NEW PROJECT
                 </span>
               </button>
             )}

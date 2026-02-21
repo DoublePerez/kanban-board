@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { X, Upload } from "lucide-react";
 import { hexToRgba } from "@/utils/colors";
 
@@ -163,43 +163,57 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
     [processImage]
   );
 
+  const [isDragOver, setIsDragOver] = useState(false);
+  const mono = "font-['JetBrains_Mono',monospace]";
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="relative bg-[#1a1a1a] rounded-[16px] p-[32px] w-[460px] max-w-[90vw]">
-        <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.1)] inset-0 pointer-events-none rounded-[16px]" />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-[6px]"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="relative backdrop-blur-[16px] bg-[rgba(14,14,14,0.92)] rounded-[14px] w-[400px] max-w-[90vw] overflow-hidden">
+        <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.08)] inset-0 pointer-events-none rounded-[14px]" />
 
-        <div className="flex items-center justify-between mb-[24px]">
-          <h2 className="font-['JetBrains_Mono',monospace] font-medium text-white text-[16px] tracking-[0.5px]">
-            UPLOAD BACKGROUND
-          </h2>
-          <button onClick={onClose} className="text-[#888] hover:text-white transition-colors">
-            <X size={20} />
-          </button>
-        </div>
+        <div className="relative z-10 p-[24px] flex flex-col gap-[20px]">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>BACKGROUND</span>
+            <button onClick={onClose} className="text-[#444] hover:text-white transition-colors">
+              <X size={16} />
+            </button>
+          </div>
 
-        <p className="font-['JetBrains_Mono',monospace] text-[#888] text-[12px] mb-[20px] leading-[18px]">
-          Image will be dithered with Floyd-Steinberg error diffusion at 3px pixel size.
-        </p>
+          {/* Drop zone */}
+          <div
+            onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={(e) => { setIsDragOver(false); handleDrop(e); }}
+            onClick={() => fileInputRef.current?.click()}
+            className="relative rounded-[10px] py-[36px] px-[24px] flex flex-col items-center justify-center cursor-pointer transition-all border border-dashed"
+            style={{
+              borderColor: isDragOver ? hexToRgba(accent, 0.5) : "rgba(255,255,255,0.08)",
+              backgroundColor: isDragOver ? hexToRgba(accent, 0.04) : "rgba(255,255,255,0.02)",
+            }}
+          >
+            <div
+              className="size-[36px] rounded-full flex items-center justify-center mb-[14px] transition-colors"
+              style={{ backgroundColor: isDragOver ? hexToRgba(accent, 0.1) : "rgba(255,255,255,0.04)" }}
+            >
+              <Upload size={16} style={{ color: isDragOver ? accent : "#555" }} className="transition-colors" />
+            </div>
+            <p className={`${mono} text-[12px] text-[#888] tracking-[-0.2px]`}>
+              {isDragOver ? "Drop to upload" : "Drop image or click to browse"}
+            </p>
+            <p className={`${mono} text-[10px] text-[#444] mt-[6px]`}>
+              PNG, JPG, WEBP
+            </p>
+          </div>
 
-        <div
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed rounded-[12px] p-[40px] flex flex-col items-center justify-center cursor-pointer transition-colors"
-          style={{
-            borderColor: "rgba(255,255,255,0.15)",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = hexToRgba(accent, 0.4))}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)")}
-        >
-          <Upload size={32} className="text-[#555] mb-[12px]" />
-          <p className="font-['JetBrains_Mono',monospace] text-[#888] text-[13px]">
-            Drop image here or click to upload
-          </p>
-          <p className="font-['JetBrains_Mono',monospace] text-[#555] text-[11px] mt-[8px]">
-            PNG, JPG, WEBP supported
+          {/* Footer note */}
+          <p className={`${mono} text-[10px] text-[#444] leading-[16px]`}>
+            Floyd-Steinberg dither at 3px pixel size
           </p>
         </div>
 

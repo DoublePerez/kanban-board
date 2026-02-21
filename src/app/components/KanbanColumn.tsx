@@ -46,19 +46,19 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
     setShowAddForm(false);
   };
 
-  // Priority styles — monochrome with accent for High only
+  // Priority styles — accent-tinted backgrounds, neutral text
   const getPriorityStyle = (p: string, selected: boolean) => {
-    if (!selected) return { backgroundColor: "rgba(255,255,255,0.05)", color: "#555" };
+    if (!selected) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
     switch (p) {
-      case "High": return { backgroundColor: hexToRgba(accent, 0.12), color: accent };
-      case "Medium": return { backgroundColor: "rgba(255,255,255,0.08)", color: "#bbb" };
-      case "Low": return { backgroundColor: "rgba(255,255,255,0.08)", color: "#999" };
+      case "High": return { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" };
+      case "Medium": return { backgroundColor: hexToRgba(accent, 0.08), color: "#bbb" };
+      case "Low": return { backgroundColor: hexToRgba(accent, 0.04), color: "#999" };
       default: return {};
     }
   };
 
   return (
-    <div className="flex flex-col min-w-[280px] w-[300px] max-w-[350px] shrink-0">
+    <div className="flex flex-col w-full sm:min-w-[260px] sm:w-[280px] lg:w-[300px] sm:max-w-[350px] sm:shrink-0 sm:h-full sm:min-h-0">
       {/* Column Header */}
       <div className="flex items-center justify-between pb-[16px] w-full">
         <div className="flex items-center gap-[8px]">
@@ -81,17 +81,17 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
       {/* Column Body */}
       <div
         ref={drop as unknown as React.Ref<HTMLDivElement>}
-        className="relative rounded-[12px] min-h-[500px] flex flex-col transition-all duration-200"
+        className="relative rounded-[12px] min-h-[200px] sm:flex-1 sm:min-h-0 flex flex-col transition-all duration-200 overflow-hidden"
         style={isOver ? { boxShadow: `inset 0 0 0 1px ${hexToRgba(accent, 0.2)}`, borderRadius: 12 } : undefined}
       >
-        <div className="absolute inset-0 rounded-[12px] backdrop-blur-[16px] bg-[rgba(8,8,8,0.65)]" />
+        <div className="absolute inset-0 rounded-[12px] backdrop-blur-[16px] bg-[rgba(8,8,8,0.55)]" />
         <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.05)] inset-0 pointer-events-none rounded-[12px]" />
 
         {isOver && (
           <div className="absolute inset-0 rounded-[12px] pointer-events-none z-[5]" style={{ backgroundColor: hexToRgba(accent, 0.02) }} />
         )}
 
-        <div className="relative z-10 flex flex-col gap-[8px] p-[12px]">
+        <div className="relative z-10 flex flex-col gap-[8px] p-[12px] sm:flex-1 sm:overflow-y-auto sm:min-h-0">
           {tasks.map((task, index) => (
             <TaskCard
               key={task.id}

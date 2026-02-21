@@ -59,7 +59,6 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
     .sort((a, b) => new Date(a.dueDate! + "T00:00:00").getTime() - new Date(b.dueDate! + "T00:00:00").getTime());
 
   const mono = "font-['JetBrains_Mono',monospace]";
-  const sans = "font-['Basis_Grotesque_Arabic_Pro',sans-serif]";
 
   const columnLabel = (columnId: string) => {
     switch (columnId) {
@@ -72,21 +71,21 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
   return (
     <div className="h-full overflow-y-auto pr-[8px]">
-      <div className="flex flex-col gap-[12px] max-w-[720px]">
+      <div className="flex flex-col gap-[16px] max-w-[720px]">
 
         {/* ═══════════════════════════════════════════ */}
         {/* ACTIVE PROJECT HERO                        */}
         {/* ═══════════════════════════════════════════ */}
         <div className="relative backdrop-blur-[16px] bg-[rgba(10,10,10,0.75)] rounded-[16px]">
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
-          <div className="relative z-10 p-[28px] pb-[24px] flex flex-col gap-[20px]">
+          <div className="relative z-10 p-[32px] pb-[28px] flex flex-col gap-[20px]">
 
             {/* Project label + global stat */}
             <div className="flex items-center justify-between">
-              <span className={`${mono} text-[10px] text-[#444] tracking-[1.5px]`}>
+              <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>
                 {activeProject.name.toUpperCase()}
               </span>
-              <span className={`${mono} text-[10px] text-[#333] tracking-[0.5px]`}>
+              <span className={`${mono} text-[10px] text-[#555] tracking-[0.5px]`}>
                 {globalDone}/{globalTotal} total
               </span>
             </div>
@@ -94,13 +93,13 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
             {/* Big number */}
             <div className="flex items-baseline gap-[14px]">
               <div className="flex items-baseline">
-                <span className={`${mono} text-[64px] leading-[0.9] tracking-[-4px] text-white`}>
+                <span className={`${mono} text-[72px] leading-[0.9] tracking-[-4px] text-white`}>
                   {activePercent}
                 </span>
-                <span className={`${mono} text-[24px] text-[#333] tracking-[-1px] leading-none ml-[2px]`}>%</span>
+                <span className={`${mono} text-[24px] text-[#555] tracking-[-1px] leading-none ml-[2px]`}>%</span>
               </div>
               {activeTotal > 0 && (
-                <span className={`${mono} text-[11px] text-[#444]`}>
+                <span className={`${mono} text-[11px] text-[#666]`}>
                   {activeDone} of {activeTotal}
                 </span>
               )}
@@ -110,20 +109,20 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
             <div className="w-full h-[2px] rounded-full bg-[rgba(255,255,255,0.06)] overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-700"
-                style={{ width: `${activePercent}%`, backgroundColor: "#555" }}
+                style={{ width: `${activePercent}%`, backgroundColor: accent }}
               />
             </div>
 
             {/* Stats row */}
-            <div className="flex gap-[32px]">
+            <div className="flex flex-wrap gap-[20px] sm:gap-[32px] lg:gap-[40px]">
               {[
                 { label: "TODO", value: activeTodo },
                 { label: "IN PROGRESS", value: activeInProgress },
                 { label: "DONE", value: activeDone },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-[4px]">
-                  <span className={`${mono} text-[9px] text-[#444] tracking-[1.2px]`}>{stat.label}</span>
-                  <span className={`${mono} text-[18px] leading-none tracking-[-0.5px] text-[#888]`}>
+                  <span className={`${mono} text-[9px] text-[#666] tracking-[1.2px]`}>{stat.label}</span>
+                  <span className={`${mono} text-[18px] leading-none tracking-[-0.5px] text-[#aaa]`}>
                     {stat.value}
                   </span>
                 </div>
@@ -138,7 +137,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
         {(activeOverdue.length > 0 || activeUpcoming.length > 0) && (
           <div className="relative backdrop-blur-[16px] bg-[rgba(10,10,10,0.75)] rounded-[16px]">
             <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
-            <div className="relative z-10 p-[24px] flex flex-col gap-[16px]">
+            <div className="relative z-10 p-[28px] flex flex-col gap-[16px]">
 
               {/* Section header */}
               <button
@@ -146,7 +145,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                 className="flex items-center justify-between w-full px-[4px]"
               >
                 <div className="flex items-center gap-[10px]">
-                  <span className={`${mono} text-[10px] text-[#555] tracking-[1.5px]`}>DUE TASKS</span>
+                  <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>DUE TASKS</span>
                   {activeOverdue.length > 0 && (
                     <span className={`${mono} text-[10px] text-[#777] bg-[rgba(255,255,255,0.05)] px-[8px] py-[2px] rounded-full`}>
                       {activeOverdue.length} overdue
@@ -154,8 +153,8 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   )}
                 </div>
                 {tasksExpanded
-                  ? <ChevronUp size={14} className="text-[#444]" />
-                  : <ChevronDown size={14} className="text-[#444]" />
+                  ? <ChevronUp size={14} className="text-[#555]" />
+                  : <ChevronDown size={14} className="text-[#555]" />
                 }
               </button>
 
@@ -166,7 +165,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   {activeOverdue.length > 0 && (
                     <>
                       <div className="px-[14px] pt-[4px] pb-[6px]">
-                        <span className={`${mono} text-[9px] text-[#444] tracking-[1px]`}>OVERDUE</span>
+                        <span className={`${mono} text-[9px] text-[#666] tracking-[1px]`}>OVERDUE</span>
                       </div>
                       {activeOverdue.map((task) => (
                         <div
@@ -181,14 +180,14 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                             <span className={`${mono} text-[12px] text-[#ccc] truncate tracking-[0.2px]`}>
                               {task.title}
                             </span>
-                            <span className={`${mono} text-[10px] text-[#333]`}>
+                            <span className={`${mono} text-[10px] text-[#555]`}>
                               {columnLabel(task.columnId)}
                             </span>
                           </div>
 
                           {/* Due badge */}
                           <div className="flex items-center gap-[5px] shrink-0 ml-[12px]">
-                            <AlertTriangle size={10} className="text-[#555]" />
+                            <AlertTriangle size={10} className="text-[#666]" />
                             <span className={`${mono} text-[10px] text-[#666]`}>
                               {daysOverdue(task.dueDate!)}d ago
                             </span>
@@ -207,7 +206,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   {activeUpcoming.length > 0 && (
                     <>
                       <div className="px-[14px] pt-[4px] pb-[6px]">
-                        <span className={`${mono} text-[9px] text-[#444] tracking-[1px]`}>UPCOMING</span>
+                        <span className={`${mono} text-[9px] text-[#666] tracking-[1px]`}>UPCOMING</span>
                       </div>
                       {activeUpcoming.map((task) => {
                         const days = daysUntil(task.dueDate!);
@@ -222,14 +221,14 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                               <span className={`${mono} text-[12px] text-[#999] truncate tracking-[0.2px]`}>
                                 {task.title}
                               </span>
-                              <span className={`${mono} text-[10px] text-[#333]`}>
+                              <span className={`${mono} text-[10px] text-[#555]`}>
                                 {columnLabel(task.columnId)}
                               </span>
                             </div>
 
                             <div className="flex items-center gap-[5px] shrink-0 ml-[12px]">
-                              <Calendar size={10} className="text-[#444]" />
-                              <span className={`${mono} text-[10px] text-[#555]`}>
+                              <Calendar size={10} className="text-[#555]" />
+                              <span className={`${mono} text-[10px] text-[#666]`}>
                                 {days === 0 ? "Today" : days === 1 ? "Tomorrow" : `in ${days}d`}
                               </span>
                             </div>
@@ -249,7 +248,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
         {/* ═══════════════════════════════════════════ */}
         <div className="relative backdrop-blur-[16px] bg-[rgba(10,10,10,0.75)] rounded-[16px]">
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
-          <div className="relative z-10 p-[24px] flex flex-col gap-[16px]">
+          <div className="relative z-10 p-[28px] flex flex-col gap-[16px]">
 
             {/* Section header */}
             <button
@@ -257,12 +256,12 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
               className="flex items-center justify-between w-full px-[4px]"
             >
               <div className="flex items-center gap-[10px]">
-                <span className={`${mono} text-[10px] text-[#555] tracking-[1.5px]`}>ALL PROJECTS</span>
-                <span className={`${mono} text-[10px] text-[#333]`}>{projects.length}</span>
+                <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>ALL PROJECTS</span>
+                <span className={`${mono} text-[10px] text-[#555]`}>{projects.length}</span>
               </div>
               {projectsExpanded
-                ? <ChevronUp size={14} className="text-[#444]" />
-                : <ChevronDown size={14} className="text-[#444]" />
+                ? <ChevronUp size={14} className="text-[#555]" />
+                : <ChevronDown size={14} className="text-[#555]" />
               }
             </button>
 
@@ -289,8 +288,8 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                     >
                       {/* Name */}
                       <span
-                        className={`${mono} text-[13px] tracking-[-0.2px] w-[140px] shrink-0 truncate`}
-                        style={{ color: isActive ? "#ddd" : "#666" }}
+                        className={`${mono} text-[13px] tracking-[-0.2px] w-[100px] sm:w-[140px] shrink-0 truncate`}
+                        style={{ color: isActive ? "#ddd" : "#777" }}
                       >
                         {project.name}
                       </span>
@@ -304,7 +303,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                           </span>
                         )}
                         {pInProgress > 0 && (
-                          <span className={`${mono} text-[10px]`} style={{ color: "#444" }}>
+                          <span className={`${mono} text-[10px]`} style={{ color: "#555" }}>
                             {pInProgress} active
                           </span>
                         )}
@@ -316,18 +315,18 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                           className="h-full rounded-full transition-all duration-500"
                           style={{
                             width: `${pPercent}%`,
-                            backgroundColor: isActive ? "#555" : "#333",
+                            backgroundColor: isActive ? accent : "#333",
                           }}
                         />
                       </div>
 
                       {/* Count */}
-                      <span className={`${mono} text-[11px] shrink-0 w-[38px] text-right tabular-nums`} style={{ color: isActive ? "#777" : "#444" }}>
+                      <span className={`${mono} text-[11px] shrink-0 w-[38px] text-right tabular-nums`} style={{ color: isActive ? "#888" : "#555" }}>
                         {pDone}/{pTotal}
                       </span>
 
                       {/* Arrow */}
-                      <ArrowRight size={12} className="text-[#333] group-hover:text-[#555] transition-colors ml-[10px] shrink-0" />
+                      <ArrowRight size={12} className="text-[#444] group-hover:text-[#666] transition-colors ml-[10px] shrink-0" />
                     </button>
                   );
                 })}

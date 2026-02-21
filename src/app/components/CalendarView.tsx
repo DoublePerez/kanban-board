@@ -61,15 +61,15 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
   return (
     <div className="flex flex-col h-full gap-[16px]">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-[16px]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between shrink-0 gap-[12px] sm:gap-0">
+        <div className="flex items-center gap-[12px] sm:gap-[16px]">
           <button
             onClick={() => setCurrentMonth((m) => subMonths(m, 1))}
             className="text-[#666] hover:text-white transition-colors p-[4px]"
           >
             <ChevronLeft size={18} />
           </button>
-          <h2 className="font-['JetBrains_Mono',monospace] font-medium text-white text-[18px] tracking-[1px] min-w-[200px] text-center">
+          <h2 className="font-['JetBrains_Mono',monospace] font-medium text-white text-[14px] sm:text-[18px] tracking-[1px] min-w-[160px] sm:min-w-[200px] text-center">
             {format(currentMonth, "MMMM yyyy").toUpperCase()}
           </h2>
           <button
@@ -91,7 +91,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
             className="px-[12px] py-[6px] rounded-[8px] text-[11px] font-['JetBrains_Mono',monospace] tracking-[0.5px] transition-colors"
             style={
               combined
-                ? { backgroundColor: hexToRgba(accent, 0.15), color: accent }
+                ? { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" }
                 : { backgroundColor: "rgba(255,255,255,0.05)", color: "#888" }
             }
           >
@@ -126,7 +126,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                 return (
                   <div
                     key={day.toISOString()}
-                    className="min-h-[80px] rounded-[6px] p-[6px] transition-colors"
+                    className="min-h-[60px] sm:min-h-[80px] rounded-[6px] p-[4px] sm:p-[6px] transition-colors"
                     style={
                       today
                         ? { backgroundColor: hexToRgba(accent, 0.06), boxShadow: `inset 0 0 0 1px ${hexToRgba(accent, 0.15)}`, borderRadius: 6 }

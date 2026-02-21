@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } from "lucide-react";
 import { hexToRgba } from "@/utils/colors";
@@ -42,6 +42,13 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   const [editDueDate, setEditDueDate] = useState(task.dueDate || "");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [newSubtaskText, setNewSubtaskText] = useState("");
+  const subtaskInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isExpanded && subtaskInputRef.current) {
+      subtaskInputRef.current.focus();
+    }
+  }, [isExpanded, task.subtasks.length]);
 
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,
@@ -74,13 +81,13 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   const totalSubs = task.subtasks.length;
   const overdue = isOverdue(task.dueDate);
 
-  // Monochrome priority styles — only High uses accent
+  // Priority styles — accent-tinted backgrounds, neutral text
   const getPriorityStyle = (p: string, selected?: boolean) => {
     if (selected === false) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
     switch (p) {
-      case "High": return { backgroundColor: hexToRgba(accent, 0.1), color: accent };
-      case "Medium": return { backgroundColor: "rgba(255,255,255,0.08)", color: "#bbb" };
-      case "Low": return { backgroundColor: "rgba(255,255,255,0.08)", color: "#999" };
+      case "High": return { backgroundColor: accent, color: "#000" };
+      case "Medium": return { backgroundColor: hexToRgba(accent, 0.15), color: "#bbb" };
+      case "Low": return { backgroundColor: hexToRgba(accent, 0.06), color: "#999" };
       default: return {};
     }
   };
@@ -212,7 +219,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 <p className="flex-1 font-['JetBrains_Mono',monospace] font-medium text-[14px] text-white tracking-[0.42px] leading-[20px] whitespace-pre-wrap select-none">
                   {task.title}
                 </p>
-                <div className="flex items-center gap-[4px] opacity-0 group-hover:opacity-100 transition-opacity ml-2 shrink-0 mt-0.5">
+                <div className="flex items-center gap-[4px] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ml-2 shrink-0 mt-0.5">
                   {showDeleteConfirm ? (
                     <>
                       <button
@@ -254,7 +261,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 </div>
               </div>
               {task.description && (
-                <p className="font-['JetBrains_Mono',monospace] font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none">
+                <p className="font-['JetBrains_Mono',monospace] font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none mt-[8px]">
                   {task.description}
                 </p>
               )}
@@ -325,11 +332,15 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 <div className="flex items-center gap-[4px] pt-[2px]">
                   <Plus size={11} className="text-[#444] shrink-0" />
                   <input
+                    ref={subtaskInputRef}
                     type="text"
                     placeholder="Add subtask..."
                     value={newSubtaskText}
                     onChange={(e) => setNewSubtaskText(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleAddSubtask(); }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleAddSubtask();
+                      if (e.key === "Escape") { setNewSubtaskText(""); setIsExpanded(totalSubs > 0); }
+                    }}
                     className="flex-1 bg-transparent text-[#999] text-[11px] font-['JetBrains_Mono',monospace] placeholder:text-[#333] outline-none"
                   />
                 </div>
@@ -337,30 +348,14 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
             )}
 
             {/* Add subtask trigger */}
-            {totalSubs === 0 && !isExpanded && (
+            {!isExpanded && totalSubs === 0 && (
               <button
                 onClick={() => setIsExpanded(true)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-[4px] text-[#333] hover:text-[#888]"
+                className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-[4px] text-[#333] hover:text-[#888]"
               >
                 <Plus size={10} />
                 <span className="font-['JetBrains_Mono',monospace] text-[9px] tracking-[0.5px]">SUBTASK</span>
               </button>
-            )}
-            {isExpanded && totalSubs === 0 && (
-              <div className="flex flex-col gap-[4px] pt-[4px] border-t border-[rgba(255,255,255,0.05)]">
-                <div className="flex items-center gap-[4px]">
-                  <Plus size={11} className="text-[#444] shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Add subtask..."
-                    value={newSubtaskText}
-                    onChange={(e) => setNewSubtaskText(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleAddSubtask(); }}
-                    autoFocus
-                    className="flex-1 bg-transparent text-[#999] text-[11px] font-['JetBrains_Mono',monospace] placeholder:text-[#333] outline-none"
-                  />
-                </div>
-              </div>
             )}
           </>
         )}
