@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { Plus, X, Calendar } from "lucide-react";
 import { TaskCard, Task } from "./TaskCard";
-
-function hexToRgba(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
+import { hexToRgba } from "@/utils/colors";
 
 interface KanbanColumnProps {
   id: string;

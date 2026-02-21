@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } from "lucide-react";
+import { hexToRgba } from "@/utils/colors";
+import { formatDueDate, isOverdue } from "@/utils/dates";
 
 export interface Subtask {
   id: string;
@@ -29,27 +31,6 @@ interface TaskCardProps {
 }
 
 const ITEM_TYPE = "TASK";
-
-function formatDueDate(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00");
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${months[d.getMonth()]} ${d.getDate()}`;
-}
-
-function isOverdue(dateStr: string | null): boolean {
-  if (!dateStr) return false;
-  const due = new Date(dateStr + "T00:00:00");
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  return due.getTime() < now.getTime();
-}
-
-function hexToRgba(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
 
 export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index }: TaskCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -148,7 +129,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
       } ${isDragging ? "opacity-30 scale-95" : "opacity-100"} ${
         isOver ? "ring-1" : ""
       } group hover:bg-[rgba(22,22,22,0.92)]`}
-      style={isOver ? { ringColor: hexToRgba(accent, 0.3) } : undefined}
+      style={isOver ? { "--tw-ring-color": hexToRgba(accent, 0.3) } as React.CSSProperties : undefined}
     >
       <div className="flex flex-col gap-[8px] overflow-clip p-[17px] rounded-[inherit]">
         {isEditing ? (

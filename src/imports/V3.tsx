@@ -1,5 +1,5 @@
 import svgPaths from "./svg-o2n40tcai9";
-import imgV3 from "figma:asset/da1ee3b9193658f9e10ef58ce6d686a6385ad1be.png";
+import imgV3 from "../assets/da1ee3b9193658f9e10ef58ce6d686a6385ad1be.png";
 
 function Svg() {
   return (

@@ -8,7 +8,8 @@ import { CalendarView } from "./components/CalendarView";
 import { OverviewPanel } from "./components/OverviewPanel";
 import { DitherProcessor } from "./components/DitherProcessor";
 import { Task } from "./components/TaskCard";
-import imgV3 from "figma:asset/da1ee3b9193658f9e10ef58ce6d686a6385ad1be.png";
+import { hexToRgba } from "@/utils/colors";
+import imgV3 from "../assets/da1ee3b9193658f9e10ef58ce6d686a6385ad1be.png";
 
 // ---- Types ----
 interface Column {
@@ -177,13 +178,6 @@ function formatDate(): string {
   const now = new Date();
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   return `${months[now.getMonth()]} ${now.getDate()}`;
-}
-
-function hexToRgba(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 // ---- Avatar Popover ----

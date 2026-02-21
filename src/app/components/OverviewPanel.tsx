@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { AlertTriangle, ArrowRight, ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import { Task } from "./TaskCard";
-
-function hexToRgba(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
+import { hexToRgba } from "@/utils/colors";
+import { daysOverdue, daysUntil } from "@/utils/dates";
 
 interface OverviewProject {
   id: string;
@@ -20,26 +15,6 @@ interface OverviewPanelProps {
   activeProjectId: string;
   accent: string;
   onSelectProject: (id: string) => void;
-}
-
-function formatDueDate(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00");
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${months[d.getMonth()]} ${d.getDate()}`;
-}
-
-function daysOverdue(dateStr: string): number {
-  const due = new Date(dateStr + "T00:00:00");
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  return Math.floor((now.getTime() - due.getTime()) / (1000 * 60 * 60 * 24));
-}
-
-function daysUntil(dateStr: string): number {
-  const due = new Date(dateStr + "T00:00:00");
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  return Math.floor((due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 export function OverviewPanel({ projects, activeProjectId, accent, onSelectProject }: OverviewPanelProps) {

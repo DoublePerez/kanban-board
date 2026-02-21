@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Plus, ChevronDown, ChevronUp, Trash2, Pencil, LayoutDashboard, CalendarDays, BarChart3 } from "lucide-react";
 import svgPaths from "../../imports/svg-o2n40tcai9";
+import { hexToRgba } from "@/utils/colors";
 
 export type ViewMode = "board" | "calendar" | "overview";
 export type AccentColor = "green" | "orange" | "blue" | "red";
@@ -11,13 +12,6 @@ export const ACCENT_HEX: Record<AccentColor, string> = {
   blue: "#00BFFF",
   red: "#FF2020",
 };
-
-function hexToRgba(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
 
 interface Project {
   id: string;
