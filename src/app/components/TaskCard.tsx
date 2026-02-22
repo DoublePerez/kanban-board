@@ -3,6 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } from "lucide-react";
 import { hexToRgba } from "@/utils/colors";
 import { formatDueDate, isOverdue } from "@/utils/dates";
+import { getCardPriorityStyle } from "@/utils/styles";
 
 export interface Subtask {
   id: string;
@@ -81,16 +82,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   const totalSubs = task.subtasks.length;
   const overdue = isOverdue(task.dueDate);
 
-  // Priority styles — accent-tinted backgrounds, neutral text
-  const getPriorityStyle = (p: string, selected?: boolean) => {
-    if (selected === false) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
-    switch (p) {
-      case "High": return { backgroundColor: accent, color: "#000" };
-      case "Medium": return { backgroundColor: hexToRgba(accent, 0.15), color: "#bbb" };
-      case "Low": return { backgroundColor: hexToRgba(accent, 0.06), color: "#999" };
-      default: return {};
-    }
-  };
+  const getPriorityStyle = (p: string, selected?: boolean) => getCardPriorityStyle(p, accent, selected);
 
   const handleSaveEdit = () => {
     if (editTitle.trim()) {

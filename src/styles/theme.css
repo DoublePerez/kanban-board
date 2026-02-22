@@ -1,127 +1,158 @@
 @custom-variant dark (&:is(.dark *));
 
+/* ════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ════════════════════════════════════════════════════════════════
+   Naming: --{category}-{element}-{modifier}
+
+   Categories:
+     color-surface-*    surfaces & backgrounds
+     color-text-*       text colors
+     color-border-*     borders & dividers
+     color-interactive-*  buttons, links, focus rings
+     glass-*            glassmorphic system (blur, bg, border, text)
+     font-*             typography (family, weight, size)
+     radius-*           border radii
+     shadow-*           box shadows
+     scrollbar-*        scrollbar styling
+     priority-*         task priority opacity scale
+   ════════════════════════════════════════════════════════════════ */
+
 :root {
-  --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
-  --destructive: #d4183d;
-  --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
-  --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* ── Surfaces ─────────────────────────────────────────────── */
+  --color-surface-base:           #ffffff;
+  --color-surface-elevated:       #ffffff;
+  --color-surface-muted:          #ececf0;
+  --color-surface-input:          #f3f3f5;
+
+  /* ── Text ─────────────────────────────────────────────────── */
+  --color-text-primary:           oklch(0.145 0 0);
+  --color-text-secondary:         #717182;
+  --color-text-muted:             #717182;
+
+  /* ── Borders ──────────────────────────────────────────────── */
+  --color-border-default:         rgba(0, 0, 0, 0.1);
+  --color-border-input:           transparent;
+
+  /* ── Interactive ──────────────────────────────────────────── */
+  --color-interactive-primary:    #030213;
+  --color-interactive-primary-fg: oklch(1 0 0);
+  --color-interactive-danger:     #d4183d;
+  --color-interactive-danger-fg:  #ffffff;
+  --color-ring-focus:             oklch(0.708 0 0);
+
+  /* ── Glassmorphic System ──────────────────────────────────── */
+  /* Blur */
+  --glass-blur-sm:                6px;
+  --glass-blur:                   12px;
+  --glass-blur-lg:                16px;
+
+  /* Surfaces */
+  --glass-surface-panel:          rgba(16, 16, 16, 0.65);
+  --glass-surface-card:           rgba(18, 18, 18, 0.88);
+  --glass-surface-card-hover:     rgba(22, 22, 22, 0.92);
+  --glass-surface-column:         rgba(8, 8, 8, 0.55);
+  --glass-surface-overlay:        rgba(10, 10, 10, 0.75);
+  --glass-surface-input:          rgba(255, 255, 255, 0.06);
+  --glass-surface-hover:          rgba(255, 255, 255, 0.03);
+  --glass-surface-active:         rgba(255, 255, 255, 0.07);
+  --glass-surface-muted:          rgba(255, 255, 255, 0.04);
+  --glass-surface-tab:            rgba(255, 255, 255, 0.03);
+
+  /* Borders */
+  --glass-border:                 rgba(255, 255, 255, 0.06);
+  --glass-border-subtle:          rgba(255, 255, 255, 0.05);
+  --glass-border-input:           rgba(255, 255, 255, 0.1);
+  --glass-border-input-focus:     rgba(255, 255, 255, 0.25);
+  --glass-border-input-strong:    rgba(255, 255, 255, 0.2);
+  --glass-border-button:          rgba(255, 255, 255, 0.08);
+  --glass-border-button-hover:    rgba(255, 255, 255, 0.15);
+
+  /* Text (dark-on-glass hierarchy: white → ghost) */
+  --glass-text-primary:           #ffffff;
+  --glass-text-secondary:         #dddddd;
+  --glass-text-tertiary:          #cccccc;
+  --glass-text-label:             #aaaaaa;
+  --glass-text-muted:             #999999;
+  --glass-text-dimmed:            #888888;
+  --glass-text-subtle:            #777777;
+  --glass-text-faint:             #666666;
+  --glass-text-ghost:             #555555;
+  --glass-text-placeholder:       #444444;
+  --glass-text-invisible:         #333333;
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-family-mono:             'JetBrains_Mono', monospace;
+  --font-family-sans:             'Basis_Grotesque_Arabic_Pro', sans-serif;
+  --font-size-base:               16px;
+  --font-weight-normal:           400;
+  --font-weight-medium:           500;
+  --font-weight-bold:             700;
+
+  /* ── Radii ────────────────────────────────────────────────── */
+  --radius-sm:                    6px;
+  --radius-md:                    8px;
+  --radius-lg:                    10px;
+  --radius-xl:                    12px;
+  --radius-2xl:                   15px;
+  --radius-3xl:                   16px;
+  --radius-full:                  9999px;
+
+  /* ── Shadows ──────────────────────────────────────────────── */
+  --shadow-card:                  0px 2px 8px rgba(0, 0, 0, 0.4),
+                                  0px 10px 20px -5px rgba(0, 0, 0, 0.3);
+
+  /* ── Scrollbar ────────────────────────────────────────────── */
+  --scrollbar-thumb:              rgba(255, 255, 255, 0.15);
+  --scrollbar-thumb-hover:        rgba(255, 255, 255, 0.25);
+
+  /* ── Priority Opacity Scale ───────────────────────────────── */
+  /* Card badges (prominent) */
+  --priority-card-high:           1;
+  --priority-card-medium:         0.15;
+  --priority-card-low:            0.06;
+  /* Form selectors (subtle) */
+  --priority-form-high:           0.15;
+  --priority-form-medium:         0.08;
+  --priority-form-low:            0.04;
+  /* Active highlight */
+  --priority-active-highlight:    0.06;
+  --priority-overview-highlight:  0.05;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
-}
+/* ── Tailwind Theme Mapping ──────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-input-background: var(--input-background);
-  --color-switch-background: var(--switch-background);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface-base: var(--color-surface-base);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-surface-input: var(--color-surface-input);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+
+  --color-border-default: var(--color-border-default);
+  --color-border-input: var(--color-border-input);
+
+  --color-interactive-primary: var(--color-interactive-primary);
+  --color-interactive-primary-fg: var(--color-interactive-primary-fg);
+  --color-interactive-danger: var(--color-interactive-danger);
+  --color-interactive-danger-fg: var(--color-interactive-danger-fg);
+  --color-ring-focus: var(--color-ring-focus);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
 }
+
+/* ── Base Layer ──────────────────────────────────────────────── */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border-default outline-ring-focus/50;
   }
 
   html, body, #root {
@@ -129,10 +160,10 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-surface-base text-text-primary;
   }
 
-  /* Custom scrollbar for dark theme */
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -141,20 +172,16 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--scrollbar-thumb);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--scrollbar-thumb-hover);
   }
 
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
-
+  /* Typography defaults — overridable by Tailwind utilities */
   html {
-    font-size: var(--font-size);
+    font-size: var(--font-size-base);
   }
 
   h1 {

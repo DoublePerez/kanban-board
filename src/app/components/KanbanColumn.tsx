@@ -3,6 +3,7 @@ import { useDrop } from "react-dnd";
 import { Plus, X, Calendar } from "lucide-react";
 import { TaskCard, Task } from "./TaskCard";
 import { hexToRgba } from "@/utils/colors";
+import { getFormPriorityStyle } from "@/utils/styles";
 
 interface KanbanColumnProps {
   id: string;
@@ -46,16 +47,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
     setShowAddForm(false);
   };
 
-  // Priority styles — accent-tinted backgrounds, neutral text
-  const getPriorityStyle = (p: string, selected: boolean) => {
-    if (!selected) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
-    switch (p) {
-      case "High": return { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" };
-      case "Medium": return { backgroundColor: hexToRgba(accent, 0.08), color: "#bbb" };
-      case "Low": return { backgroundColor: hexToRgba(accent, 0.04), color: "#999" };
-      default: return {};
-    }
-  };
+  const getPriorityStyle = (p: string, selected: boolean) => getFormPriorityStyle(p, accent, selected);
 
   return (
     <div className="flex flex-col w-full sm:min-w-[260px] sm:w-[280px] lg:w-[300px] sm:max-w-[350px] sm:shrink-0 sm:h-full sm:min-h-0">
