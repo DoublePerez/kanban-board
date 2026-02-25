@@ -1,51 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
-import { AccentColor } from "../components/Sidebar";
-import { Task } from "../components/TaskCard";
+import type { AccentColor, Task, Project, Column, DeletedTask, DeletedProject, AppState } from "@/types";
+import { STORAGE_KEY, DEFAULT_COLUMNS, MAX_DELETED_TASKS, MAX_DELETED_PROJECTS, MONTH_ABBREVS } from "@/constants";
 
-// ── Types ──────────────────────────────────────────────────────
+// Re-export types for backward compatibility
+export type { Column, Project, DeletedTask, DeletedProject, AppState };
 
-export interface Column {
-  id: string;
-  title: string;
-}
-
-export interface Project {
-  id: string;
-  name: string;
-  tasks: Task[];
-  columns: Column[];
-  backgroundImage: string | null;
-}
-
-export interface DeletedTask {
-  task: Task;
-  projectId: string;
-  deletedAt: number;
-}
-
-export interface DeletedProject {
-  project: Project;
-  deletedAt: number;
-}
-
-export interface AppState {
-  projects: Project[];
-  activeProjectId: string;
-  accentColor: AccentColor;
-  userInitials: string;
-  deletedTasks: DeletedTask[];
-  deletedProjects: DeletedProject[];
-}
-
-// ── Constants ──────────────────────────────────────────────────
-
-const STORAGE_KEY = "kanban_board_v7";
-
-const defaultColumns: Column[] = [
-  { id: "todo", title: "To Do" },
-  { id: "in-progress", title: "In Progress" },
-  { id: "done", title: "Done" },
-];
+// ── Seed Data ─────────────────────────────────────────────────
 
 const initialTasks: Task[] = [
   {
@@ -130,9 +90,9 @@ const initialTasks: Task[] = [
 
 const defaultState: AppState = {
   projects: [
-    { id: "p1", name: "Shrek is Love", tasks: initialTasks, columns: [...defaultColumns], backgroundImage: null },
-    { id: "p2", name: "Work", tasks: [], columns: [...defaultColumns], backgroundImage: null },
-    { id: "p3", name: "Personal", tasks: [], columns: [...defaultColumns], backgroundImage: null },
+    { id: "p1", name: "Shrek is Love", tasks: initialTasks, columns: [...DEFAULT_COLUMNS], backgroundImage: null },
+    { id: "p2", name: "Work", tasks: [], columns: [...DEFAULT_COLUMNS], backgroundImage: null },
+    { id: "p3", name: "Personal", tasks: [], columns: [...DEFAULT_COLUMNS], backgroundImage: null },
   ],
   activeProjectId: "p1",
   accentColor: "green",
@@ -198,8 +158,7 @@ function genId(): string { return `id_${nextId++}`; }
 
 function formatDate(): string {
   const now = new Date();
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${months[now.getMonth()]} ${now.getDate()}`;
+  return `${MONTH_ABBREVS[now.getMonth()]} ${now.getDate()}`;
 }
 
 // ── Hook ───────────────────────────────────────────────────────
@@ -235,7 +194,7 @@ export function useKanbanState() {
 
   const addProject = useCallback(
     (name: string) => {
-      setProjects((prev) => [...prev, { id: genId(), name, tasks: [], columns: [...defaultColumns], backgroundImage: null }]);
+      setProjects((prev) => [...prev, { id: genId(), name, tasks: [], columns: [...DEFAULT_COLUMNS], backgroundImage: null }]);
     },
     [setProjects],
   );
@@ -249,7 +208,7 @@ export function useKanbanState() {
         ...s,
         projects: remaining,
         activeProjectId: s.activeProjectId === id ? remaining[0].id : s.activeProjectId,
-        deletedProjects: [{ project: { ...project }, deletedAt: Date.now() }, ...s.deletedProjects].slice(0, 10),
+        deletedProjects: [{ project: { ...project }, deletedAt: Date.now() }, ...s.deletedProjects].slice(0, MAX_DELETED_PROJECTS),
       };
     });
   }, []);
@@ -286,7 +245,7 @@ export function useKanbanState() {
       if (!task) return s;
       return {
         ...s,
-        deletedTasks: [{ task: { ...task }, projectId: s.activeProjectId, deletedAt: Date.now() }, ...s.deletedTasks].slice(0, 20),
+        deletedTasks: [{ task: { ...task }, projectId: s.activeProjectId, deletedAt: Date.now() }, ...s.deletedTasks].slice(0, MAX_DELETED_TASKS),
         projects: s.projects.map((p) => p.id === s.activeProjectId ? { ...p, tasks: p.tasks.filter((t) => t.id !== taskId) } : p),
       };
     });
