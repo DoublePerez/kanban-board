@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { AccentColor } from "../components/Sidebar";
 import { Task } from "../components/TaskCard";
+import { generateId } from "@/utils/ids";
 
 // ── Types ──────────────────────────────────────────────────────
 
@@ -193,8 +194,6 @@ function saveState(state: AppState) {
 
 // ── Helpers ────────────────────────────────────────────────────
 
-let nextId = Date.now();
-function genId(): string { return `id_${nextId++}`; }
 
 function formatDate(): string {
   const now = new Date();
@@ -235,7 +234,7 @@ export function useKanbanState() {
 
   const addProject = useCallback(
     (name: string) => {
-      setProjects((prev) => [...prev, { id: genId(), name, tasks: [], columns: [...defaultColumns], backgroundImage: null }]);
+      setProjects((prev) => [...prev, { id: generateId(), name, tasks: [], columns: [...defaultColumns], backgroundImage: null }]);
     },
     [setProjects],
   );
@@ -272,7 +271,7 @@ export function useKanbanState() {
     (columnId: string, title: string, description: string, priority: "High" | "Medium" | "Low", dueDate: string | null) => {
       updateProject(activeProjectId, (p) => ({
         ...p,
-        tasks: [...p.tasks, { id: genId(), title: title.toUpperCase(), description, priority, date: formatDate(), dueDate, columnId, subtasks: [] }],
+        tasks: [...p.tasks, { id: generateId(), title: title.toUpperCase(), description, priority, date: formatDate(), dueDate, columnId, subtasks: [] }],
       }));
     },
     [activeProjectId, updateProject],

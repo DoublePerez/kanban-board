@@ -33,7 +33,7 @@ export function AvatarPopover({
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (popRef.current && !popRef.current.contains(e.target as Node)) setOpen(false);
+      if (popRef.current && e.target instanceof Node && !popRef.current.contains(e.target)) setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);

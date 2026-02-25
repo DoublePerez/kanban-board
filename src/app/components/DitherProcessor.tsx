@@ -135,7 +135,8 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
           onImageProcessed(dataUrl);
           onClose();
         };
-        img.src = e.target?.result as string;
+        if (typeof e.target?.result !== 'string') return;
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     },

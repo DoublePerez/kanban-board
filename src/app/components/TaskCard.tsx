@@ -4,6 +4,7 @@ import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } f
 import { hexToRgba } from "@/utils/colors";
 import { formatDueDate, isOverdue } from "@/utils/dates";
 import { getCardPriorityStyle } from "@/utils/styles";
+import { generateId } from "@/utils/ids";
 
 export interface Subtask {
   id: string;
@@ -110,7 +111,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
       ...task,
       subtasks: [
         ...task.subtasks,
-        { id: `sub_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, text: newSubtaskText.trim(), done: false },
+        { id: generateId(), text: newSubtaskText.trim(), done: false },
       ],
     });
     setNewSubtaskText("");
