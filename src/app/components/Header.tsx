@@ -12,6 +12,7 @@ interface HeaderProps {
   totalTasks: number;
   doneTasks: number;
   deletedTasks: DeletedTask[];
+  deletedProjects: DeletedProject[];
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onRenameProject: (name: string) => void;
@@ -19,6 +20,7 @@ interface HeaderProps {
   onChangeAccent: (c: AccentColor) => void;
   onUploadBackground: () => void;
   onRestoreTask: (index: number) => void;
+  onRestoreProject: (index: number) => void;
   onOpenSidebar: () => void;
 }
 
@@ -30,6 +32,7 @@ export function Header({
   totalTasks,
   doneTasks,
   deletedTasks,
+  deletedProjects,
   searchQuery,
   onSearchChange,
   onRenameProject,
@@ -37,6 +40,7 @@ export function Header({
   onChangeAccent,
   onUploadBackground,
   onRestoreTask,
+  onRestoreProject,
   onOpenSidebar,
 }: HeaderProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -88,13 +92,13 @@ export function Header({
               if (e.key === "Enter") handleTitleChange((e.target as HTMLInputElement).value);
               if (e.key === "Escape") setIsEditingTitle(false);
             }}
-            className="bg-transparent text-white text-[48px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-3px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
+            className="bg-transparent text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
             style={{ borderBottom: "2px solid rgba(255,255,255,0.2)" }}
           />
         ) : (
           <h1
             onClick={() => setIsEditingTitle(true)}
-            className="text-white text-[48px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-3px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
+            className="text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
             title="Click to rename project"
           >
             {projectName}
@@ -102,7 +106,7 @@ export function Header({
         )}
       </div>
 
-      <div className="flex items-center gap-[8px] sm:gap-[10px] shrink-0 mt-[8px]">
+      <div className="flex items-center gap-[6px] sm:gap-[10px] shrink-0 mt-[4px] sm:mt-[8px]">
         {/* Hamburger - mobile only */}
         <button
           onClick={onOpenSidebar}
@@ -111,8 +115,8 @@ export function Header({
           <Menu size={22} />
         </button>
 
-        {/* Search */}
-        <div className="relative">
+        {/* Search - hidden on mobile, shown in sidebar instead */}
+        <div className="relative hidden sm:block">
           {showSearch ? (
             <div className="flex items-center gap-[8px] bg-[rgba(14,14,14,0.85)] backdrop-blur-[12px] rounded-[10px] px-[12px] py-[7px] border border-[rgba(255,255,255,0.08)]">
               <Search size={14} className="text-[#555] shrink-0" />
@@ -167,7 +171,9 @@ export function Header({
           onChangeAccent={onChangeAccent}
           onUploadBackground={onUploadBackground}
           deletedTasks={deletedTasks}
+          deletedProjects={deletedProjects}
           onRestoreTask={onRestoreTask}
+          onRestoreProject={onRestoreProject}
         />
       </div>
     </header>
