@@ -23,12 +23,18 @@ export interface DeletedTask {
   deletedAt: number;
 }
 
+export interface DeletedProject {
+  project: Project;
+  deletedAt: number;
+}
+
 export interface AppState {
   projects: Project[];
   activeProjectId: string;
   accentColor: AccentColor;
   userInitials: string;
   deletedTasks: DeletedTask[];
+  deletedProjects: DeletedProject[];
 }
 
 // ── Constants ──────────────────────────────────────────────────
@@ -132,6 +138,7 @@ const defaultState: AppState = {
   accentColor: "green",
   userInitials: "AP",
   deletedTasks: [],
+  deletedProjects: [],
 };
 
 // ── Persistence ────────────────────────────────────────────────
@@ -147,6 +154,7 @@ function loadState(): AppState {
           accentColor: parsed.accentColor || "green",
           userInitials: parsed.userInitials || "AP",
           deletedTasks: parsed.deletedTasks || [],
+          deletedProjects: parsed.deletedProjects || [],
           projects: parsed.projects.map((p) => ({
             ...p,
             tasks: p.tasks.map((t) => ({
@@ -234,9 +242,15 @@ export function useKanbanState() {
 
   const deleteProject = useCallback((id: string) => {
     setState((s) => {
+      const project = s.projects.find((p) => p.id === id);
       const remaining = s.projects.filter((p) => p.id !== id);
-      if (remaining.length === 0) return s;
-      return { ...s, projects: remaining, activeProjectId: s.activeProjectId === id ? remaining[0].id : s.activeProjectId };
+      if (remaining.length === 0 || !project) return s;
+      return {
+        ...s,
+        projects: remaining,
+        activeProjectId: s.activeProjectId === id ? remaining[0].id : s.activeProjectId,
+        deletedProjects: [{ project: { ...project }, deletedAt: Date.now() }, ...s.deletedProjects].slice(0, 10),
+      };
     });
   }, []);
 
@@ -274,6 +288,18 @@ export function useKanbanState() {
         ...s,
         deletedTasks: [{ task: { ...task }, projectId: s.activeProjectId, deletedAt: Date.now() }, ...s.deletedTasks].slice(0, 20),
         projects: s.projects.map((p) => p.id === s.activeProjectId ? { ...p, tasks: p.tasks.filter((t) => t.id !== taskId) } : p),
+      };
+    });
+  }, []);
+
+  const restoreProject = useCallback((deletedIndex: number) => {
+    setState((s) => {
+      const entry = s.deletedProjects[deletedIndex];
+      if (!entry) return s;
+      return {
+        ...s,
+        deletedProjects: s.deletedProjects.filter((_, i) => i !== deletedIndex),
+        projects: [...s.projects, entry.project],
       };
     });
   }, []);
@@ -345,6 +371,7 @@ export function useKanbanState() {
     setUserInitials,
     addProject,
     deleteProject,
+    restoreProject,
     renameProject,
     addTask,
     deleteTask,

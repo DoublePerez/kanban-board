@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ImageIcon, Undo2 } from "lucide-react";
 import { AccentColor, ACCENT_HEX } from "./Sidebar";
-import { DeletedTask } from "../hooks/useKanbanState";
+import { DeletedTask, DeletedProject } from "../hooks/useKanbanState";
 
 interface AvatarPopoverProps {
   initials: string;
@@ -10,7 +10,9 @@ interface AvatarPopoverProps {
   onChangeAccent: (c: AccentColor) => void;
   onUploadBackground: () => void;
   deletedTasks: DeletedTask[];
+  deletedProjects: DeletedProject[];
   onRestoreTask: (index: number) => void;
+  onRestoreProject: (index: number) => void;
 }
 
 export function AvatarPopover({
@@ -20,7 +22,9 @@ export function AvatarPopover({
   onChangeAccent,
   onUploadBackground,
   deletedTasks,
+  deletedProjects,
   onRestoreTask,
+  onRestoreProject,
 }: AvatarPopoverProps) {
   const [open, setOpen] = useState(false);
   const [editInitials, setEditInitials] = useState(initials);
@@ -102,18 +106,37 @@ export function AvatarPopover({
             </span>
           </button>
 
-          {/* Recently deleted tasks */}
-          {deletedTasks.length > 0 && (
+          {/* Recently deleted */}
+          {(deletedTasks.length > 0 || deletedProjects.length > 0) && (
             <>
               <div className="relative z-10 w-full h-px bg-[rgba(255,255,255,0.06)]" />
               <div className="relative z-10 flex flex-col gap-[8px]">
                 <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#555] tracking-[2px]">
                   RECENTLY DELETED
                 </span>
-                <div className="flex flex-col gap-[2px] max-h-[100px] overflow-y-auto">
+                <div className="flex flex-col gap-[2px] max-h-[120px] overflow-y-auto">
+                  {deletedProjects.slice(0, 5).map((entry, index) => (
+                    <div
+                      key={`proj-${entry.project.id}-${entry.deletedAt}`}
+                      className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+                    >
+                      <div className="flex items-center gap-[5px] truncate flex-1">
+                        <span className="font-['JetBrains_Mono',monospace] text-[8px] text-[#555] tracking-[0.5px] shrink-0">PRJ</span>
+                        <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#777] truncate">
+                          {entry.project.name}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => { onRestoreProject(index); }}
+                        className="text-[#555] hover:text-white transition-colors shrink-0"
+                      >
+                        <Undo2 size={11} />
+                      </button>
+                    </div>
+                  ))}
                   {deletedTasks.slice(0, 10).map((entry, index) => (
                     <div
-                      key={`${entry.task.id}-${entry.deletedAt}`}
+                      key={`task-${entry.task.id}-${entry.deletedAt}`}
                       className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
                     >
                       <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#777] truncate flex-1">

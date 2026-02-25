@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Search, X, Menu } from "lucide-react";
 import { AccentColor } from "./Sidebar";
 import { AvatarPopover } from "./AvatarPopover";
-import { DeletedTask } from "../hooks/useKanbanState";
+import { DeletedTask, DeletedProject } from "../hooks/useKanbanState";
 
 interface HeaderProps {
   projectName: string;
