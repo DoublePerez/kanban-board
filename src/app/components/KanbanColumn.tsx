@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { Plus, X, Calendar } from "lucide-react";
-import { TaskCard, Task } from "./TaskCard";
+import type { Task, Priority } from "@/types";
+import { DND_ITEM_TYPE } from "@/types";
+import { TaskCard } from "./TaskCard";
 import { hexToRgba } from "@/utils/colors";
 import { getFormPriorityStyle } from "@/utils/styles";
 
@@ -10,7 +12,7 @@ interface KanbanColumnProps {
   title: string;
   tasks: Task[];
   accent: string;
-  onAddTask: (columnId: string, title: string, description: string, priority: "High" | "Medium" | "Low", dueDate: string | null) => void;
+  onAddTask: (columnId: string, title: string, description: string, priority: Priority, dueDate: string | null) => void;
   onDeleteTask: (taskId: string) => void;
   onMoveTask: (taskId: string, targetColumnId: string, targetIndex: number) => void;
   onEditTask: (task: Task) => void;
@@ -20,11 +22,11 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
-  const [newPriority, setNewPriority] = useState<"High" | "Medium" | "Low">("Medium");
+  const [newPriority, setNewPriority] = useState<Priority>("Medium");
   const [newDueDate, setNewDueDate] = useState("");
 
   const [{ isOver }, drop] = useDrop({
-    accept: "TASK",
+    accept: DND_ITEM_TYPE,
     drop(item: { id: string; columnId: string; index: number }, monitor) {
       if (monitor.didDrop()) return;
       if (item.columnId !== id) {
@@ -54,10 +56,10 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
       {/* Column Header */}
       <div className="flex items-center justify-between pb-[16px] w-full">
         <div className="flex items-center gap-[8px]">
-          <span className="font-['JetBrains_Mono',monospace] font-bold text-[12px] text-white tracking-[0.24px] uppercase leading-[24px]">
+          <span className="font-mono font-bold text-[12px] text-white tracking-[0.24px] uppercase leading-[24px]">
             {title}
           </span>
-          <span className="font-['JetBrains_Mono',monospace] font-normal text-[14px] text-[rgba(246,246,246,0.76)] tracking-[0.28px] leading-[20px]">
+          <span className="font-mono font-normal text-[14px] text-[rgba(246,246,246,0.76)] tracking-[0.28px] leading-[20px]">
             [{tasks.length}]
           </span>
         </div>
@@ -98,7 +100,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
 
           {tasks.length === 0 && !showAddForm && (
             <div className="flex flex-col items-center justify-center py-[40px] opacity-30">
-              <p className="font-['JetBrains_Mono',monospace] text-[#888] text-[11px] tracking-[1px]">
+              <p className="font-mono text-[#888] text-[11px] tracking-[1px]">
                 NO TASKS
               </p>
             </div>
@@ -114,7 +116,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   autoFocus
-                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-['JetBrains_Mono',monospace] placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                   onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />
@@ -123,7 +125,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                   placeholder="Description..."
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
-                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-['JetBrains_Mono',monospace] placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                   onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />
@@ -134,7 +136,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                     type="date"
                     value={newDueDate}
                     onChange={(e) => setNewDueDate(e.target.value)}
-                    className="flex-1 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[10px] py-[6px] text-[#999] text-[12px] font-['JetBrains_Mono',monospace] border border-[rgba(255,255,255,0.1)] outline-none [color-scheme:dark]"
+                    className="flex-1 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[10px] py-[6px] text-[#999] text-[12px] font-mono border border-[rgba(255,255,255,0.1)] outline-none [color-scheme:dark]"
                   />
                 </div>
                 {/* Priority */}
@@ -144,7 +146,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                       key={p}
                       type="button"
                       onClick={() => setNewPriority(p)}
-                      className="px-[8px] py-[4px] rounded-full text-[11px] font-['JetBrains_Mono',monospace] font-medium transition-all"
+                      className="px-[8px] py-[4px] rounded-full text-[11px] font-mono font-medium transition-all"
                       style={getPriorityStyle(p, newPriority === p)}
                     >
                       {p}
@@ -161,7 +163,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                   </button>
                   <button
                     type="submit"
-                    className="px-[12px] py-[6px] rounded-[8px] text-[12px] font-['JetBrains_Mono',monospace] font-medium transition-colors hover:opacity-80"
+                    className="px-[12px] py-[6px] rounded-[8px] text-[12px] font-mono font-medium transition-colors hover:opacity-80"
                     style={{ backgroundColor: "rgba(255,255,255,0.1)", color: "#ddd" }}
                   >
                     ADD

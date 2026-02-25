@@ -2,7 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { X } from "lucide-react";
-import { Sidebar, ViewMode, ACCENT_HEX } from "./components/Sidebar";
+import { Sidebar } from "./components/Sidebar";
+import type { ViewMode } from "@/types";
+import { ACCENT_HEX } from "@/types";
 import { KanbanColumn } from "./components/KanbanColumn";
 import { CalendarView } from "./components/CalendarView";
 import { OverviewPanel } from "./components/OverviewPanel";
@@ -29,6 +31,7 @@ export default function App() {
     addTask,
     deleteTask,
     restoreTask,
+    restoreProject,
     editTask,
     moveTask,
     setBackgroundImage,
@@ -111,6 +114,7 @@ export default function App() {
             totalTasks={totalTasks}
             doneTasks={doneTasks}
             deletedTasks={state.deletedTasks}
+            deletedProjects={state.deletedProjects}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onRenameProject={(name) => renameProject(activeProjectId, name)}
@@ -118,6 +122,7 @@ export default function App() {
             onChangeAccent={setAccentColor}
             onUploadBackground={() => setShowDitherModal(true)}
             onRestoreTask={restoreTask}
+            onRestoreProject={restoreProject}
             onOpenSidebar={() => setSidebarOpen(true)}
           />
 

@@ -9,16 +9,10 @@ const GRID_ICON_PATHS = [
   "M7.5 11.6667H3.33333C2.8731 11.6667 2.5 12.0398 2.5 12.5V16.6667C2.5 17.1269 2.8731 17.5 3.33333 17.5H7.5C7.96024 17.5 8.33333 17.1269 8.33333 16.6667V12.5C8.33333 12.0398 7.96024 11.6667 7.5 11.6667Z",
 ];
 
-export type ViewMode = "board" | "calendar" | "overview";
-export type AccentColor = "green" | "orange" | "blue" | "red" | "lime";
-
-export const ACCENT_HEX: Record<AccentColor, string> = {
-  green: "#34D399",
-  orange: "#F97316",
-  blue: "#60A5FA",
-  red: "#F87171",
-  lime: "#A3E635",
-};
+// Re-export from centralized types for backwards compatibility
+export type { ViewMode, AccentColor } from "@/types";
+export { ACCENT_HEX } from "@/types";
+import type { ViewMode } from "@/types";
 
 interface Project {
   id: string;
@@ -110,7 +104,7 @@ export function Sidebar({
             }
           >
             {v.icon}
-            <span className="font-['JetBrains_Mono',monospace] text-[9px] tracking-[0.6px]">
+            <span className="font-mono text-[9px] tracking-[0.6px]">
               {v.label}
             </span>
           </button>
@@ -130,7 +124,7 @@ export function Sidebar({
               ))}
             </svg>
           </div>
-          <span className="font-['Basis_Grotesque_Arabic_Pro',sans-serif] text-[24px] text-white tracking-[-0.72px] leading-[24px]">
+          <span className="font-sans text-[24px] text-white tracking-[-0.72px] leading-[24px]">
             Projects
           </span>
           <div className="ml-auto">
@@ -174,11 +168,11 @@ export function Sidebar({
                         if (e.key === "Escape") { setEditingProjectId(null); setEditingName(""); }
                       }}
                       onClick={(e) => e.stopPropagation()}
-                      className="flex-1 min-w-0 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[2px] text-[13px] font-['JetBrains_Mono',monospace] font-light tracking-[-0.2px] outline-none border border-[rgba(255,255,255,0.2)] text-[#e0e0e0]"
+                      className="flex-1 min-w-0 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[2px] text-[13px] font-mono font-light tracking-[-0.2px] outline-none border border-[rgba(255,255,255,0.2)] text-[#e0e0e0]"
                     />
                   ) : (
                     <span
-                      className="font-['JetBrains_Mono',monospace] font-light text-[13px] tracking-[-0.2px] leading-[20px] transition-colors truncate flex-1 min-w-0"
+                      className="font-mono font-light text-[13px] tracking-[-0.2px] leading-[20px] transition-colors truncate flex-1 min-w-0"
                       style={{ color: isActive ? "#ddd" : "#666" }}
                       onDoubleClick={(e) => { e.stopPropagation(); startEditing(project); }}
                     >
@@ -189,7 +183,7 @@ export function Sidebar({
                   {/* Right side: count + actions */}
                   <div className="flex items-center gap-[4px] shrink-0 ml-[8px]">
                     <span
-                      className="font-['JetBrains_Mono',monospace] text-[10px] tabular-nums min-w-[16px] text-right"
+                      className="font-mono text-[10px] tabular-nums min-w-[16px] text-right"
                       style={{ color: isActive ? "#666" : "#444" }}
                     >
                       {count}
@@ -199,13 +193,13 @@ export function Sidebar({
                       <div className="flex items-center gap-[6px] ml-[2px]" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => { onDeleteProject(project.id); setConfirmDeleteId(null); }}
-                          className="text-red-400 hover:text-red-300 transition-colors text-[10px] font-['JetBrains_Mono',monospace] font-medium"
+                          className="text-red-400 hover:text-red-300 transition-colors text-[10px] font-mono font-medium"
                         >
                           YES
                         </button>
                         <button
                           onClick={() => setConfirmDeleteId(null)}
-                          className="text-[#666] hover:text-white transition-colors text-[10px] font-['JetBrains_Mono',monospace]"
+                          className="text-[#666] hover:text-white transition-colors text-[10px] font-mono"
                         >
                           NO
                         </button>
@@ -243,7 +237,7 @@ export function Sidebar({
                   autoFocus
                   onBlur={() => { if (!newProjectName.trim()) setShowNewProject(false); }}
                   onKeyDown={(e) => { if (e.key === "Escape") setShowNewProject(false); }}
-                  className="w-full bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[7px] text-white text-[13px] font-['JetBrains_Mono',monospace] placeholder:text-[#444] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="w-full bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[7px] text-white text-[13px] font-mono placeholder:text-[#444] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                 />
               </form>
@@ -253,7 +247,7 @@ export function Sidebar({
                 className="flex items-center justify-center gap-[6px] w-full mt-[10px] py-[8px] rounded-[8px] border border-[rgba(255,255,255,0.08)] text-[#444] hover:text-[#888] hover:border-[rgba(255,255,255,0.15)] transition-all"
               >
                 <Plus size={12} />
-                <span className="font-['JetBrains_Mono',monospace] text-[11px] tracking-[0.5px]">
+                <span className="font-mono text-[11px] tracking-[0.5px]">
                   NEW PROJECT
                 </span>
               </button>

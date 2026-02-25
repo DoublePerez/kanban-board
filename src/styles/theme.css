@@ -146,6 +146,9 @@
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
+
+  --font-mono: 'JetBrains_Mono', monospace;
+  --font-sans: 'Basis_Grotesque_Arabic_Pro', sans-serif;
 }
 
 /* ── Base Layer ──────────────────────────────────────────────── */

@@ -165,7 +165,7 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
   );
 
   const [isDragOver, setIsDragOver] = useState(false);
-  const mono = "font-['JetBrains_Mono',monospace]";
+  
 
   if (!isOpen) return null;
 
@@ -180,7 +180,7 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
         <div className="relative z-10 p-[24px] flex flex-col gap-[20px]">
           {/* Header */}
           <div className="flex items-center justify-between">
-            <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>BACKGROUND</span>
+            <span className="font-mono text-[10px] text-[#666] tracking-[1.5px]">BACKGROUND</span>
             <button onClick={onClose} className="text-[#444] hover:text-white transition-colors">
               <X size={16} />
             </button>
@@ -204,16 +204,16 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
             >
               <Upload size={16} style={{ color: isDragOver ? accent : "#555" }} className="transition-colors" />
             </div>
-            <p className={`${mono} text-[12px] text-[#888] tracking-[-0.2px]`}>
+            <p className="font-mono text-[12px] text-[#888] tracking-[-0.2px]">
               {isDragOver ? "Drop to upload" : "Drop image or click to browse"}
             </p>
-            <p className={`${mono} text-[10px] text-[#444] mt-[6px]`}>
+            <p className="font-mono text-[10px] text-[#444] mt-[6px]">
               PNG, JPG, WEBP
             </p>
           </div>
 
           {/* Footer note */}
-          <p className={`${mono} text-[10px] text-[#444] leading-[16px]`}>
+          <p className="font-mono text-[10px] text-[#444] leading-[16px]">
             Floyd-Steinberg dither at 3px pixel size
           </p>
         </div>

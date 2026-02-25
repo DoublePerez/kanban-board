@@ -23,15 +23,15 @@ export class ErrorBoundary extends React.Component<
       return (
         <div className="flex items-center justify-center size-full bg-[#080808]">
           <div className="flex flex-col items-center gap-[16px] text-center p-[32px]">
-            <span className="font-['JetBrains_Mono',monospace] text-[12px] text-[#666] tracking-[1.5px]">
+            <span className="font-mono text-[12px] text-[#666] tracking-[1.5px]">
               SOMETHING WENT WRONG
             </span>
-            <p className="font-['JetBrains_Mono',monospace] text-[11px] text-[#555] max-w-[400px]">
+            <p className="font-mono text-[11px] text-[#555] max-w-[400px]">
               {this.state.error?.message}
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="font-['JetBrains_Mono',monospace] text-[11px] text-[#888] tracking-[0.5px] px-[16px] py-[8px] rounded-[8px] border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.05)] transition-colors"
+              className="font-mono text-[11px] text-[#888] tracking-[0.5px] px-[16px] py-[8px] rounded-[8px] border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.05)] transition-colors"
             >
               RELOAD
             </button>
