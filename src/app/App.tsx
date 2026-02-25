@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 import { Sidebar, ViewMode, ACCENT_HEX } from "./components/Sidebar";
 import { KanbanColumn } from "./components/KanbanColumn";
 import { CalendarView } from "./components/CalendarView";
@@ -29,6 +29,7 @@ export default function App() {
     addTask,
     deleteTask,
     restoreTask,
+    restoreProject,
     editTask,
     moveTask,
     setBackgroundImage,
@@ -111,6 +112,7 @@ export default function App() {
             totalTasks={totalTasks}
             doneTasks={doneTasks}
             deletedTasks={state.deletedTasks}
+            deletedProjects={state.deletedProjects}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onRenameProject={(name) => renameProject(activeProjectId, name)}
@@ -118,6 +120,7 @@ export default function App() {
             onChangeAccent={setAccentColor}
             onUploadBackground={() => setShowDitherModal(true)}
             onRestoreTask={restoreTask}
+            onRestoreProject={restoreProject}
             onOpenSidebar={() => setSidebarOpen(true)}
           />
 
@@ -143,6 +146,25 @@ export default function App() {
                     >
                       <X size={20} />
                     </button>
+                  </div>
+                  {/* Mobile search */}
+                  <div className="flex items-center gap-[8px] bg-[rgba(255,255,255,0.04)] rounded-[10px] px-[12px] py-[9px] mb-[16px] border border-[rgba(255,255,255,0.08)]">
+                    <Search size={14} className="text-[#555] shrink-0" />
+                    <input
+                      type="text"
+                      placeholder="Search tasks..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="bg-transparent text-white text-[13px] font-['JetBrains_Mono',monospace] placeholder:text-[#444] outline-none w-full"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="text-[#555] hover:text-white transition-colors shrink-0"
+                      >
+                        <X size={14} />
+                      </button>
+                    )}
                   </div>
                   <Sidebar {...sidebarProps} />
                 </div>
