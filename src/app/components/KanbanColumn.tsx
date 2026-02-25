@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { Plus, X, Calendar } from "lucide-react";
 import type { Task, Priority } from "@/types";
-import { DND_ITEM_TYPE } from "@/types";
+import { DND_ITEM_TYPE, PRIORITIES } from "@/types";
 import { TaskCard } from "./TaskCard";
 import { hexToRgba } from "@/utils/colors";
 import { getFormPriorityStyle } from "@/utils/styles";
-import { DND_ITEM_TYPE, PRIORITIES } from "@/types";
-import type { Task, Priority } from "@/types";
 
 interface KanbanColumnProps {
   id: string;

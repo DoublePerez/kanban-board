@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Plus, ChevronDown, ChevronUp, X, Pencil, LayoutDashboard, CalendarDays, BarChart3 } from "lucide-react";
 import { hexToRgba } from "@/utils/colors";
-import type { ViewMode } from "@/types";
+import type { ViewMode, AccentColor } from "@/types";
+import { ACCENT_HEX } from "@/types";
 
 const GRID_ICON_PATHS = [
   "M7.5 2.5H3.33333C2.8731 2.5 2.5 2.8731 2.5 3.33333V7.5C2.5 7.96024 2.8731 8.33333 3.33333 8.33333H7.5C7.96024 8.33333 8.33333 7.96024 8.33333 7.5V3.33333C8.33333 2.8731 7.96024 2.5 7.5 2.5Z",
@@ -11,9 +12,8 @@ const GRID_ICON_PATHS = [
 ];
 
 // Re-export from centralized types for backwards compatibility
-export type { ViewMode, AccentColor } from "@/types";
-export { ACCENT_HEX } from "@/types";
-import type { ViewMode } from "@/types";
+export type { ViewMode, AccentColor };
+export { ACCENT_HEX };
 
 interface Project {
   id: string;
