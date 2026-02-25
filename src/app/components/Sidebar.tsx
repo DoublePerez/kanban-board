@@ -26,6 +26,7 @@ interface SidebarProps {
   taskCounts: Record<string, number>;
   viewMode: ViewMode;
   accent: string;
+  embedded?: boolean;
   onSelectProject: (id: string) => void;
   onAddProject: (name: string) => void;
   onDeleteProject: (id: string) => void;
@@ -39,6 +40,7 @@ export function Sidebar({
   taskCounts,
   viewMode,
   accent,
+  embedded = false,
   onSelectProject,
   onAddProject,
   onDeleteProject,
@@ -88,29 +90,34 @@ export function Sidebar({
   ];
 
   return (
-    <div className="relative backdrop-blur-[12px] bg-[rgba(16,16,16,0.65)] flex flex-col gap-[28px] items-start pb-[28px] pt-[28px] px-[22px] rounded-[15px] w-full lg:w-[290px] shrink-0">
-      <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[15px]" />
+    <div className={embedded
+      ? "flex flex-col gap-[24px] items-start w-full"
+      : "relative backdrop-blur-[12px] bg-[rgba(16,16,16,0.65)] flex flex-col gap-[28px] items-start pb-[28px] pt-[28px] px-[22px] rounded-[15px] w-full lg:w-[290px] shrink-0"
+    }>
+      {!embedded && <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[15px]" />}
 
-      {/* View Tabs */}
-      <div className="flex gap-[3px] w-full relative z-10 bg-[rgba(255,255,255,0.03)] rounded-[10px] p-[4px]">
-        {views.map((v) => (
-          <button
-            key={v.id}
-            onClick={() => onChangeView(v.id)}
-            className="flex-1 flex items-center justify-center gap-[6px] py-[8px] px-[4px] rounded-[8px] transition-all"
-            style={
-              viewMode === v.id
-                ? { backgroundColor: "rgba(255,255,255,0.07)", color: "#ddd" }
-                : { color: "#555" }
-            }
-          >
-            {v.icon}
-            <span className="font-mono text-[9px] tracking-[0.6px]">
-              {v.label}
-            </span>
-          </button>
-        ))}
-      </div>
+      {/* View Tabs — hidden in embedded (mobile has its own switcher) */}
+      {!embedded && (
+        <div className="flex gap-[3px] w-full relative z-10 bg-[rgba(255,255,255,0.03)] rounded-[10px] p-[4px]">
+          {views.map((v) => (
+            <button
+              key={v.id}
+              onClick={() => onChangeView(v.id)}
+              className="flex-1 flex items-center justify-center gap-[6px] py-[8px] px-[4px] rounded-[8px] transition-all"
+              style={
+                viewMode === v.id
+                  ? { backgroundColor: "rgba(255,255,255,0.07)", color: "#ddd" }
+                  : { color: "#555" }
+              }
+            >
+              {v.icon}
+              <span className="font-mono text-[9px] tracking-[0.6px]">
+                {v.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Projects Header */}
       <div className="flex flex-col gap-[20px] items-start w-full relative z-10">

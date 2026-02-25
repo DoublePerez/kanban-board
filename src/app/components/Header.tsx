@@ -107,19 +107,11 @@ export function Header({
         )}
       </div>
 
-      <div className="flex items-center gap-[6px] sm:gap-[10px] shrink-0 mt-[4px] sm:mt-[8px]">
-        {/* Hamburger - mobile only */}
-        <button
-          onClick={onOpenSidebar}
-          className="lg:hidden text-[#888] hover:text-white transition-colors shrink-0"
-        >
-          <Menu size={22} />
-        </button>
-
-        {/* Search - hidden on mobile, shown in sidebar instead */}
+      <div className="flex items-center gap-[8px] shrink-0 mt-[4px] sm:mt-[8px]">
+        {/* Search - hidden on mobile */}
         <div className="relative hidden sm:block">
           {showSearch ? (
-            <div className="flex items-center gap-[8px] bg-[rgba(14,14,14,0.85)] backdrop-blur-[12px] rounded-[10px] px-[12px] py-[7px] border border-[rgba(255,255,255,0.08)]">
+            <div className="flex items-center gap-[8px] bg-[rgba(14,14,14,0.85)] backdrop-blur-[12px] rounded-[10px] px-[12px] h-[34px] border border-[rgba(255,255,255,0.08)]">
               <Search size={14} className="text-[#555] shrink-0" />
               <input
                 ref={searchRef}
@@ -139,9 +131,9 @@ export function Header({
           ) : (
             <button
               onClick={() => setShowSearch(true)}
-              className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center gap-[6px] px-[10px] py-[7px] rounded-[10px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
+              className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center gap-[6px] px-[10px] h-[34px] rounded-[10px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
             >
-              <Search size={13} className="text-[#777]" />
+              <Search size={14} className="text-[#777]" />
               <span className="font-mono text-[10px] text-[#555] tracking-[0.5px] hidden md:inline">
                 CMD+K
               </span>
@@ -149,9 +141,9 @@ export function Header({
           )}
         </div>
 
-        {/* Progress */}
+        {/* Progress - hidden on mobile */}
         {totalTasks > 0 && (
-          <div className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] hidden sm:flex items-center gap-[8px] px-[10px] py-[7px] rounded-[10px] border border-[rgba(255,255,255,0.06)]">
+          <div className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] hidden sm:flex items-center gap-[8px] px-[10px] h-[34px] rounded-[10px] border border-[rgba(255,255,255,0.06)]">
             <div className="w-[36px] h-[3px] rounded-full bg-[rgba(255,255,255,0.1)] overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500"
@@ -163,6 +155,14 @@ export function Header({
             </span>
           </div>
         )}
+
+        {/* Hamburger - mobile only, glass container matching other buttons */}
+        <button
+          onClick={onOpenSidebar}
+          className="lg:hidden bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center justify-center w-[34px] h-[34px] rounded-[10px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors shrink-0"
+        >
+          <Menu size={16} className="text-[#777]" />
+        </button>
 
         {/* Avatar with popover */}
         <AvatarPopover

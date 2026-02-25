@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertTriangle, ArrowRight, ChevronDown, ChevronUp, Calendar } from "lucide-react";
+import { AlertTriangle, ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import type { Task } from "@/types";
 import { COLUMN_LABELS, UPCOMING_DAYS_WINDOW } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
@@ -21,6 +21,7 @@ interface OverviewPanelProps {
 export function OverviewPanel({ projects, activeProjectId, accent, onSelectProject }: OverviewPanelProps) {
   const [tasksExpanded, setTasksExpanded] = useState(true);
   const [projectsExpanded, setProjectsExpanded] = useState(true);
+  const [expandedProjectId, setExpandedProjectId] = useState<string | null>(null);
 
   const activeProject = projects.find((p) => p.id === activeProjectId) || projects[0];
 
@@ -261,9 +262,11 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                 {projects.map((project) => {
                   const pTotal = project.tasks.length;
                   const pDone = project.tasks.filter((t) => t.columnId === "done").length;
+                  const pTodo = project.tasks.filter((t) => t.columnId === "todo").length;
                   const pInProgress = project.tasks.filter((t) => t.columnId === "in-progress").length;
                   const pPercent = pTotal > 0 ? Math.round((pDone / pTotal) * 100) : 0;
                   const isActive = project.id === activeProjectId;
+                  const isExpanded = expandedProjectId === project.id;
 
                   const pOverdue = project.tasks.filter((t) => {
                     if (!t.dueDate || t.columnId === "done") return false;
@@ -271,54 +274,117 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   }).length;
 
                   return (
-                    <button
-                      key={project.id}
-                      onClick={() => onSelectProject(project.id)}
-                      className="flex items-center w-full rounded-[10px] px-[14px] py-[11px] transition-colors text-left group hover:bg-[rgba(255,255,255,0.03)]"
-                      style={isActive ? { backgroundColor: hexToRgba(accent, 0.05) } : {}}
-                    >
-                      {/* Name */}
-                      <span
-                        className="font-mono text-[13px] tracking-[-0.2px] w-[100px] sm:w-[140px] shrink-0 truncate"
-                        style={{ color: isActive ? "#ddd" : "#777" }}
+                    <div key={project.id} className="flex flex-col">
+                      <button
+                        onClick={() => {
+                          onSelectProject(project.id);
+                          setExpandedProjectId(isExpanded ? null : project.id);
+                        }}
+                        className="flex flex-col gap-[10px] w-full rounded-[10px] px-[14px] py-[12px] transition-colors text-left group hover:bg-[rgba(255,255,255,0.03)]"
+                        style={isActive ? { backgroundColor: hexToRgba(accent, 0.05) } : {}}
                       >
-                        {project.name}
-                      </span>
-
-                      {/* Mini stats */}
-                      <div className="flex items-center gap-[10px] shrink-0 ml-[4px] w-[80px]">
-                        {pOverdue > 0 && (
-                          <span className="font-mono text-[10px] text-[#666] flex items-center gap-[3px]">
-                            <AlertTriangle size={9} />
-                            {pOverdue}
+                        {/* Top row: name + count + chevron */}
+                        <div className="flex items-center w-full">
+                          <span
+                            className="font-mono text-[13px] tracking-[-0.2px] truncate flex-1 min-w-0"
+                            style={{ color: isActive ? "#ddd" : "#777" }}
+                          >
+                            {project.name}
                           </span>
-                        )}
-                        {pInProgress > 0 && (
-                          <span className="font-mono text-[10px]" style={{ color: "#555" }}>
-                            {pInProgress} active
-                          </span>
-                        )}
-                      </div>
 
-                      {/* Bar */}
-                      <div className="flex-1 h-[2px] rounded-full bg-[rgba(255,255,255,0.04)] overflow-hidden mx-[12px]">
-                        <div
-                          className="h-full rounded-full transition-all duration-500"
-                          style={{
-                            width: `${pPercent}%`,
-                            backgroundColor: isActive ? accent : "#333",
-                          }}
-                        />
-                      </div>
+                          <div className="flex items-center gap-[8px] shrink-0 ml-[12px]">
+                            {pOverdue > 0 && (
+                              <span className="font-mono text-[10px] text-[#666] flex items-center gap-[3px]">
+                                <AlertTriangle size={9} />
+                                {pOverdue}
+                              </span>
+                            )}
+                            <span className="font-mono text-[11px] tabular-nums" style={{ color: isActive ? "#888" : "#555" }}>
+                              {pDone}/{pTotal}
+                            </span>
+                            {isExpanded
+                              ? <ChevronUp size={12} className="text-[#555]" />
+                              : <ChevronDown size={12} className="text-[#444] group-hover:text-[#888] transition-colors" />
+                            }
+                          </div>
+                        </div>
 
-                      {/* Count */}
-                      <span className="font-mono text-[11px] shrink-0 w-[38px] text-right tabular-nums" style={{ color: isActive ? "#888" : "#555" }}>
-                        {pDone}/{pTotal}
-                      </span>
+                        {/* Bottom row: progress bar */}
+                        <div className="flex items-center w-full">
+                          <div className="flex-1 h-[2px] rounded-full bg-[rgba(255,255,255,0.04)] overflow-hidden">
+                            <div
+                              className="h-full rounded-full transition-all duration-500"
+                              style={{
+                                width: `${pPercent}%`,
+                                backgroundColor: isActive ? accent : "#333",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </button>
 
-                      {/* Arrow */}
-                      <ArrowRight size={12} className="text-[#444] group-hover:text-[#666] transition-colors ml-[10px] shrink-0" />
-                    </button>
+                      {/* Expanded inline: stats + task list */}
+                      {isExpanded && (
+                        <div className="px-[14px] pb-[12px] flex flex-col gap-[12px]">
+                          {/* Mini stats row */}
+                          <div className="flex gap-[20px] px-[4px] pt-[4px]">
+                            {[
+                              { label: "TODO", value: pTodo },
+                              { label: "IN PROGRESS", value: pInProgress },
+                              { label: "DONE", value: pDone },
+                            ].map((stat) => (
+                              <div key={stat.label} className="flex flex-col gap-[2px]">
+                                <span className="font-mono text-[8px] text-[#555] tracking-[1px]">{stat.label}</span>
+                                <span className="font-mono text-[14px] leading-none tracking-[-0.5px] text-[#888]">
+                                  {stat.value}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Task list */}
+                          {project.tasks.length > 0 ? (
+                            <div className="flex flex-col gap-[1px]">
+                              {project.tasks.map((task) => {
+                                const isOverdue = task.dueDate && task.columnId !== "done" &&
+                                  new Date(task.dueDate + "T00:00:00").getTime() < now.getTime();
+                                return (
+                                  <div
+                                    key={task.id}
+                                    className="flex items-center rounded-[8px] px-[10px] py-[8px] hover:bg-[rgba(255,255,255,0.02)] transition-colors"
+                                  >
+                                    <div
+                                      className="size-[4px] rounded-full shrink-0 mr-[10px]"
+                                      style={{
+                                        backgroundColor: task.columnId === "done" ? accent : "#444",
+                                        opacity: task.columnId === "done" ? 0.6 : 1,
+                                      }}
+                                    />
+                                    <span
+                                      className="font-mono text-[11px] truncate flex-1 min-w-0 tracking-[0.1px]"
+                                      style={{
+                                        color: task.columnId === "done" ? "#555" : "#999",
+                                        textDecoration: task.columnId === "done" ? "line-through" : "none",
+                                      }}
+                                    >
+                                      {task.title}
+                                    </span>
+                                    <span className="font-mono text-[9px] text-[#444] shrink-0 ml-[8px]">
+                                      {COLUMN_LABELS[task.columnId] ?? task.columnId}
+                                    </span>
+                                    {isOverdue && (
+                                      <AlertTriangle size={9} className="text-[#666] shrink-0 ml-[6px]" />
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <span className="font-mono text-[10px] text-[#444] px-[4px]">No tasks yet</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </div>

@@ -47,7 +47,7 @@ export function AvatarPopover({
     <div className="relative" ref={popRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center justify-center rounded-[10px] px-[10px] py-[7px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
+        className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center justify-center rounded-[10px] px-[10px] h-[34px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
       >
         <span className="font-mono text-[10px] tracking-[1.2px] leading-[13px] text-[#666]">
           {initials}
