@@ -54,6 +54,11 @@ export function loadState(): AppState {
   }
 }
 
+/** Remove persisted state from localStorage (used after migration to cloud). */
+export function clearState(): void {
+  try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+}
+
 /**
  * Persist state to localStorage.
  * If storage is full, retries without background images.

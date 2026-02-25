@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ImageIcon, Undo2, Trash2 } from "lucide-react";
+import { ImageIcon, Undo2, Trash2, LogIn, LogOut } from "lucide-react";
 import { type AccentColor, ACCENT_HEX, type DeletedTask, type DeletedProject } from "@/types";
 import { MAX_DISPLAYED_DELETED_PROJECTS, MAX_DISPLAYED_DELETED_TASKS } from "@/constants";
 
@@ -14,6 +14,10 @@ interface AvatarPopoverProps {
   onRestoreTask: (index: number) => void;
   onRestoreProject: (index: number) => void;
   onClearAllDeleted: () => void;
+  isAuthenticated: boolean;
+  userEmail?: string;
+  onSignIn: () => void;
+  onSignOut: () => void;
 }
 
 export function AvatarPopover({
@@ -27,6 +31,10 @@ export function AvatarPopover({
   onRestoreTask,
   onRestoreProject,
   onClearAllDeleted,
+  isAuthenticated,
+  userEmail,
+  onSignIn,
+  onSignOut,
 }: AvatarPopoverProps) {
   const [open, setOpen] = useState(false);
   const [editInitials, setEditInitials] = useState(initials);
@@ -107,6 +115,33 @@ export function AvatarPopover({
               BACKGROUND
             </span>
           </button>
+
+          {/* Auth */}
+          <div className="relative z-10 w-full h-px bg-[rgba(255,255,255,0.06)]" />
+          {isAuthenticated ? (
+            <div className="relative z-10 flex flex-col gap-[6px]">
+              {userEmail && (
+                <span className="font-mono text-[9px] text-[#555] truncate" title={userEmail}>
+                  {userEmail}
+                </span>
+              )}
+              <button
+                onClick={() => { onSignOut(); setOpen(false); }}
+                className="flex items-center justify-center gap-[6px] py-[6px] px-[8px] rounded-[6px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] text-[#555] hover:text-[#888] hover:border-[rgba(255,255,255,0.18)] transition-all w-full"
+              >
+                <LogOut size={11} />
+                <span className="font-mono text-[11px] tracking-[0.6px]">SIGN OUT</span>
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => { onSignIn(); setOpen(false); }}
+              className="relative z-10 flex items-center justify-center gap-[6px] py-[6px] px-[8px] rounded-[6px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] text-[#555] hover:text-[#888] hover:border-[rgba(255,255,255,0.18)] transition-all w-full"
+            >
+              <LogIn size={11} />
+              <span className="font-mono text-[11px] tracking-[0.6px]">SIGN IN</span>
+            </button>
+          )}
 
           {/* Recently deleted */}
           {(deletedTasks.length > 0 || deletedProjects.length > 0) && (

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, X, Menu } from "lucide-react";
-import type { AccentColor, DeletedTask, DeletedProject } from "@/types";
+import type { AccentColor, DeletedTask, DeletedProject, SyncStatus } from "@/types";
 import { AvatarPopover } from "./AvatarPopover";
+import { SyncIndicator } from "./SyncIndicator";
 
 interface HeaderProps {
   projectName: string;
@@ -22,6 +23,11 @@ interface HeaderProps {
   onRestoreProject: (index: number) => void;
   onClearAllDeleted: () => void;
   onOpenSidebar: () => void;
+  syncStatus: SyncStatus;
+  isAuthenticated: boolean;
+  userEmail?: string;
+  onSignIn: () => void;
+  onSignOut: () => void;
 }
 
 export function Header({
@@ -43,6 +49,11 @@ export function Header({
   onRestoreProject,
   onClearAllDeleted,
   onOpenSidebar,
+  syncStatus,
+  isAuthenticated,
+  userEmail,
+  onSignIn,
+  onSignOut,
 }: HeaderProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -156,6 +167,9 @@ export function Header({
           </div>
         )}
 
+        {/* Sync status */}
+        <SyncIndicator status={syncStatus} />
+
         {/* Hamburger - mobile only, glass container matching other buttons */}
         <button
           onClick={onOpenSidebar}
@@ -176,6 +190,10 @@ export function Header({
           onRestoreTask={onRestoreTask}
           onRestoreProject={onRestoreProject}
           onClearAllDeleted={onClearAllDeleted}
+          isAuthenticated={isAuthenticated}
+          userEmail={userEmail}
+          onSignIn={onSignIn}
+          onSignOut={onSignOut}
         />
       </div>
     </header>

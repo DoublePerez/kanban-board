@@ -10,7 +10,10 @@ import { CalendarView } from "./components/CalendarView";
 import { OverviewPanel } from "./components/OverviewPanel";
 import { DitherProcessor } from "./components/DitherProcessor";
 import { Header } from "./components/Header";
+import { AuthPage } from "./components/AuthPage";
+import { MigrationDialog } from "./components/MigrationDialog";
 import { useKanbanState } from "./hooks/useKanbanState";
+import { useAuth } from "./contexts/AuthContext";
 import imgV3 from "../assets/shrek.png";
 
 export default function App() {
@@ -22,6 +25,11 @@ export default function App() {
     accentColor,
     userInitials,
     taskCounts,
+    isDataLoading,
+    syncStatus,
+    showMigrationDialog,
+    handleMigrateLocal,
+    handleUseCloud,
     setActiveProjectId,
     setAccentColor,
     setUserInitials,
@@ -39,7 +47,10 @@ export default function App() {
     getFilteredTasks,
   } = useKanbanState();
 
+  const { isAuthenticated, user, signIn, signUp, signOut } = useAuth();
+
   const [showDitherModal, setShowDitherModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("board");
   const [calendarCombined, setCalendarCombined] = useState(false);
@@ -49,6 +60,11 @@ export default function App() {
   const totalTasks = activeProject.tasks.length;
   const doneTasks = activeProject.tasks.filter((t) => t.columnId === "done").length;
   const bgImage = activeProject.backgroundImage;
+
+  // Close auth modal on successful sign-in
+  useEffect(() => {
+    if (isAuthenticated) setShowAuthModal(false);
+  }, [isAuthenticated]);
 
   // Ctrl+Z to undo last delete
   useEffect(() => {
@@ -74,6 +90,11 @@ export default function App() {
     (v: ViewMode) => { setViewMode(v); setSidebarOpen(false); },
     [],
   );
+
+  const handleAuth = useCallback(async (mode: "signin" | "signup", email: string, password: string) => {
+    if (mode === "signup") return signUp(email, password);
+    return signIn(email, password);
+  }, [signIn, signUp]);
 
   const sidebarProps = {
     projects,
@@ -106,6 +127,19 @@ export default function App() {
           />
         </div>
 
+        {/* Loading overlay */}
+        {isDataLoading && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)] backdrop-blur-[4px]">
+            <div className="flex flex-col items-center gap-[12px]">
+              <div
+                className="w-[24px] h-[24px] border-2 border-t-transparent rounded-full animate-spin"
+                style={{ borderColor: `${accent} transparent ${accent} ${accent}` }}
+              />
+              <span className="font-mono text-[10px] text-[#888] tracking-[2px]">LOADING</span>
+            </div>
+          </div>
+        )}
+
         <div className="relative z-10 flex flex-col size-full">
           <Header
             projectName={activeProject.name}
@@ -126,6 +160,11 @@ export default function App() {
             onRestoreProject={restoreProject}
             onClearAllDeleted={clearAllDeleted}
             onOpenSidebar={() => setSidebarOpen(true)}
+            syncStatus={syncStatus}
+            isAuthenticated={isAuthenticated}
+            userEmail={user?.email}
+            onSignIn={() => setShowAuthModal(true)}
+            onSignOut={signOut}
           />
 
           {/* Mobile view switcher */}
@@ -290,6 +329,24 @@ export default function App() {
           onImageProcessed={setBackgroundImage}
           accent={accent}
         />
+
+        {/* Auth modal */}
+        {showAuthModal && (
+          <AuthPage
+            accent={accent}
+            onClose={() => setShowAuthModal(false)}
+            onAuth={handleAuth}
+          />
+        )}
+
+        {/* Migration dialog */}
+        {showMigrationDialog && (
+          <MigrationDialog
+            accent={accent}
+            onUploadLocal={handleMigrateLocal}
+            onUseCloud={handleUseCloud}
+          />
+        )}
       </div>
     </DndProvider>
   );
