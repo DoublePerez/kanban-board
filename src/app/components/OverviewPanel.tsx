@@ -86,25 +86,30 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
           <div className="relative z-10 p-[32px] pb-[28px] flex flex-col gap-[20px]">
 
-            {/* Scope toggle pills */}
-            <div className="flex items-center gap-[6px]">
-              {([
-                { id: "project" as HeroScope, label: activeProject.name.toUpperCase() },
-                { id: "all" as HeroScope, label: "ALL PROJECTS" },
-              ]).map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setHeroScope(s.id)}
-                  className="font-mono text-[9px] tracking-[1.2px] px-[10px] py-[4px] rounded-full transition-all"
-                  style={
-                    heroScope === s.id
-                      ? { backgroundColor: hexToRgba(accent, 0.12), color: "#ccc", border: `1px solid ${hexToRgba(accent, 0.2)}` }
-                      : { backgroundColor: "rgba(255,255,255,0.03)", color: "#555", border: "1px solid rgba(255,255,255,0.06)" }
-                  }
-                >
-                  {s.label}
-                </button>
-              ))}
+            {/* Top row: label + scope toggle */}
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-[#666] tracking-[1.5px]">
+                {heroScope === "project" ? activeProject.name.toUpperCase() : "ALL PROJECTS"}
+              </span>
+              <div className="flex items-center gap-[2px] bg-[rgba(255,255,255,0.03)] rounded-[6px] p-[2px]">
+                {([
+                  { id: "project" as HeroScope, label: "PROJECT" },
+                  { id: "all" as HeroScope, label: "ALL" },
+                ]).map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setHeroScope(s.id)}
+                    className="font-mono text-[8px] tracking-[1px] px-[8px] py-[3px] rounded-[5px] transition-all"
+                    style={
+                      heroScope === s.id
+                        ? { backgroundColor: "rgba(255,255,255,0.08)", color: "#aaa" }
+                        : { color: "#444" }
+                    }
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Big number */}
@@ -229,7 +234,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
                       {/* Expanded inline: task list with due badges */}
                       {isExpanded && (
-                        <div className="px-[14px] pb-[12px] flex flex-col">
+                        <div className="px-[14px] pt-[4px] pb-[16px] flex flex-col">
                           {/* Task list — sorted by due date, then status */}
                           {project.tasks.length > 0 ? (
                             <div className="flex flex-col gap-[1px]">
