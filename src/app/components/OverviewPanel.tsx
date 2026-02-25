@@ -22,8 +22,21 @@ type HeroScope = "project" | "all";
 
 const COLUMN_ORDER: Record<string, number> = { "in-progress": 0, "todo": 1, "done": 2 };
 
+/** Sort: tasks with due dates first (soonest upcoming → overdue), then by column status, done last. */
 function sortedTasks(tasks: Task[]): Task[] {
-  return [...tasks].sort((a, b) => (COLUMN_ORDER[a.columnId] ?? 1) - (COLUMN_ORDER[b.columnId] ?? 1));
+  return [...tasks].sort((a, b) => {
+    // Done always last
+    if (a.columnId === "done" && b.columnId !== "done") return 1;
+    if (a.columnId !== "done" && b.columnId === "done") return -1;
+
+    // Among non-done: due date takes priority (soonest first, then no-date)
+    const aDue = a.dueDate ? new Date(a.dueDate + "T00:00:00").getTime() : Infinity;
+    const bDue = b.dueDate ? new Date(b.dueDate + "T00:00:00").getTime() : Infinity;
+    if (aDue !== bDue) return aDue - bDue;
+
+    // Same due date: sort by column status
+    return (COLUMN_ORDER[a.columnId] ?? 1) - (COLUMN_ORDER[b.columnId] ?? 1);
+  });
 }
 
 function getDueBadge(task: Task, now: Date): { label: string; icon: "overdue" | "upcoming" | null } | null {
