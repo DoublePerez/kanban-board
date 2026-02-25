@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AlertTriangle, ArrowRight, ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import type { Task } from "@/types";
-import { COLUMN_LABELS, UPCOMING_DAYS_WINDOW } from "@/constants";
+import { COLUMN_LABELS } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
 import { daysOverdue, daysUntil } from "@/utils/dates";
 
@@ -59,9 +59,6 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
     })
     .sort((a, b) => new Date(a.dueDate! + "T00:00:00").getTime() - new Date(b.dueDate! + "T00:00:00").getTime());
 
-  const mono = "font-['JetBrains_Mono',monospace]";
-
-  const columnLabel = (columnId: string) => COLUMN_LABELS[columnId] || columnId;
 
   return (
     <div className="h-full overflow-y-auto pr-[8px]">
@@ -76,10 +73,10 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
             {/* Project label + global stat */}
             <div className="flex items-center justify-between">
-              <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>
+              <span className="font-mono text-[10px] text-[#666] tracking-[1.5px]">
                 {activeProject.name.toUpperCase()}
               </span>
-              <span className={`${mono} text-[10px] text-[#555] tracking-[0.5px]`}>
+              <span className="font-mono text-[10px] text-[#555] tracking-[0.5px]">
                 {globalDone}/{globalTotal} total
               </span>
             </div>
@@ -87,13 +84,13 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
             {/* Big number */}
             <div className="flex items-baseline gap-[14px]">
               <div className="flex items-baseline">
-                <span className={`${mono} text-[72px] leading-[0.9] tracking-[-4px] text-white`}>
+                <span className="font-mono text-[72px] leading-[0.9] tracking-[-4px] text-white">
                   {activePercent}
                 </span>
-                <span className={`${mono} text-[24px] text-[#555] tracking-[-1px] leading-none ml-[2px]`}>%</span>
+                <span className="font-mono text-[24px] text-[#555] tracking-[-1px] leading-none ml-[2px]">%</span>
               </div>
               {activeTotal > 0 && (
-                <span className={`${mono} text-[11px] text-[#666]`}>
+                <span className="font-mono text-[11px] text-[#666]">
                   {activeDone} of {activeTotal}
                 </span>
               )}
@@ -115,8 +112,8 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                 { label: "DONE", value: activeDone },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-[4px]">
-                  <span className={`${mono} text-[9px] text-[#666] tracking-[1.2px]`}>{stat.label}</span>
-                  <span className={`${mono} text-[18px] leading-none tracking-[-0.5px] text-[#aaa]`}>
+                  <span className="font-mono text-[9px] text-[#666] tracking-[1.2px]">{stat.label}</span>
+                  <span className="font-mono text-[18px] leading-none tracking-[-0.5px] text-[#aaa]">
                     {stat.value}
                   </span>
                 </div>
@@ -139,9 +136,9 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                 className="flex items-center justify-between w-full px-[4px]"
               >
                 <div className="flex items-center gap-[10px]">
-                  <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>DUE TASKS</span>
+                  <span className="font-mono text-[10px] text-[#666] tracking-[1.5px]">DUE TASKS</span>
                   {activeOverdue.length > 0 && (
-                    <span className={`${mono} text-[10px] text-[#777] bg-[rgba(255,255,255,0.05)] px-[8px] py-[2px] rounded-full`}>
+                    <span className="font-mono text-[10px] text-[#777] bg-[rgba(255,255,255,0.05)] px-[8px] py-[2px] rounded-full">
                       {activeOverdue.length} overdue
                     </span>
                   )}
@@ -159,7 +156,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   {activeOverdue.length > 0 && (
                     <>
                       <div className="px-[14px] pt-[4px] pb-[6px]">
-                        <span className={`${mono} text-[9px] text-[#666] tracking-[1px]`}>OVERDUE</span>
+                        <span className="font-mono text-[9px] text-[#666] tracking-[1px]">OVERDUE</span>
                       </div>
                       {activeOverdue.map((task) => (
                         <div
@@ -171,18 +168,18 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
                           {/* Task info */}
                           <div className="flex flex-col gap-[1px] flex-1 min-w-0">
-                            <span className={`${mono} text-[12px] text-[#ccc] truncate tracking-[0.2px]`}>
+                            <span className="font-mono text-[12px] text-[#ccc] truncate tracking-[0.2px]">
                               {task.title}
                             </span>
-                            <span className={`${mono} text-[10px] text-[#555]`}>
-                              {columnLabel(task.columnId)}
+                            <span className="font-mono text-[10px] text-[#555]">
+                              {COLUMN_LABELS[task.columnId] ?? task.columnId}
                             </span>
                           </div>
 
                           {/* Due badge */}
                           <div className="flex items-center gap-[5px] shrink-0 ml-[12px]">
                             <AlertTriangle size={10} className="text-[#666]" />
-                            <span className={`${mono} text-[10px] text-[#666]`}>
+                            <span className="font-mono text-[10px] text-[#666]">
                               {daysOverdue(task.dueDate!)}d ago
                             </span>
                           </div>
@@ -200,7 +197,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                   {activeUpcoming.length > 0 && (
                     <>
                       <div className="px-[14px] pt-[4px] pb-[6px]">
-                        <span className={`${mono} text-[9px] text-[#666] tracking-[1px]`}>UPCOMING</span>
+                        <span className="font-mono text-[9px] text-[#666] tracking-[1px]">UPCOMING</span>
                       </div>
                       {activeUpcoming.map((task) => {
                         const days = daysUntil(task.dueDate!);
@@ -212,17 +209,17 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                             <div className="size-[5px] rounded-full shrink-0 mr-[12px]" style={{ backgroundColor: accent, opacity: 0.4 }} />
 
                             <div className="flex flex-col gap-[1px] flex-1 min-w-0">
-                              <span className={`${mono} text-[12px] text-[#999] truncate tracking-[0.2px]`}>
+                              <span className="font-mono text-[12px] text-[#999] truncate tracking-[0.2px]">
                                 {task.title}
                               </span>
-                              <span className={`${mono} text-[10px] text-[#555]`}>
-                                {columnLabel(task.columnId)}
+                              <span className="font-mono text-[10px] text-[#555]">
+                                {COLUMN_LABELS[task.columnId] ?? task.columnId}
                               </span>
                             </div>
 
                             <div className="flex items-center gap-[5px] shrink-0 ml-[12px]">
                               <Calendar size={10} className="text-[#555]" />
-                              <span className={`${mono} text-[10px] text-[#666]`}>
+                              <span className="font-mono text-[10px] text-[#666]">
                                 {days === 0 ? "Today" : days === 1 ? "Tomorrow" : `in ${days}d`}
                               </span>
                             </div>
@@ -250,8 +247,8 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
               className="flex items-center justify-between w-full px-[4px]"
             >
               <div className="flex items-center gap-[10px]">
-                <span className={`${mono} text-[10px] text-[#666] tracking-[1.5px]`}>ALL PROJECTS</span>
-                <span className={`${mono} text-[10px] text-[#555]`}>{projects.length}</span>
+                <span className="font-mono text-[10px] text-[#666] tracking-[1.5px]">ALL PROJECTS</span>
+                <span className="font-mono text-[10px] text-[#555]">{projects.length}</span>
               </div>
               {projectsExpanded
                 ? <ChevronUp size={14} className="text-[#555]" />
@@ -282,7 +279,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                     >
                       {/* Name */}
                       <span
-                        className={`${mono} text-[13px] tracking-[-0.2px] w-[100px] sm:w-[140px] shrink-0 truncate`}
+                        className="font-mono text-[13px] tracking-[-0.2px] w-[100px] sm:w-[140px] shrink-0 truncate"
                         style={{ color: isActive ? "#ddd" : "#777" }}
                       >
                         {project.name}
@@ -291,13 +288,13 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                       {/* Mini stats */}
                       <div className="flex items-center gap-[10px] shrink-0 ml-[4px] w-[80px]">
                         {pOverdue > 0 && (
-                          <span className={`${mono} text-[10px] text-[#666] flex items-center gap-[3px]`}>
+                          <span className="font-mono text-[10px] text-[#666] flex items-center gap-[3px]">
                             <AlertTriangle size={9} />
                             {pOverdue}
                           </span>
                         )}
                         {pInProgress > 0 && (
-                          <span className={`${mono} text-[10px]`} style={{ color: "#555" }}>
+                          <span className="font-mono text-[10px]" style={{ color: "#555" }}>
                             {pInProgress} active
                           </span>
                         )}
@@ -315,7 +312,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                       </div>
 
                       {/* Count */}
-                      <span className={`${mono} text-[11px] shrink-0 w-[38px] text-right tabular-nums`} style={{ color: isActive ? "#888" : "#555" }}>
+                      <span className="font-mono text-[11px] shrink-0 w-[38px] text-right tabular-nums" style={{ color: isActive ? "#888" : "#555" }}>
                         {pDone}/{pTotal}
                       </span>
 

@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ImageIcon, Undo2 } from "lucide-react";
-import { ACCENT_HEX } from "@/types";
-import type { AccentColor, DeletedTask, DeletedProject } from "@/types";
-import { MAX_DISPLAYED_DELETED_PROJECTS, MAX_DISPLAYED_DELETED_TASKS } from "@/constants";
+import { type AccentColor, ACCENT_HEX, type DeletedTask, type DeletedProject } from "@/types";
 
 interface AvatarPopoverProps {
   initials: string;
@@ -34,7 +32,7 @@ export function AvatarPopover({
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (popRef.current && !popRef.current.contains(e.target as Node)) setOpen(false);
+      if (popRef.current && e.target instanceof Node && !popRef.current.contains(e.target)) setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -48,7 +46,7 @@ export function AvatarPopover({
         onClick={() => setOpen(!open)}
         className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center justify-center rounded-[10px] px-[10px] py-[7px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
       >
-        <span className="font-['JetBrains_Mono',monospace] text-[10px] tracking-[1.2px] leading-[13px] text-[#666]">
+        <span className="font-mono text-[10px] tracking-[1.2px] leading-[13px] text-[#666]">
           {initials}
         </span>
       </button>
@@ -59,7 +57,7 @@ export function AvatarPopover({
 
           {/* Initials */}
           <div className="relative z-10 flex flex-col gap-[6px]">
-            <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#555] tracking-[2px]">INITIALS</span>
+            <span className="font-mono text-[9px] text-[#555] tracking-[2px]">INITIALS</span>
             <input
               type="text"
               value={editInitials}
@@ -69,7 +67,7 @@ export function AvatarPopover({
                 if (v.length >= 1) onChangeInitials(v);
               }}
               maxLength={3}
-              className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[8px] py-[6px] text-white text-[11px] font-['JetBrains_Mono',monospace] tracking-[2px] border border-[rgba(255,255,255,0.1)] outline-none w-full"
+              className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[8px] py-[6px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.1)] outline-none w-full"
               onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
               onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
             />
@@ -77,7 +75,7 @@ export function AvatarPopover({
 
           {/* Accent color */}
           <div className="relative z-10 flex flex-col gap-[8px]">
-            <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#555] tracking-[2px]">THEME</span>
+            <span className="font-mono text-[9px] text-[#555] tracking-[2px]">THEME</span>
             <div className="flex gap-[8px]">
               {(Object.keys(ACCENT_HEX) as AccentColor[]).map((c) => (
                 <button
@@ -102,7 +100,7 @@ export function AvatarPopover({
             className="relative z-10 flex items-center justify-center gap-[6px] py-[6px] px-[8px] rounded-[6px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] text-[#555] hover:text-[#888] hover:border-[rgba(255,255,255,0.18)] transition-all w-full"
           >
             <ImageIcon size={11} />
-            <span className="font-['JetBrains_Mono',monospace] text-[11px] tracking-[0.6px]">
+            <span className="font-mono text-[11px] tracking-[0.6px]">
               BACKGROUND
             </span>
           </button>
@@ -112,7 +110,7 @@ export function AvatarPopover({
             <>
               <div className="relative z-10 w-full h-px bg-[rgba(255,255,255,0.06)]" />
               <div className="relative z-10 flex flex-col gap-[8px]">
-                <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#555] tracking-[2px]">
+                <span className="font-mono text-[9px] text-[#555] tracking-[2px]">
                   RECENTLY DELETED
                 </span>
                 <div className="flex flex-col gap-[2px] max-h-[120px] overflow-y-auto">
@@ -122,8 +120,8 @@ export function AvatarPopover({
                       className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
                     >
                       <div className="flex items-center gap-[5px] truncate flex-1">
-                        <span className="font-['JetBrains_Mono',monospace] text-[8px] text-[#555] tracking-[0.5px] shrink-0">PRJ</span>
-                        <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#777] truncate">
+                        <span className="font-mono text-[8px] text-[#555] tracking-[0.5px] shrink-0">PRJ</span>
+                        <span className="font-mono text-[9px] text-[#777] truncate">
                           {entry.project.name}
                         </span>
                       </div>
@@ -140,7 +138,7 @@ export function AvatarPopover({
                       key={`task-${entry.task.id}-${entry.deletedAt}`}
                       className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
                     >
-                      <span className="font-['JetBrains_Mono',monospace] text-[9px] text-[#777] truncate flex-1">
+                      <span className="font-mono text-[9px] text-[#777] truncate flex-1">
                         {entry.task.title}
                       </span>
                       <button

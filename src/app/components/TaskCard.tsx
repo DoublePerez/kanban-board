@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } from "lucide-react";
+import type { Task } from "@/types";
+import { DND_ITEM_TYPE } from "@/types";
 import { hexToRgba } from "@/utils/colors";
 import { formatDueDate, isOverdue } from "@/utils/dates";
 import { getCardPriorityStyle } from "@/utils/styles";
-import { DND_DND_ITEM_TYPE, PRIORITIES } from "@/types";
-import type { Task, Subtask } from "@/types";
+import { generateId } from "@/utils/ids";
 
-// Re-export types for backward compatibility
-export type { Task, Subtask };
+// Re-export for backwards compatibility
+export type { Subtask, Task } from "@/types";
 
 interface TaskCardProps {
   task: Task;
@@ -18,7 +19,6 @@ interface TaskCardProps {
   onEditTask: (task: Task) => void;
   index: number;
 }
-
 
 export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index }: TaskCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -97,7 +97,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
       ...task,
       subtasks: [
         ...task.subtasks,
-        { id: `sub_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, text: newSubtaskText.trim(), done: false },
+        { id: generateId(), text: newSubtaskText.trim(), done: false },
       ],
     });
     setNewSubtaskText("");
@@ -110,7 +110,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   return (
     <div
       ref={ref}
-      className={`relative backdrop-blur-[6px] bg-[rgba(18,18,18,0.88)] rounded-[12px] w-full transition-all ${
+      className={`relative backdrop-blur-[12px] bg-[rgba(14,14,14,0.75)] rounded-[12px] w-full transition-all ${
         isEditing ? "cursor-default" : "cursor-grab active:cursor-grabbing"
       } ${isDragging ? "opacity-30 scale-95" : "opacity-100"} ${
         isOver ? "ring-1" : ""
@@ -130,7 +130,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 if (e.key === "Enter") handleSaveEdit();
                 if (e.key === "Escape") setIsEditing(false);
               }}
-              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-white text-[13px] font-['JetBrains_Mono',monospace] font-medium tracking-[0.42px] border border-[rgba(255,255,255,0.12)] outline-none"
+              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-white text-[13px] font-mono font-medium tracking-[0.42px] border border-[rgba(255,255,255,0.12)] outline-none"
               style={{ borderColor: undefined }}
               onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
               onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
@@ -144,7 +144,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 if (e.key === "Enter") handleSaveEdit();
                 if (e.key === "Escape") setIsEditing(false);
               }}
-              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-[#a1a1a1] text-[11px] font-['JetBrains_Mono',monospace] placeholder:text-[#444] border border-[rgba(255,255,255,0.12)] outline-none"
+              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-[#a1a1a1] text-[11px] font-mono placeholder:text-[#444] border border-[rgba(255,255,255,0.12)] outline-none"
               onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
               onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
             />
@@ -155,7 +155,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 type="date"
                 value={editDueDate}
                 onChange={(e) => setEditDueDate(e.target.value)}
-                className="flex-1 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[4px] text-[#999] text-[11px] font-['JetBrains_Mono',monospace] border border-[rgba(255,255,255,0.12)] outline-none [color-scheme:dark]"
+                className="flex-1 bg-[rgba(255,255,255,0.06)] rounded-[6px] px-[8px] py-[4px] text-[#999] text-[11px] font-mono border border-[rgba(255,255,255,0.12)] outline-none [color-scheme:dark]"
               />
             </div>
             {/* Priority */}
@@ -165,7 +165,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                   key={p}
                   type="button"
                   onClick={() => setEditPriority(p)}
-                  className="px-[6px] py-[3px] rounded-full text-[10px] font-['JetBrains_Mono',monospace] font-medium transition-all"
+                  className="px-[6px] py-[3px] rounded-full text-[10px] font-mono font-medium transition-all"
                   style={getPriorityStyle(p, editPriority === p)}
                 >
                   {p}
@@ -195,7 +195,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
               }}
             >
               <div className="flex items-start pb-[4px] w-full">
-                <p className="flex-1 font-['JetBrains_Mono',monospace] font-medium text-[14px] text-white tracking-[0.42px] leading-[20px] whitespace-pre-wrap select-none">
+                <p className="flex-1 font-mono font-medium text-[14px] text-white tracking-[0.42px] leading-[20px] whitespace-pre-wrap select-none">
                   {task.title}
                 </p>
                 <div className="flex items-center gap-[4px] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ml-2 shrink-0 mt-0.5">
@@ -203,13 +203,13 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                     <>
                       <button
                         onClick={(e) => { e.stopPropagation(); onDelete(task.id); }}
-                        className="text-red-400 hover:text-red-300 transition-colors text-[10px] font-['JetBrains_Mono',monospace] font-medium"
+                        className="text-red-400 hover:text-red-300 transition-colors text-[10px] font-mono font-medium"
                       >
                         YES
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); setShowDeleteConfirm(false); }}
-                        className="text-[#888] hover:text-white transition-colors text-[10px] font-['JetBrains_Mono',monospace]"
+                        className="text-[#888] hover:text-white transition-colors text-[10px] font-mono"
                       >
                         NO
                       </button>
@@ -240,7 +240,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 </div>
               </div>
               {task.description && (
-                <p className="font-['JetBrains_Mono',monospace] font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none mt-[8px]">
+                <p className="font-mono font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none mt-[8px]">
                   {task.description}
                 </p>
               )}
@@ -250,7 +250,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
             <div className="flex items-center justify-between w-full min-h-[26px] flex-wrap gap-[6px]">
               <div className="flex items-center gap-[6px]">
                 <div className="flex items-center px-[7px] py-[3px] rounded-full" style={getPriorityStyle(task.priority)}>
-                  <span className="font-['JetBrains_Mono',monospace] font-medium text-[11px] leading-[14px]">
+                  <span className="font-mono font-medium text-[11px] leading-[14px]">
                     {task.priority}
                   </span>
                 </div>
@@ -261,7 +261,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                   >
                     {isExpanded ? <ChevronDown size={10} className="text-[#666]" /> : <ChevronRight size={10} className="text-[#666]" />}
                     <span
-                      className="font-['JetBrains_Mono',monospace] font-normal text-[10px] leading-[14px]"
+                      className="font-mono font-normal text-[10px] leading-[14px]"
                       style={{ color: doneCount === totalSubs ? "#aaa" : "#777" }}
                     >
                       {doneCount}/{totalSubs}
@@ -272,7 +272,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
               {task.dueDate && (
                 <div className="flex items-center gap-[4px]" style={{ color: overdue ? "#999" : "#555" }}>
                   <Calendar size={11} />
-                  <span className="font-['JetBrains_Mono',monospace] font-normal text-[11px] leading-[14px]">
+                  <span className="font-mono font-normal text-[11px] leading-[14px]">
                     {formatDueDate(task.dueDate)}
                   </span>
                 </div>
@@ -294,7 +294,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                       )}
                     </button>
                     <span
-                      className={`font-['JetBrains_Mono',monospace] text-[11px] leading-[16px] flex-1 ${
+                      className={`font-mono text-[11px] leading-[16px] flex-1 ${
                         sub.done ? "text-[#555] line-through" : "text-[#999]"
                       }`}
                     >
@@ -320,7 +320,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                       if (e.key === "Enter") handleAddSubtask();
                       if (e.key === "Escape") { setNewSubtaskText(""); setIsExpanded(totalSubs > 0); }
                     }}
-                    className="flex-1 bg-transparent text-[#999] text-[11px] font-['JetBrains_Mono',monospace] placeholder:text-[#333] outline-none"
+                    className="flex-1 bg-transparent text-[#999] text-[11px] font-mono placeholder:text-[#333] outline-none"
                   />
                 </div>
               </div>
@@ -333,7 +333,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-[4px] text-[#333] hover:text-[#888]"
               >
                 <Plus size={10} />
-                <span className="font-['JetBrains_Mono',monospace] text-[9px] tracking-[0.5px]">SUBTASK</span>
+                <span className="font-mono text-[9px] tracking-[0.5px]">SUBTASK</span>
               </button>
             )}
           </>

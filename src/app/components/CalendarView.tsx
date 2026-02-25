@@ -14,7 +14,6 @@ import {
   subMonths,
 } from "date-fns";
 import type { Task } from "@/types";
-import { WEEK_DAYS, MAX_CALENDAR_TASKS_PER_DAY } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
 
 interface CalendarProject {
@@ -69,7 +68,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
           >
             <ChevronLeft size={18} />
           </button>
-          <h2 className="font-['JetBrains_Mono',monospace] font-medium text-white text-[14px] sm:text-[18px] tracking-[1px] min-w-[160px] sm:min-w-[200px] text-center">
+          <h2 className="font-mono font-medium text-white text-[14px] sm:text-[18px] tracking-[1px] min-w-[160px] sm:min-w-[200px] text-center">
             {format(currentMonth, "MMMM yyyy").toUpperCase()}
           </h2>
           <button
@@ -82,13 +81,13 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
         <div className="flex items-center gap-[12px]">
           <button
             onClick={() => setCurrentMonth(new Date())}
-            className="px-[12px] py-[6px] rounded-[8px] bg-[rgba(255,255,255,0.05)] text-[#888] hover:text-white text-[11px] font-['JetBrains_Mono',monospace] tracking-[0.5px] transition-colors"
+            className="px-[12px] py-[6px] rounded-[8px] bg-[rgba(255,255,255,0.05)] text-[#888] hover:text-white text-[11px] font-mono tracking-[0.5px] transition-colors"
           >
             TODAY
           </button>
           <button
             onClick={onToggleCombined}
-            className="px-[12px] py-[6px] rounded-[8px] text-[11px] font-['JetBrains_Mono',monospace] tracking-[0.5px] transition-colors"
+            className="px-[12px] py-[6px] rounded-[8px] text-[11px] font-mono tracking-[0.5px] transition-colors"
             style={
               combined
                 ? { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" }
@@ -109,7 +108,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
             <div className="grid grid-cols-7 gap-[1px] mb-[8px]">
               {WEEK_DAYS.map((d) => (
                 <div key={d} className="text-center py-[8px]">
-                  <span className="font-['JetBrains_Mono',monospace] font-medium text-[10px] text-[#444] tracking-[1px]">
+                  <span className="font-mono font-medium text-[10px] text-[#444] tracking-[1px]">
                     {d}
                   </span>
                 </div>
@@ -136,7 +135,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                     }
                   >
                     <span
-                      className="font-['JetBrains_Mono',monospace] text-[11px] block mb-[4px]"
+                      className="font-mono text-[11px] block mb-[4px]"
                       style={{ color: today ? accent : inMonth ? "#666" : "#2a2a2a", fontWeight: today ? 500 : 400 }}
                     >
                       {format(day, "d")}
@@ -156,7 +155,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                               style={{ backgroundColor: isDone ? "#555" : accent }}
                             />
                             <span
-                              className="font-['JetBrains_Mono',monospace] text-[8px] truncate"
+                              className="font-mono text-[8px] truncate"
                               style={{ color: isDone ? "#555" : "#ccc" }}
                             >
                               {t.title}
@@ -164,9 +163,9 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                           </div>
                         );
                       })}
-                      {dayTasks.length > MAX_CALENDAR_TASKS_PER_DAY && (
-                        <span className="font-['JetBrains_Mono',monospace] text-[8px] text-[#444] px-[4px]">
-                          +{dayTasks.length - MAX_CALENDAR_TASKS_PER_DAY} more
+                      {dayTasks.length > 3 && (
+                        <span className="font-mono text-[8px] text-[#444] px-[4px]">
+                          +{dayTasks.length - 3} more
                         </span>
                       )}
                     </div>

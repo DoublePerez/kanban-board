@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, X, Menu } from "lucide-react";
-import { AvatarPopover } from "./AvatarPopover";
 import type { AccentColor, DeletedTask, DeletedProject } from "@/types";
+import { AvatarPopover } from "./AvatarPopover";
 
 interface HeaderProps {
   projectName: string;
@@ -91,13 +91,13 @@ export function Header({
               if (e.key === "Enter") handleTitleChange((e.target as HTMLInputElement).value);
               if (e.key === "Escape") setIsEditingTitle(false);
             }}
-            className="bg-transparent text-white text-[48px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-3px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
+            className="bg-transparent text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
             style={{ borderBottom: "2px solid rgba(255,255,255,0.2)" }}
           />
         ) : (
           <h1
             onClick={() => setIsEditingTitle(true)}
-            className="text-white text-[48px] sm:text-[72px] lg:text-[min(110px,8vw)] font-['Basis_Grotesque_Arabic_Pro',sans-serif] tracking-[-3px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
+            className="text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
             title="Click to rename project"
           >
             {projectName}
@@ -105,7 +105,7 @@ export function Header({
         )}
       </div>
 
-      <div className="flex items-center gap-[8px] sm:gap-[10px] shrink-0 mt-[8px]">
+      <div className="flex items-center gap-[6px] sm:gap-[10px] shrink-0 mt-[4px] sm:mt-[8px]">
         {/* Hamburger - mobile only */}
         <button
           onClick={onOpenSidebar}
@@ -114,8 +114,8 @@ export function Header({
           <Menu size={22} />
         </button>
 
-        {/* Search */}
-        <div className="relative">
+        {/* Search - hidden on mobile, shown in sidebar instead */}
+        <div className="relative hidden sm:block">
           {showSearch ? (
             <div className="flex items-center gap-[8px] bg-[rgba(14,14,14,0.85)] backdrop-blur-[12px] rounded-[10px] px-[12px] py-[7px] border border-[rgba(255,255,255,0.08)]">
               <Search size={14} className="text-[#555] shrink-0" />
@@ -125,7 +125,7 @@ export function Header({
                 placeholder="Search tasks..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="bg-transparent text-white text-[13px] font-['JetBrains_Mono',monospace] placeholder:text-[#444] outline-none w-[180px]"
+                className="bg-transparent text-white text-[13px] font-mono placeholder:text-[#444] outline-none w-[180px]"
               />
               <button
                 onClick={() => { setShowSearch(false); onSearchChange(""); }}
@@ -140,7 +140,7 @@ export function Header({
               className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center gap-[6px] px-[10px] py-[7px] rounded-[10px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
             >
               <Search size={13} className="text-[#777]" />
-              <span className="font-['JetBrains_Mono',monospace] text-[10px] text-[#555] tracking-[0.5px] hidden md:inline">
+              <span className="font-mono text-[10px] text-[#555] tracking-[0.5px] hidden md:inline">
                 CMD+K
               </span>
             </button>
@@ -156,7 +156,7 @@ export function Header({
                 style={{ width: `${(doneTasks / totalTasks) * 100}%`, backgroundColor: accent }}
               />
             </div>
-            <span className="font-['JetBrains_Mono',monospace] text-[11px] text-[#888] tracking-[0.5px]">
+            <span className="font-mono text-[11px] text-[#888] tracking-[0.5px]">
               {doneTasks}/{totalTasks}
             </span>
           </div>
