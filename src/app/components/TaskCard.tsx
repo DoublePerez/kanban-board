@@ -110,7 +110,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   return (
     <div
       ref={ref}
-      className={`relative backdrop-blur-[6px] bg-[rgba(18,18,18,0.88)] rounded-[12px] w-full transition-all ${
+      className={`relative backdrop-blur-[12px] bg-[rgba(14,14,14,0.75)] rounded-[12px] w-full transition-all ${
         isEditing ? "cursor-default" : "cursor-grab active:cursor-grabbing"
       } ${isDragging ? "opacity-30 scale-95" : "opacity-100"} ${
         isOver ? "ring-1" : ""
