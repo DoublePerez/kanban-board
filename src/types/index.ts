@@ -84,6 +84,11 @@ export interface AppState {
   deletedProjects: DeletedProject[];
 }
 
+// ── Sync ─────────────────────────────────────────────────────
+
+/** Cloud sync status for the Supabase backend. */
+export type SyncStatus = "idle" | "syncing" | "synced" | "error" | "offline";
+
 // ── UI Enums ───────────────────────────────────────────────────
 
 /** Sidebar view modes. */
