@@ -15,6 +15,7 @@ import {
 } from "date-fns";
 import type { Task } from "@/types";
 import { hexToRgba } from "@/utils/colors";
+import { WEEK_DAYS, MAX_CALENDAR_TASKS_PER_DAY } from "@/constants";
 
 interface CalendarProject {
   id: string;

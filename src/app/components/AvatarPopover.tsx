@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { ImageIcon, Undo2 } from "lucide-react";
+import { ImageIcon, Undo2, Trash2 } from "lucide-react";
 import { type AccentColor, ACCENT_HEX, type DeletedTask, type DeletedProject } from "@/types";
+import { MAX_DISPLAYED_DELETED_PROJECTS, MAX_DISPLAYED_DELETED_TASKS } from "@/constants";
 
 interface AvatarPopoverProps {
   initials: string;
@@ -12,6 +13,7 @@ interface AvatarPopoverProps {
   deletedProjects: DeletedProject[];
   onRestoreTask: (index: number) => void;
   onRestoreProject: (index: number) => void;
+  onClearAllDeleted: () => void;
 }
 
 export function AvatarPopover({
@@ -24,6 +26,7 @@ export function AvatarPopover({
   deletedProjects,
   onRestoreTask,
   onRestoreProject,
+  onClearAllDeleted,
 }: AvatarPopoverProps) {
   const [open, setOpen] = useState(false);
   const [editInitials, setEditInitials] = useState(initials);
@@ -110,9 +113,19 @@ export function AvatarPopover({
             <>
               <div className="relative z-10 w-full h-px bg-[rgba(255,255,255,0.06)]" />
               <div className="relative z-10 flex flex-col gap-[8px]">
-                <span className="font-mono text-[9px] text-[#555] tracking-[2px]">
-                  RECENTLY DELETED
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[9px] text-[#555] tracking-[2px]">
+                    RECENTLY DELETED
+                  </span>
+                  <button
+                    onClick={() => { onClearAllDeleted(); }}
+                    className="flex items-center gap-[3px] text-[#444] hover:text-[#f55] transition-colors"
+                    title="Clear all"
+                  >
+                    <Trash2 size={9} />
+                    <span className="font-mono text-[8px] tracking-[0.5px]">CLEAR</span>
+                  </button>
+                </div>
                 <div className="flex flex-col gap-[2px] max-h-[120px] overflow-y-auto">
                   {deletedProjects.slice(0, MAX_DISPLAYED_DELETED_PROJECTS).map((entry, index) => (
                     <div

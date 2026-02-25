@@ -11,8 +11,7 @@
  * are implementation details not exposed directly.
  */
 
-import { useState, useEffect, useMemo } from "react";
-import type { Task } from "@/types";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { loadState, saveState } from "@/utils/storage";
 import { useProjectActions } from "./useProjectActions";
 import { useTaskActions } from "./useTaskActions";
@@ -40,6 +39,10 @@ export function useKanbanState() {
   const projectActions = useProjectActions(setState, activeProjectId);
   const taskActions = useTaskActions(setState, activeProjectId);
 
+  const clearAllDeleted = useCallback(() => {
+    setState((prev) => ({ ...prev, deletedTasks: [], deletedProjects: [] }));
+  }, []);
+
   return {
     state,
     projects,
@@ -50,6 +53,7 @@ export function useKanbanState() {
     taskCounts,
     ...projectActions,
     ...taskActions,
+    clearAllDeleted,
   };
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AlertTriangle, ArrowRight, ChevronDown, ChevronUp, Calendar } from "lucide-react";
 import type { Task } from "@/types";
-import { COLUMN_LABELS } from "@/constants";
+import { COLUMN_LABELS, UPCOMING_DAYS_WINDOW } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
 import { daysOverdue, daysUntil } from "@/utils/dates";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } from "lucide-react";
 import type { Task } from "@/types";
-import { DND_ITEM_TYPE } from "@/types";
+import { DND_ITEM_TYPE, PRIORITIES } from "@/types";
 import { hexToRgba } from "@/utils/colors";
 import { formatDueDate, isOverdue } from "@/utils/dates";
 import { getCardPriorityStyle } from "@/utils/styles";

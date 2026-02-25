@@ -20,6 +20,7 @@ interface HeaderProps {
   onUploadBackground: () => void;
   onRestoreTask: (index: number) => void;
   onRestoreProject: (index: number) => void;
+  onClearAllDeleted: () => void;
   onOpenSidebar: () => void;
 }
 
@@ -40,6 +41,7 @@ export function Header({
   onUploadBackground,
   onRestoreTask,
   onRestoreProject,
+  onClearAllDeleted,
   onOpenSidebar,
 }: HeaderProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -173,6 +175,7 @@ export function Header({
           deletedProjects={deletedProjects}
           onRestoreTask={onRestoreTask}
           onRestoreProject={onRestoreProject}
+          onClearAllDeleted={onClearAllDeleted}
         />
       </div>
     </header>

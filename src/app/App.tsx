@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 import { Sidebar } from "./components/Sidebar";
 import type { ViewMode } from "@/types";
 import { ACCENT_HEX } from "@/types";
@@ -32,6 +32,7 @@ export default function App() {
     deleteTask,
     restoreTask,
     restoreProject,
+    clearAllDeleted,
     editTask,
     moveTask,
     setBackgroundImage,
@@ -123,6 +124,7 @@ export default function App() {
             onUploadBackground={() => setShowDitherModal(true)}
             onRestoreTask={restoreTask}
             onRestoreProject={restoreProject}
+            onClearAllDeleted={clearAllDeleted}
             onOpenSidebar={() => setSidebarOpen(true)}
           />
 
