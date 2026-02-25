@@ -1,7 +1,22 @@
 -- ============================================================
 -- Kanban Board — Supabase Schema
 -- Run this entire file in the Supabase SQL Editor.
+-- Safe to re-run: drops existing objects first.
 -- ============================================================
+
+-- ── Clean slate ─────────────────────────────────────────────
+drop trigger if exists on_auth_user_created on auth.users;
+drop trigger if exists trg_tasks_updated_at on public.tasks;
+drop trigger if exists trg_projects_updated_at on public.projects;
+drop trigger if exists trg_profiles_updated_at on public.profiles;
+drop function if exists public.handle_new_user() cascade;
+drop function if exists public.update_updated_at() cascade;
+drop table if exists public.deleted_projects cascade;
+drop table if exists public.deleted_tasks cascade;
+drop table if exists public.tasks cascade;
+drop table if exists public.projects cascade;
+drop table if exists public.profiles cascade;
+-- Storage tables can't be deleted via SQL; handled with ON CONFLICT below.
 
 -- ── Extensions ──────────────────────────────────────────────
 create extension if not exists "uuid-ossp";
@@ -221,7 +236,14 @@ create policy "Users can delete own deleted projects"
 -- ============================================================
 
 insert into storage.buckets (id, name, public)
-values ('backgrounds', 'backgrounds', false);
+values ('backgrounds', 'backgrounds', true)
+on conflict (id) do update set public = true;
+
+-- Drop storage policies first (they survive table drops since they live on storage.objects)
+drop policy if exists "Users can upload own backgrounds"  on storage.objects;
+drop policy if exists "Users can read own backgrounds"    on storage.objects;
+drop policy if exists "Users can update own backgrounds"  on storage.objects;
+drop policy if exists "Users can delete own backgrounds"  on storage.objects;
 
 -- Users can upload to their own folder: backgrounds/{user_id}/*
 create policy "Users can upload own backgrounds"
