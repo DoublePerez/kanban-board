@@ -168,8 +168,6 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                 {projects.map((project) => {
                   const pTotal = project.tasks.length;
                   const pDone = project.tasks.filter((t) => t.columnId === "done").length;
-                  const pTodo = project.tasks.filter((t) => t.columnId === "todo").length;
-                  const pInProgress = project.tasks.filter((t) => t.columnId === "in-progress").length;
                   const pPercent = pTotal > 0 ? Math.round((pDone / pTotal) * 100) : 0;
                   const isActive = project.id === activeProjectId;
                   const isExpanded = expandedProjectId === project.id;
@@ -229,26 +227,10 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                         </div>
                       </button>
 
-                      {/* Expanded inline: stats + task list with due badges */}
+                      {/* Expanded inline: task list with due badges */}
                       {isExpanded && (
-                        <div className="px-[14px] pb-[12px] flex flex-col gap-[12px]">
-                          {/* Mini stats row */}
-                          <div className="flex gap-[20px] px-[4px] pt-[4px]">
-                            {[
-                              { label: "TODO", value: pTodo },
-                              { label: "IN PROGRESS", value: pInProgress },
-                              { label: "DONE", value: pDone },
-                            ].map((stat) => (
-                              <div key={stat.label} className="flex flex-col gap-[2px]">
-                                <span className="font-mono text-[8px] text-[#555] tracking-[1px]">{stat.label}</span>
-                                <span className="font-mono text-[14px] leading-none tracking-[-0.5px] text-[#888]">
-                                  {stat.value}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Task list — sorted: in-progress → todo → done, with due badges */}
+                        <div className="px-[14px] pb-[12px] flex flex-col">
+                          {/* Task list — sorted by due date, then status */}
                           {project.tasks.length > 0 ? (
                             <div className="flex flex-col gap-[1px]">
                               {sortedTasks(project.tasks).map((task) => {
