@@ -79,24 +79,37 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
             <ChevronRight size={18} />
           </button>
         </div>
-        <div className="flex items-center gap-[12px]">
+        <div className="flex items-center gap-[8px]">
           <button
             onClick={() => setCurrentMonth(new Date())}
-            className="px-[12px] py-[6px] rounded-[8px] bg-[rgba(255,255,255,0.05)] text-[#888] hover:text-white text-[11px] font-mono tracking-[0.5px] transition-colors"
+            className="px-[8px] py-[3px] rounded-[5px] bg-[rgba(255,255,255,0.05)] text-[#666] hover:text-white text-[9px] font-mono tracking-[0.8px] transition-colors"
           >
             TODAY
           </button>
-          <button
-            onClick={onToggleCombined}
-            className="px-[12px] py-[6px] rounded-[8px] text-[11px] font-mono tracking-[0.5px] transition-colors"
-            style={
-              combined
-                ? { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" }
-                : { backgroundColor: "rgba(255,255,255,0.05)", color: "#888" }
-            }
-          >
-            {combined ? "ALL PROJECTS" : "THIS PROJECT"}
-          </button>
+          <div className="flex items-center gap-[2px] bg-[rgba(255,255,255,0.03)] rounded-[6px] p-[2px]">
+            <button
+              onClick={() => { if (combined) onToggleCombined(); }}
+              className="font-mono text-[8px] tracking-[1px] px-[8px] py-[3px] rounded-[5px] transition-all"
+              style={
+                !combined
+                  ? { backgroundColor: "rgba(255,255,255,0.08)", color: "#aaa" }
+                  : { color: "#444" }
+              }
+            >
+              PROJECT
+            </button>
+            <button
+              onClick={() => { if (!combined) onToggleCombined(); }}
+              className="font-mono text-[8px] tracking-[1px] px-[8px] py-[3px] rounded-[5px] transition-all"
+              style={
+                combined
+                  ? { backgroundColor: "rgba(255,255,255,0.08)", color: "#aaa" }
+                  : { color: "#444" }
+              }
+            >
+              ALL
+            </button>
+          </div>
         </div>
       </div>
 
