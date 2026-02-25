@@ -214,7 +214,7 @@ export function DitherProcessor({ isOpen, onClose, onImageProcessed, accent = "#
 
           {/* Footer note */}
           <p className="font-mono text-[10px] text-[#444] leading-[16px]">
-            Floyd-Steinberg dither at 3px pixel size
+            Converts your image to a high-contrast black &amp; white halftone pattern using error-diffusion dithering.
           </p>
         </div>
 
