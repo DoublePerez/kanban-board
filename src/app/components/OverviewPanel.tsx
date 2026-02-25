@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AlertTriangle, ArrowRight, ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { Task } from "./TaskCard";
+import type { Task } from "@/types";
+import { COLUMN_LABELS, UPCOMING_DAYS_WINDOW } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
 import { daysOverdue, daysUntil } from "@/utils/dates";
 
@@ -48,7 +49,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
     .sort((a, b) => daysOverdue(b.dueDate!) - daysOverdue(a.dueDate!));
 
   const weekFromNow = new Date(now);
-  weekFromNow.setDate(weekFromNow.getDate() + 7);
+  weekFromNow.setDate(weekFromNow.getDate() + UPCOMING_DAYS_WINDOW);
 
   const activeUpcoming = activeTasks
     .filter((t) => {
@@ -60,14 +61,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
   const mono = "font-['JetBrains_Mono',monospace]";
 
-  const columnLabel = (columnId: string) => {
-    switch (columnId) {
-      case "todo": return "To Do";
-      case "in-progress": return "In Progress";
-      case "done": return "Done";
-      default: return columnId;
-    }
-  };
+  const columnLabel = (columnId: string) => COLUMN_LABELS[columnId] || columnId;
 
   return (
     <div className="h-full overflow-y-auto pr-[8px]">

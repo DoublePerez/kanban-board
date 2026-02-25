@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, X, Menu } from "lucide-react";
-import { AccentColor } from "./Sidebar";
 import { AvatarPopover } from "./AvatarPopover";
-import { DeletedTask, DeletedProject } from "../hooks/useKanbanState";
+import type { AccentColor, DeletedTask, DeletedProject } from "@/types";
 
 interface HeaderProps {
   projectName: string;
@@ -12,6 +11,7 @@ interface HeaderProps {
   totalTasks: number;
   doneTasks: number;
   deletedTasks: DeletedTask[];
+  deletedProjects: DeletedProject[];
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onRenameProject: (name: string) => void;
@@ -19,6 +19,7 @@ interface HeaderProps {
   onChangeAccent: (c: AccentColor) => void;
   onUploadBackground: () => void;
   onRestoreTask: (index: number) => void;
+  onRestoreProject: (index: number) => void;
   onOpenSidebar: () => void;
 }
 
@@ -30,6 +31,7 @@ export function Header({
   totalTasks,
   doneTasks,
   deletedTasks,
+  deletedProjects,
   searchQuery,
   onSearchChange,
   onRenameProject,
@@ -37,6 +39,7 @@ export function Header({
   onChangeAccent,
   onUploadBackground,
   onRestoreTask,
+  onRestoreProject,
   onOpenSidebar,
 }: HeaderProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -167,7 +170,9 @@ export function Header({
           onChangeAccent={onChangeAccent}
           onUploadBackground={onUploadBackground}
           deletedTasks={deletedTasks}
+          deletedProjects={deletedProjects}
           onRestoreTask={onRestoreTask}
+          onRestoreProject={onRestoreProject}
         />
       </div>
     </header>

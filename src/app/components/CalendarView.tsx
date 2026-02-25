@@ -13,7 +13,8 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-import { Task } from "./TaskCard";
+import type { Task } from "@/types";
+import { WEEK_DAYS, MAX_CALENDAR_TASKS_PER_DAY } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
 
 interface CalendarProject {
@@ -49,7 +50,6 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
   const calendarStart = startOfWeek(monthStart, { weekStartsOn: 1 });
   const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
-  const weekDays = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
   const getTasksForDay = (day: Date) => {
     return tasksToShow.filter((t) => {
@@ -107,7 +107,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
           <div className="relative z-10 p-[12px]">
             {/* Week day headers */}
             <div className="grid grid-cols-7 gap-[1px] mb-[8px]">
-              {weekDays.map((d) => (
+              {WEEK_DAYS.map((d) => (
                 <div key={d} className="text-center py-[8px]">
                   <span className="font-['JetBrains_Mono',monospace] font-medium text-[10px] text-[#444] tracking-[1px]">
                     {d}
@@ -142,7 +142,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                       {format(day, "d")}
                     </span>
                     <div className="flex flex-col gap-[2px]">
-                      {dayTasks.slice(0, 3).map((t) => {
+                      {dayTasks.slice(0, MAX_CALENDAR_TASKS_PER_DAY).map((t) => {
                         const isDone = t.columnId === "done";
                         return (
                           <div
@@ -164,9 +164,9 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
                           </div>
                         );
                       })}
-                      {dayTasks.length > 3 && (
+                      {dayTasks.length > MAX_CALENDAR_TASKS_PER_DAY && (
                         <span className="font-['JetBrains_Mono',monospace] text-[8px] text-[#444] px-[4px]">
-                          +{dayTasks.length - 3} more
+                          +{dayTasks.length - MAX_CALENDAR_TASKS_PER_DAY} more
                         </span>
                       )}
                     </div>

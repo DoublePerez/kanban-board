@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { ImageIcon, Undo2 } from "lucide-react";
-import { AccentColor, ACCENT_HEX } from "./Sidebar";
-import { DeletedTask, DeletedProject } from "../hooks/useKanbanState";
+import { ACCENT_HEX } from "@/types";
+import type { AccentColor, DeletedTask, DeletedProject } from "@/types";
+import { MAX_DISPLAYED_DELETED_PROJECTS, MAX_DISPLAYED_DELETED_TASKS } from "@/constants";
 
 interface AvatarPopoverProps {
   initials: string;
@@ -115,7 +116,7 @@ export function AvatarPopover({
                   RECENTLY DELETED
                 </span>
                 <div className="flex flex-col gap-[2px] max-h-[120px] overflow-y-auto">
-                  {deletedProjects.slice(0, 5).map((entry, index) => (
+                  {deletedProjects.slice(0, MAX_DISPLAYED_DELETED_PROJECTS).map((entry, index) => (
                     <div
                       key={`proj-${entry.project.id}-${entry.deletedAt}`}
                       className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
@@ -134,7 +135,7 @@ export function AvatarPopover({
                       </button>
                     </div>
                   ))}
-                  {deletedTasks.slice(0, 10).map((entry, index) => (
+                  {deletedTasks.slice(0, MAX_DISPLAYED_DELETED_TASKS).map((entry, index) => (
                     <div
                       key={`task-${entry.task.id}-${entry.deletedAt}`}
                       className="flex items-center justify-between gap-[6px] px-[6px] py-[4px] rounded-[6px] hover:bg-[rgba(255,255,255,0.04)] transition-colors"

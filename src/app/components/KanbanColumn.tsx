@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { Plus, X, Calendar } from "lucide-react";
-import { TaskCard, Task } from "./TaskCard";
+import { TaskCard } from "./TaskCard";
 import { hexToRgba } from "@/utils/colors";
 import { getFormPriorityStyle } from "@/utils/styles";
+import { DND_ITEM_TYPE, PRIORITIES } from "@/types";
+import type { Task, Priority } from "@/types";
 
 interface KanbanColumnProps {
   id: string;
   title: string;
   tasks: Task[];
   accent: string;
-  onAddTask: (columnId: string, title: string, description: string, priority: "High" | "Medium" | "Low", dueDate: string | null) => void;
+  onAddTask: (columnId: string, title: string, description: string, priority: Priority, dueDate: string | null) => void;
   onDeleteTask: (taskId: string) => void;
   onMoveTask: (taskId: string, targetColumnId: string, targetIndex: number) => void;
   onEditTask: (task: Task) => void;
@@ -20,11 +22,11 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
-  const [newPriority, setNewPriority] = useState<"High" | "Medium" | "Low">("Medium");
+  const [newPriority, setNewPriority] = useState<Priority>("Medium");
   const [newDueDate, setNewDueDate] = useState("");
 
   const [{ isOver }, drop] = useDrop({
-    accept: "TASK",
+    accept: DND_ITEM_TYPE,
     drop(item: { id: string; columnId: string; index: number }, monitor) {
       if (monitor.didDrop()) return;
       if (item.columnId !== id) {
@@ -139,7 +141,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                 </div>
                 {/* Priority */}
                 <div className="flex gap-[6px]">
-                  {(["High", "Medium", "Low"] as const).map((p) => (
+                  {PRIORITIES.map((p) => (
                     <button
                       key={p}
                       type="button"

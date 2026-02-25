@@ -1,7 +1,8 @@
+import { MONTH_ABBREVS } from "@/constants";
+
 export function formatDueDate(dateStr: string): string {
   const d = new Date(dateStr + "T00:00:00");
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${months[d.getMonth()]} ${d.getDate()}`;
+  return `${MONTH_ABBREVS[d.getMonth()]} ${d.getDate()}`;
 }
 
 export function isOverdue(dateStr: string | null): boolean {

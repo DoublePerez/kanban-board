@@ -4,23 +4,11 @@ import { X, Calendar, Check, Plus, ChevronDown, ChevronRight, Circle, Pencil } f
 import { hexToRgba } from "@/utils/colors";
 import { formatDueDate, isOverdue } from "@/utils/dates";
 import { getCardPriorityStyle } from "@/utils/styles";
+import { DND_DND_ITEM_TYPE, PRIORITIES } from "@/types";
+import type { Task, Subtask } from "@/types";
 
-export interface Subtask {
-  id: string;
-  text: string;
-  done: boolean;
-}
-
-export interface Task {
-  id: string;
-  title: string;
-  description: string;
-  priority: "High" | "Medium" | "Low";
-  date: string;
-  dueDate: string | null;
-  columnId: string;
-  subtasks: Subtask[];
-}
+// Re-export types for backward compatibility
+export type { Task, Subtask };
 
 interface TaskCardProps {
   task: Task;
@@ -31,7 +19,6 @@ interface TaskCardProps {
   index: number;
 }
 
-const ITEM_TYPE = "TASK";
 
 export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index }: TaskCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -52,14 +39,14 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
   }, [isExpanded, task.subtasks.length]);
 
   const [{ isDragging }, drag] = useDrag({
-    type: ITEM_TYPE,
+    type: DND_ITEM_TYPE,
     item: () => ({ id: task.id, columnId: task.columnId, index }),
     canDrag: !isEditing,
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
   const [{ isOver }, drop] = useDrop({
-    accept: ITEM_TYPE,
+    accept: DND_ITEM_TYPE,
     hover(item: { id: string; columnId: string; index: number }, monitor) {
       if (!ref.current || item.id === task.id) return;
       const hoverRect = ref.current.getBoundingClientRect();
@@ -173,7 +160,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
             </div>
             {/* Priority */}
             <div className="flex gap-[4px]">
-              {(["High", "Medium", "Low"] as const).map((p) => (
+              {PRIORITIES.map((p) => (
                 <button
                   key={p}
                   type="button"
