@@ -71,23 +71,32 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
     setSuccess(null);
   };
 
+  // Focus style uses accent color subtly
+  const focusBorder = accent;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-[8px]"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
-        className="relative backdrop-blur-[20px] bg-[rgba(12,12,12,0.95)] rounded-[16px] w-[300px] max-w-[90vw] overflow-hidden"
+        className="relative backdrop-blur-[20px] bg-[rgba(14,14,14,0.95)] rounded-[14px] w-[300px] max-w-[90vw] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         style={shake ? { animation: "shake 0.5s ease-in-out" } : undefined}
       >
-        <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
+        <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.08)] inset-0 pointer-events-none rounded-[14px]" />
 
-        <div className="relative z-10 p-[24px] flex flex-col gap-[20px]">
+        <div className="relative z-10 p-[20px] flex flex-col gap-[16px]">
           {/* Header */}
           <div className="flex items-center justify-between">
-            <h2 className="font-mono text-[11px] text-[#888] tracking-[3px]">
-              {view === "forgot" ? "RESET PASSWORD" : view === "signin" ? "SIGN IN" : "CREATE ACCOUNT"}
-            </h2>
+            <div className="flex items-center gap-[8px]">
+              <div
+                className="size-[6px] rounded-full shrink-0"
+                style={{ backgroundColor: accent }}
+              />
+              <span className="font-mono text-[9px] text-[#555] tracking-[2px]">
+                {view === "forgot" ? "RESET PASSWORD" : view === "signin" ? "SIGN IN" : "CREATE ACCOUNT"}
+              </span>
+            </div>
             <button
               onClick={onClose}
               className="bg-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.06)] rounded-[8px] size-[26px] flex items-center justify-center text-[#444] hover:text-white transition-all shrink-0"
@@ -97,7 +106,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
           </div>
 
           {/* Subtitle */}
-          <p className="font-mono text-[10px] text-[#444] leading-[1.5] -mt-[10px]">
+          <p className="font-mono text-[10px] text-[#444] leading-[1.5] -mt-[6px]">
             {view === "forgot"
               ? "We\u2019ll send a reset link to your email."
               : view === "signin"
@@ -105,28 +114,33 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
               : "Sync your boards across devices."}
           </p>
 
+          {/* Divider */}
+          <div className="w-full h-px bg-[rgba(255,255,255,0.06)]" />
+
           {/* Form */}
           <form
             onSubmit={view === "forgot" ? handleForgotPassword : handleSubmit}
-            className="flex flex-col gap-[14px]"
+            className="flex flex-col gap-[12px]"
           >
             {/* Email */}
             <div className="flex flex-col gap-[5px]">
-              <label className="font-mono text-[8px] text-[#555] tracking-[2px]">EMAIL</label>
+              <label className="font-mono text-[9px] text-[#555] tracking-[2px]">EMAIL</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-[rgba(255,255,255,0.03)] rounded-[8px] px-[10px] py-[8px] text-white text-[11px] font-mono border border-[rgba(255,255,255,0.08)] outline-none focus:border-[rgba(255,255,255,0.2)] transition-colors w-full placeholder:text-[#333]"
+                className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[10px] py-[7px] text-white text-[11px] font-mono border border-[rgba(255,255,255,0.1)] outline-none transition-colors w-full placeholder:text-[#333]"
                 placeholder="you@email.com"
+                onFocus={(e) => { e.target.style.borderColor = focusBorder; }}
+                onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; }}
               />
             </div>
 
             {/* Password (hidden in forgot mode) */}
             {view !== "forgot" && (
               <div className="flex flex-col gap-[5px]">
-                <label className="font-mono text-[8px] text-[#555] tracking-[2px]">PASSWORD</label>
+                <label className="font-mono text-[9px] text-[#555] tracking-[2px]">PASSWORD</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -134,8 +148,10 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength={6}
-                    className="bg-[rgba(255,255,255,0.03)] rounded-[8px] px-[10px] py-[8px] pr-[32px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.08)] outline-none focus:border-[rgba(255,255,255,0.2)] transition-colors w-full placeholder:text-[#333]"
+                    className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[10px] py-[7px] pr-[32px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.1)] outline-none transition-colors w-full placeholder:text-[#333]"
                     placeholder="••••••"
+                    onFocus={(e) => { e.target.style.borderColor = focusBorder; }}
+                    onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; }}
                   />
                   <button
                     type="button"
@@ -150,7 +166,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                   <button
                     type="button"
                     onClick={() => switchView("forgot")}
-                    className="font-mono text-[9px] text-[#444] hover:text-[#777] transition-colors tracking-[0.5px] self-end mt-[1px]"
+                    className="font-mono text-[9px] text-[#444] hover:text-[#777] transition-colors tracking-[0.5px] self-end mt-[2px]"
                   >
                     Forgot password?
                   </button>
@@ -160,23 +176,23 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
 
             {/* Error */}
             {error && (
-              <div className="bg-[rgba(255,60,60,0.05)] border border-[rgba(255,60,60,0.1)] rounded-[8px] px-[10px] py-[8px]">
+              <div className="bg-[rgba(255,60,60,0.05)] border border-[rgba(255,60,60,0.12)] rounded-[6px] px-[10px] py-[7px]">
                 <p className="font-mono text-[9px] text-[#e55] leading-[1.5]">{error}</p>
               </div>
             )}
 
             {/* Success */}
             {success && (
-              <div className="bg-[rgba(80,200,80,0.05)] border border-[rgba(80,200,80,0.1)] rounded-[8px] px-[10px] py-[8px]">
+              <div className="bg-[rgba(80,200,80,0.05)] border border-[rgba(80,200,80,0.12)] rounded-[6px] px-[10px] py-[7px]">
                 <p className="font-mono text-[9px] text-[#6b6] leading-[1.5]">{success}</p>
               </div>
             )}
 
-            {/* Submit — white outline, no accent fill */}
+            {/* Submit — neutral glass, matching popover buttons */}
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center justify-center gap-[5px] py-[9px] rounded-[8px] font-mono text-[10px] tracking-[2px] transition-all disabled:opacity-50 border border-[rgba(255,255,255,0.15)] bg-[rgba(255,255,255,0.04)] text-[#ccc] hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+              className="flex items-center justify-center gap-[6px] py-[7px] px-[8px] rounded-[6px] font-mono text-[11px] tracking-[0.6px] transition-all disabled:opacity-50 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] text-[#555] hover:text-[#888] hover:border-[rgba(255,255,255,0.18)]"
             >
               {loading && <Loader2 size={11} className="animate-spin" />}
               {view === "forgot" ? "SEND RESET LINK" : view === "signin" ? "SIGN IN" : "CREATE ACCOUNT"}
@@ -185,7 +201,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
 
           {/* Footer */}
           <div className="flex flex-col items-center gap-[8px]">
-            <div className="w-full h-px bg-[rgba(255,255,255,0.04)]" />
+            <div className="w-full h-px bg-[rgba(255,255,255,0.06)]" />
 
             {view === "forgot" ? (
               <button

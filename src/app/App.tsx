@@ -169,7 +169,7 @@ export default function App() {
           />
 
           {/* Mobile view switcher */}
-          <div className="flex lg:hidden px-[16px] sm:px-[24px] pt-[16px] pb-[20px] gap-[6px]">
+          <div className="flex lg:hidden px-[16px] sm:px-[24px] pt-[0px] pb-[10px] gap-[4px]">
             {([
               { id: "board" as ViewMode, icon: <LayoutDashboard size={12} />, label: "BOARD" },
               { id: "calendar" as ViewMode, icon: <CalendarDays size={12} />, label: "CALENDAR" },
@@ -192,7 +192,7 @@ export default function App() {
           </div>
 
           {/* Main Content */}
-          <div className="flex flex-1 overflow-hidden px-[16px] sm:px-[24px] lg:px-[40px] pt-[12px] lg:pt-[20px] pb-[16px] lg:pb-[40px] gap-[16px] lg:gap-[28px]">
+          <div className="flex flex-1 overflow-hidden px-[16px] sm:px-[24px] lg:px-[40px] pt-[4px] lg:pt-[20px] pb-[16px] lg:pb-[40px] gap-[16px] lg:gap-[28px]">
             {/* Desktop sidebar */}
             <div className="hidden lg:block shrink-0 overflow-y-auto">
               <Sidebar {...sidebarProps} />

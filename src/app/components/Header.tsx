@@ -92,7 +92,7 @@ export function Header({
   };
 
   return (
-    <header className="flex items-start justify-between px-[16px] sm:px-[24px] lg:px-[40px] pt-[28px] sm:pt-[20px] lg:pt-[28px] pb-[28px] lg:pb-[32px] shrink-0">
+    <header className="flex items-start justify-between px-[16px] sm:px-[24px] lg:px-[40px] pt-[28px] sm:pt-[20px] lg:pt-[28px] pb-[18px] sm:pb-[20px] lg:pb-[32px] shrink-0">
       <div className="flex items-center flex-1 min-w-0">
         {isEditingTitle ? (
           <input
