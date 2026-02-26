@@ -91,7 +91,7 @@ export function Sidebar({
 
   return (
     <div className={embedded
-      ? "flex flex-col gap-[24px] items-start w-full"
+      ? "flex flex-col gap-[24px] items-start w-full pt-[4px]"
       : "relative backdrop-blur-[12px] bg-[rgba(16,16,16,0.65)] flex flex-col gap-[28px] items-start pb-[28px] pt-[28px] px-[22px] rounded-[15px] w-full lg:w-[290px] shrink-0"
     }>
       {!embedded && <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[15px]" />}

@@ -55,6 +55,7 @@ export default function App() {
   const [viewMode, setViewMode] = useState<ViewMode>("board");
   const [calendarCombined, setCalendarCombined] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const accent = ACCENT_HEX[accentColor];
   const totalTasks = activeProject.tasks.length;
@@ -206,73 +207,84 @@ export default function App() {
                 />
                 <div className="absolute left-0 top-0 bottom-0 w-[300px] max-w-[85vw] bg-[rgba(10,10,10,0.92)] backdrop-blur-[20px] border-r border-[rgba(255,255,255,0.06)] overflow-y-auto flex flex-col">
                   {/* Close header */}
-                  <div className="flex items-center justify-between px-[20px] pt-[24px] pb-[16px] shrink-0">
+                  <div className="flex items-center justify-between px-[20px] pt-[24px] pb-[8px] shrink-0">
                     <span className="font-mono text-[9px] text-[#555] tracking-[2px]">MENU</span>
-                    <button
-                      onClick={() => setSidebarOpen(false)}
-                      className="bg-[rgba(255,255,255,0.05)] flex items-center justify-center w-[28px] h-[28px] rounded-[8px] border border-[rgba(255,255,255,0.08)] text-[#666] hover:text-white hover:bg-[rgba(255,255,255,0.08)] transition-colors"
-                    >
-                      <X size={14} />
-                    </button>
-                  </div>
-                  {/* Mobile search */}
-                  <div className="px-[20px] pb-[20px] shrink-0 flex flex-col gap-[10px]">
-                    <div className="flex items-center gap-[8px] bg-[rgba(255,255,255,0.04)] rounded-[10px] px-[12px] h-[36px] border border-[rgba(255,255,255,0.08)]">
-                      <Search size={14} className="text-[#555] shrink-0" />
-                      <input
-                        type="text"
-                        placeholder="Search tasks..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="bg-transparent text-white text-[13px] font-mono placeholder:text-[#444] outline-none w-full"
-                      />
-                      {searchQuery && (
-                        <button
-                          onClick={() => setSearchQuery("")}
-                          className="text-[#555] hover:text-white transition-colors shrink-0"
-                        >
-                          <X size={14} />
-                        </button>
-                      )}
+                    <div className="flex items-center gap-[6px]">
+                      <button
+                        onClick={() => { setMobileSearchOpen(!mobileSearchOpen); if (!mobileSearchOpen) setSearchQuery(""); }}
+                        className="bg-[rgba(255,255,255,0.05)] flex items-center justify-center w-[28px] h-[28px] rounded-[8px] border border-[rgba(255,255,255,0.08)] text-[#666] hover:text-white hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+                      >
+                        <Search size={13} />
+                      </button>
+                      <button
+                        onClick={() => setSidebarOpen(false)}
+                        className="bg-[rgba(255,255,255,0.05)] flex items-center justify-center w-[28px] h-[28px] rounded-[8px] border border-[rgba(255,255,255,0.08)] text-[#666] hover:text-white hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+                      >
+                        <X size={14} />
+                      </button>
                     </div>
-                    {/* Search results */}
-                    {searchQuery.trim() && (() => {
-                      const q = searchQuery.toLowerCase();
-                      const matches = projects.flatMap((p) =>
-                        p.tasks
-                          .filter((t) => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q))
-                          .map((t) => ({ task: t, projectName: p.name, projectId: p.id }))
-                      );
-                      return matches.length > 0 ? (
-                        <div className="flex flex-col gap-[2px] max-h-[200px] overflow-y-auto">
-                          <span className="font-mono text-[9px] text-[#555] tracking-[1px] px-[4px] pb-[2px]">
-                            {matches.length} RESULT{matches.length !== 1 ? "S" : ""}
-                          </span>
-                          {matches.map((m) => (
-                            <button
-                              key={m.task.id}
-                              onClick={() => {
-                                setActiveProjectId(m.projectId);
-                                setSidebarOpen(false);
-                              }}
-                              className="flex items-center gap-[8px] px-[8px] py-[6px] rounded-[8px] hover:bg-[rgba(255,255,255,0.04)] transition-colors text-left"
-                            >
-                              <span className="font-mono text-[11px] text-[#bbb] truncate flex-1">
-                                {m.task.title}
-                              </span>
-                              <span className="font-mono text-[8px] text-[#444] tracking-[0.5px] shrink-0">
-                                {m.projectName}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      ) : (
-                        <span className="font-mono text-[10px] text-[#444] px-[4px]">No results</span>
-                      );
-                    })()}
                   </div>
+                  {/* Mobile search — collapsible */}
+                  {mobileSearchOpen && (
+                    <div className="px-[20px] pb-[12px] shrink-0 flex flex-col gap-[10px]">
+                      <div className="flex items-center gap-[8px] bg-[rgba(255,255,255,0.04)] rounded-[10px] px-[12px] h-[36px] border border-[rgba(255,255,255,0.08)]">
+                        <Search size={14} className="text-[#555] shrink-0" />
+                        <input
+                          type="text"
+                          placeholder="Search tasks..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          autoFocus
+                          className="bg-transparent text-white text-[13px] font-mono placeholder:text-[#444] outline-none w-full"
+                        />
+                        {searchQuery && (
+                          <button
+                            onClick={() => setSearchQuery("")}
+                            className="text-[#555] hover:text-white transition-colors shrink-0"
+                          >
+                            <X size={14} />
+                          </button>
+                        )}
+                      </div>
+                      {/* Search results */}
+                      {searchQuery.trim() && (() => {
+                        const q = searchQuery.toLowerCase();
+                        const matches = projects.flatMap((p) =>
+                          p.tasks
+                            .filter((t) => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q))
+                            .map((t) => ({ task: t, projectName: p.name, projectId: p.id }))
+                        );
+                        return matches.length > 0 ? (
+                          <div className="flex flex-col gap-[2px] max-h-[200px] overflow-y-auto">
+                            <span className="font-mono text-[9px] text-[#555] tracking-[1px] px-[4px] pb-[2px]">
+                              {matches.length} RESULT{matches.length !== 1 ? "S" : ""}
+                            </span>
+                            {matches.map((m) => (
+                              <button
+                                key={m.task.id}
+                                onClick={() => {
+                                  setActiveProjectId(m.projectId);
+                                  setSidebarOpen(false);
+                                }}
+                                className="flex items-center gap-[8px] px-[8px] py-[6px] rounded-[8px] hover:bg-[rgba(255,255,255,0.04)] transition-colors text-left"
+                              >
+                                <span className="font-mono text-[11px] text-[#bbb] truncate flex-1">
+                                  {m.task.title}
+                                </span>
+                                <span className="font-mono text-[8px] text-[#444] tracking-[0.5px] shrink-0">
+                                  {m.projectName}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="font-mono text-[10px] text-[#444] px-[4px]">No results</span>
+                        );
+                      })()}
+                    </div>
+                  )}
                   {/* Sidebar content */}
-                  <div className="flex-1 overflow-y-auto px-[20px] pb-[20px]">
+                  <div className="flex-1 overflow-y-auto px-[20px] pt-[16px] pb-[20px]">
                     <Sidebar {...sidebarProps} embedded />
                   </div>
                 </div>

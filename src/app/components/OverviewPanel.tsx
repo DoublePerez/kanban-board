@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { AlertTriangle, ChevronDown, ChevronUp, Calendar } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import type { Task } from "@/types";
 import { COLUMN_LABELS } from "@/constants";
 import { hexToRgba } from "@/utils/colors";
@@ -77,7 +77,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
 
   return (
     <div className="h-full overflow-y-auto pr-[8px]">
-      <div className="flex flex-col gap-[16px] max-w-[720px]">
+      <div className="flex flex-col gap-[24px] max-w-[720px]">
 
         {/* ═══════════════════════════════════════════ */}
         {/* HERO STATS CARD                            */}
@@ -151,7 +151,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
         {/* ═══════════════════════════════════════════ */}
         <div className="relative backdrop-blur-[16px] bg-[rgba(10,10,10,0.75)] rounded-[16px]">
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.06)] inset-0 pointer-events-none rounded-[16px]" />
-          <div className="relative z-10 p-[28px] flex flex-col gap-[16px]">
+          <div className="relative z-10 p-[32px] flex flex-col gap-[16px]">
 
             {/* Section header */}
             <button
@@ -169,18 +169,13 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
             </button>
 
             {projectsExpanded && (
-              <div className="flex flex-col gap-[2px]">
+              <div className="flex flex-col gap-[4px]">
                 {projects.map((project) => {
                   const pTotal = project.tasks.length;
                   const pDone = project.tasks.filter((t) => t.columnId === "done").length;
                   const pPercent = pTotal > 0 ? Math.round((pDone / pTotal) * 100) : 0;
                   const isActive = project.id === activeProjectId;
                   const isExpanded = expandedProjectId === project.id;
-
-                  const pOverdue = project.tasks.filter((t) => {
-                    if (!t.dueDate || t.columnId === "done") return false;
-                    return new Date(t.dueDate + "T00:00:00").getTime() < now.getTime();
-                  }).length;
 
                   return (
                     <div key={project.id} className="flex flex-col">
@@ -202,12 +197,6 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                           </span>
 
                           <div className="flex items-center gap-[8px] shrink-0 ml-[12px]">
-                            {pOverdue > 0 && (
-                              <span className="font-mono text-[10px] text-[#666] flex items-center gap-[3px]">
-                                <AlertTriangle size={9} />
-                                {pOverdue}
-                              </span>
-                            )}
                             <span className="font-mono text-[11px] tabular-nums" style={{ color: isActive ? "#888" : "#555" }}>
                               {pDone}/{pTotal}
                             </span>
@@ -237,7 +226,7 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                         <div className="px-[14px] pt-[4px] pb-[16px] flex flex-col">
                           {/* Task list — sorted by due date, then status */}
                           {project.tasks.length > 0 ? (
-                            <div className="flex flex-col gap-[1px]">
+                            <div className="flex flex-col gap-[2px]">
                               {sortedTasks(project.tasks).map((task) => {
                                 const badge = getDueBadge(task, now);
                                 return (
@@ -262,15 +251,12 @@ export function OverviewPanel({ projects, activeProjectId, accent, onSelectProje
                                       {task.title}
                                     </span>
                                     {badge ? (
-                                      <div className="flex items-center gap-[4px] shrink-0 ml-[8px]">
-                                        {badge.icon === "overdue"
-                                          ? <AlertTriangle size={9} className="text-[#666]" />
-                                          : <Calendar size={9} className="text-[#555]" />
-                                        }
-                                        <span className="font-mono text-[9px] text-[#555]">
-                                          {badge.label}
-                                        </span>
-                                      </div>
+                                      <span
+                                        className="font-mono text-[9px] shrink-0 ml-[8px]"
+                                        style={{ color: badge.icon === "overdue" ? "#c55" : "#888" }}
+                                      >
+                                        {badge.label}
+                                      </span>
                                     ) : (
                                       <span className="font-mono text-[9px] text-[#444] shrink-0 ml-[8px]">
                                         {COLUMN_LABELS[task.columnId] ?? task.columnId}

@@ -87,17 +87,21 @@ export function AvatarPopover({
           {/* Accent color */}
           <div className="relative z-10 flex flex-col gap-[8px]">
             <span className="font-mono text-[9px] text-[#555] tracking-[2px]">THEME</span>
-            <div className="flex gap-[8px]">
+            <div className="flex gap-[2px]">
               {(Object.keys(ACCENT_HEX) as AccentColor[]).map((c) => (
                 <button
                   key={c}
                   onClick={() => onChangeAccent(c)}
-                  className="size-[12px] rounded-full transition-all"
-                  style={{
-                    backgroundColor: ACCENT_HEX[c],
-                    boxShadow: accentColor === c ? `0 0 0 2px rgba(14,14,14,0.95), 0 0 0 3px ${ACCENT_HEX[c]}` : "none",
-                  }}
-                />
+                  className="p-[6px] rounded-full transition-all"
+                >
+                  <div
+                    className="size-[12px] rounded-full"
+                    style={{
+                      backgroundColor: ACCENT_HEX[c],
+                      boxShadow: accentColor === c ? `0 0 0 2px rgba(14,14,14,0.95), 0 0 0 3px ${ACCENT_HEX[c]}` : "none",
+                    }}
+                  />
+                </button>
               ))}
             </div>
           </div>
