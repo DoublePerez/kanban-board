@@ -47,7 +47,7 @@ export default function App() {
     getFilteredTasks,
   } = useKanbanState();
 
-  const { isAuthenticated, user, signIn, signUp, signOut } = useAuth();
+  const { isAuthenticated, user, signIn, signUp, signOut, resetPassword } = useAuth();
 
   const [showDitherModal, setShowDitherModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -192,7 +192,7 @@ export default function App() {
           </div>
 
           {/* Main Content */}
-          <div className="flex flex-1 overflow-hidden px-[16px] sm:px-[24px] lg:px-[40px] pt-[4px] lg:pt-[16px] pb-[16px] lg:pb-[40px] gap-[16px] lg:gap-[28px]">
+          <div className="flex flex-1 overflow-hidden px-[16px] sm:px-[24px] lg:px-[40px] pt-[12px] lg:pt-[20px] pb-[16px] lg:pb-[40px] gap-[16px] lg:gap-[28px]">
             {/* Desktop sidebar */}
             <div className="hidden lg:block shrink-0 overflow-y-auto">
               <Sidebar {...sidebarProps} />
@@ -348,6 +348,7 @@ export default function App() {
             accent={accent}
             onClose={() => setShowAuthModal(false)}
             onAuth={handleAuth}
+            onResetPassword={resetPassword}
           />
         )}
 

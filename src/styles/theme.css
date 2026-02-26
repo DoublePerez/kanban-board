@@ -110,12 +110,12 @@
   /* ── Priority Opacity Scale ───────────────────────────────── */
   /* Card badges (prominent) */
   --priority-card-high:           1;
-  --priority-card-medium:         0.15;
-  --priority-card-low:            0.06;
+  --priority-card-medium:         0.20;
+  --priority-card-low:            0.10;
   /* Form selectors (subtle) */
   --priority-form-high:           0.15;
-  --priority-form-medium:         0.08;
-  --priority-form-low:            0.04;
+  --priority-form-medium:         0.12;
+  --priority-form-low:            0.06;
   /* Active highlight */
   --priority-active-highlight:    0.06;
   --priority-overview-highlight:  0.05;
@@ -228,4 +228,12 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
 }

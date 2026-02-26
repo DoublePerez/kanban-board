@@ -28,8 +28,8 @@ export function getCardPriorityStyle(
   if (selected === false) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
   switch (priority) {
     case "High": return { backgroundColor: accent, color: "#000" };
-    case "Medium": return { backgroundColor: hexToRgba(accent, 0.15), color: "#bbb" };
-    case "Low": return { backgroundColor: hexToRgba(accent, 0.06), color: "#999" };
+    case "Medium": return { backgroundColor: hexToRgba(accent, 0.20), color: "#bbb" };
+    case "Low": return { backgroundColor: hexToRgba(accent, 0.10), color: "#999" };
     default: return {};
   }
 }
@@ -50,8 +50,8 @@ export function getFormPriorityStyle(
   if (!selected) return { backgroundColor: "rgba(255,255,255,0.04)", color: "#555" };
   switch (priority) {
     case "High": return { backgroundColor: hexToRgba(accent, 0.15), color: "#ddd" };
-    case "Medium": return { backgroundColor: hexToRgba(accent, 0.08), color: "#bbb" };
-    case "Low": return { backgroundColor: hexToRgba(accent, 0.04), color: "#999" };
+    case "Medium": return { backgroundColor: hexToRgba(accent, 0.12), color: "#bbb" };
+    case "Low": return { backgroundColor: hexToRgba(accent, 0.06), color: "#999" };
     default: return {};
   }
 }

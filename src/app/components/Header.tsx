@@ -92,7 +92,7 @@ export function Header({
   };
 
   return (
-    <header className="flex items-start justify-between px-[16px] sm:px-[24px] lg:px-[40px] pt-[24px] sm:pt-[16px] lg:pt-[24px] pb-[8px] shrink-0">
+    <header className="flex items-start justify-between px-[16px] sm:px-[24px] lg:px-[40px] pt-[24px] sm:pt-[16px] lg:pt-[24px] pb-[20px] lg:pb-[28px] shrink-0">
       <div className="flex items-center flex-1 min-w-0">
         {isEditingTitle ? (
           <input
@@ -118,7 +118,7 @@ export function Header({
         )}
       </div>
 
-      <div className="flex items-center gap-[8px] shrink-0 mt-[4px] sm:mt-[8px]">
+      <div className="flex items-center gap-[8px] shrink-0 mt-[2px] sm:mt-[4px]">
         {/* Search - hidden on mobile */}
         <div className="relative hidden sm:block">
           {showSearch ? (
