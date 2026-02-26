@@ -64,7 +64,7 @@ export function AvatarPopover({
 
       {open && (
         <div className="absolute right-0 top-[calc(100%+8px)] w-[200px] bg-[rgba(14,14,14,0.95)] backdrop-blur-[20px] rounded-[12px] p-[14px] z-50 flex flex-col gap-[12px] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-          <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.08)] inset-0 pointer-events-none rounded-[12px]" />
+          <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.04)] inset-0 pointer-events-none rounded-[12px]" />
 
           {/* Initials */}
           <div className="relative z-10 flex flex-col gap-[6px]">
@@ -140,10 +140,10 @@ export function AvatarPopover({
           ) : (
             <button
               onClick={() => { onSignIn(); setOpen(false); }}
-              className="relative z-10 flex items-center justify-center gap-[6px] py-[6px] px-[8px] rounded-[6px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.1)] text-[#555] hover:text-[#888] hover:border-[rgba(255,255,255,0.18)] transition-all w-full"
+              className="relative z-10 flex items-center justify-center gap-[6px] py-[6px] px-[8px] rounded-[8px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] text-[#ccc] hover:bg-[rgba(255,255,255,0.12)] hover:border-[rgba(255,255,255,0.2)] hover:text-white transition-all w-full"
             >
               <LogIn size={11} />
-              <span className="font-mono text-[11px] tracking-[0.6px]">SIGN IN</span>
+              <span className="font-mono text-[10px] tracking-[1.5px]">SIGN IN</span>
             </button>
           )}
 
