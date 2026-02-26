@@ -81,7 +81,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
         style={shake ? { animation: "shake 0.5s ease-in-out" } : undefined}
       >
 
-        <div className="relative z-10 p-[20px] flex flex-col gap-[14px]">
+        <div className="relative z-10 px-[20px] pt-[20px] pb-[18px] flex flex-col gap-[16px]">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-[7px]">
@@ -104,7 +104,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
           {/* Form */}
           <form
             onSubmit={view === "forgot" ? handleForgotPassword : handleSubmit}
-            className="flex flex-col gap-[10px]"
+            className="flex flex-col gap-[12px]"
           >
             {/* Email */}
             <div className="flex flex-col gap-[4px]">
@@ -116,7 +116,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                 required
                 className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] text-white text-[11px] font-mono border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
                 placeholder="you@email.com"
-                onFocus={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; }}
+                onFocus={(e) => { e.target.style.borderColor = accent; }}
                 onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
               />
             </div>
@@ -134,7 +134,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                     minLength={6}
                     className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] pr-[32px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
                     placeholder="••••••"
-                    onFocus={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; }}
+                    onFocus={(e) => { e.target.style.borderColor = accent; }}
                     onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
                   />
                   <button
@@ -182,7 +182,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center justify-center gap-[6px] py-[8px] px-[8px] rounded-[8px] font-mono text-[10px] tracking-[1.5px] transition-all disabled:opacity-50 mt-[4px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] text-[#ccc] hover:bg-[rgba(255,255,255,0.12)] hover:border-[rgba(255,255,255,0.2)] hover:text-white"
+              className="flex items-center justify-center gap-[6px] py-[9px] px-[8px] rounded-[8px] font-mono text-[10px] tracking-[1.5px] transition-all disabled:opacity-50 mt-[2px] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.12)] text-[#ccc] hover:bg-[rgba(255,255,255,0.12)] hover:border-[rgba(255,255,255,0.2)] hover:text-white"
             >
               {loading ? <Loader2 size={12} className="animate-spin" /> : <ArrowRight size={12} />}
               {view === "forgot" ? "SEND LINK" : view === "signin" ? "SIGN IN" : "CREATE ACCOUNT"}
@@ -190,7 +190,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
           </form>
 
           {/* Footer */}
-          <div className="flex flex-col items-center gap-[8px] pt-[4px]">
+          <div className="flex flex-col items-center gap-[8px] pt-[2px]">
             <div className="w-full h-px bg-[rgba(255,255,255,0.04)]" />
 
             {view === "forgot" ? (
