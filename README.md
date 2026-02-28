@@ -1,5 +1,7 @@
 # Dither Kanban
 
+![Dither Kanban](public/og-image.png)
+
 A project management tool for organizing tasks visually. Work is represented as cards on a board, split into columns — To Do, In Progress, and Done. You move cards between columns as tasks progress. This is the kanban method, borrowed from agile/scrum workflows and adapted here for personal and team use.
 
 Dark UI, glassmorphic design system, monospace typography. Works offline, syncs to the cloud when you need it.
