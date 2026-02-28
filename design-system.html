@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dither Kanban — Design System</title>
+  <meta name="description" content="Design system reference for Dither Kanban. Tokens, typography, surfaces, components." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .page { max-width: 960px; margin: 0 auto; padding: 80px 32px 120px; }
+    @media (max-width: 640px) { .page { padding: 48px 20px 80px; } }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero { margin-bottom: 80px; }
+    .hero-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 13px;
+      color: #777;
+      line-height: 24px;
+      max-width: 560px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #444;
+    }
+    .hero-meta span { color: #666; }
+
+    /* ── Section ───────────────────────────────────────────── */
+    .section { margin-bottom: 72px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .section-number {
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 2px;
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .section-desc {
+      font-size: 11px;
+      color: #555;
+      line-height: 20px;
+      margin-bottom: 28px;
+      max-width: 600px;
+    }
+
+    /* ── Subsection ────────────────────────────────────────── */
+    .subsection { margin-bottom: 40px; }
+    .subsection-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    /* ── Color Grid ────────────────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .color-card {
+      background: rgba(14,14,14,0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .color-swatch {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .color-name {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #aaa;
+    }
+    .color-value {
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Token Table ───────────────────────────────────────── */
+    .token-table { width: 100%; border-collapse: collapse; }
+    .token-table th {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #444;
+      text-align: left;
+      padding: 0 0 12px 0;
+      text-transform: uppercase;
+    }
+    .token-table td {
+      font-size: 11px;
+      color: #888;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .token-table td:first-child {
+      color: #ccc;
+      font-weight: 500;
+      padding-right: 24px;
+      white-space: nowrap;
+    }
+    .token-table td:last-child {
+      color: #555;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Surface Cards ─────────────────────────────────────── */
+    .surface-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .surface-card {
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .surface-card .label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #aaa;
+    }
+    .surface-card .value {
+      font-size: 9px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Text Scale ────────────────────────────────────────── */
+    .text-scale { display: flex; flex-direction: column; gap: 20px; }
+    .text-row {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .text-row .meta {
+      flex-shrink: 0;
+      width: 120px;
+      font-size: 9px;
+      color: #444;
+      letter-spacing: 1px;
+    }
+    .text-row .sample { flex: 1; }
+
+    /* ── Text Color Ramp ───────────────────────────────────── */
+    .text-ramp {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .text-ramp-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 17px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .text-ramp-row:last-child { border-bottom: none; }
+    .text-ramp-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .text-ramp-name {
+      font-size: 10px;
+      color: #888;
+      letter-spacing: 0.5px;
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .text-ramp-hex {
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Component Preview ─────────────────────────────────── */
+    .preview-container {
+      background: rgba(14,14,14,0.45);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* Task Card Preview */
+    .preview-card {
+      width: 260px;
+      background: rgba(14,14,14,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 17px;
+      position: relative;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.4), 0px 10px 20px -5px rgba(0,0,0,0.3);
+    }
+    .preview-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .preview-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .preview-card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.42px;
+      line-height: 20px;
+    }
+    .preview-card-desc {
+      font-size: 10px;
+      color: #777;
+      line-height: 18px;
+      margin-top: 12px;
+    }
+    .preview-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+    .preview-badge {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      line-height: 14px;
+    }
+    .preview-badge-high {
+      background: rgba(163,230,53,1);
+      color: rgba(0,0,0,0.8);
+    }
+    .preview-badge-medium {
+      background: rgba(163,230,53,0.20);
+      color: rgba(163,230,53,0.7);
+    }
+    .preview-badge-low {
+      background: rgba(163,230,53,0.10);
+      color: rgba(163,230,53,0.5);
+    }
+    .preview-date {
+      font-size: 11px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Button Previews */
+    .preview-buttons { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+    .btn-accent {
+      background: rgba(163,230,53,0.12);
+      border-color: rgba(163,230,53,0.2);
+      color: #A3E635;
+    }
+    .btn-accent:hover {
+      background: rgba(163,230,53,0.18);
+      border-color: rgba(163,230,53,0.3);
+    }
+    .btn-ghost {
+      background: transparent;
+      border-color: transparent;
+      color: #666;
+    }
+    .btn-ghost:hover {
+      color: #fff;
+    }
+
+    /* Input Preview */
+    .preview-input {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px;
+      width: 260px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .preview-input::placeholder { color: #444; }
+    .preview-input:focus { border-color: rgba(255,255,255,0.25); }
+
+    /* Tooltip Preview */
+    .preview-tooltip {
+      width: 260px;
+      background: rgba(14,14,14,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.4), 0px 10px 20px -5px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .preview-tooltip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .preview-tooltip-content {
+      padding: 17px;
+      padding-right: 34px;
+    }
+    .preview-tooltip-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+    .preview-tooltip-desc {
+      font-size: 11px;
+      color: #777;
+      line-height: 20px;
+      margin-top: 12px;
+    }
+    .preview-tooltip-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 17px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .preview-tooltip-nav {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      color: #444;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .preview-tooltip-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .preview-tooltip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    /* Column Preview */
+    .preview-column {
+      width: 260px;
+      background: rgba(8,8,8,0.55);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .preview-column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 4px 14px;
+    }
+    .preview-column-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #f1f1f1;
+    }
+    .preview-column-count {
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+    }
+    .preview-column-mini-card {
+      background: rgba(14,14,14,0.75);
+      border-radius: 12px;
+      padding: 14px 17px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .preview-column-mini-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: #ccc;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Spacing Scale ─────────────────────────────────────── */
+    .spacing-grid { display: flex; flex-direction: column; gap: 8px; }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .spacing-label {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 0.5px;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .spacing-bar {
+      height: 8px;
+      background: rgba(163,230,53,0.25);
+      border-radius: 4px;
+      border: 1px solid rgba(163,230,53,0.15);
+    }
+    .spacing-px {
+      font-size: 9px;
+      color: #444;
+      flex-shrink: 0;
+      width: 40px;
+    }
+
+    /* ── Radius Preview ────────────────────────────────────── */
+    .radius-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .radius-box {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .radius-label {
+      font-size: 9px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Shadow Preview ────────────────────────────────────── */
+    .shadow-preview {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .shadow-box {
+      width: 120px;
+      height: 80px;
+      background: rgba(14,14,14,0.75);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 10px;
+    }
+    .shadow-box .label {
+      font-size: 9px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Priority Scale ────────────────────────────────────── */
+    .priority-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .priority-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .priority-box {
+      width: 80px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .priority-label {
+      font-size: 9px;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Scrollbar Styling ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Dot Separator ─────────────────────────────────────── */
+    .dot-sep {
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #333;
+      margin: 0 4px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ═══ Hero ═══════════════════════════════════════════════ -->
+    <div class="hero">
+      <div class="hero-label">DESIGN SYSTEM</div>
+      <h1>Dither Kanban</h1>
+      <p>
+        Token-based design system for a glassmorphic kanban board.
+        Every surface, color, and spacing value is drawn from a single
+        source of truth. Dark theme only.
+      </p>
+      <div class="hero-meta">
+        <span>V1.0</span>
+        <span>JETBRAINS MONO</span>
+        <span>TAILWIND 4</span>
+        <span>REACT 18</span>
+      </div>
+    </div>
+
+    <!-- ═══ 01 — Accent Colors ════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <span class="section-title">Accent Colors</span>
+      </div>
+      <p class="section-desc">
+        Five accent options that propagate through badges, dots, focus rings,
+        and interactive highlights. Each project can override the global accent.
+        Lime is the default.
+      </p>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background:#A3E635;"></div>
+          <div class="color-name">Lime</div>
+          <div class="color-value">#A3E635 — default</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background:#34D399;"></div>
+          <div class="color-name">Green</div>
+          <div class="color-value">#34D399</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background:#60A5FA;"></div>
+          <div class="color-name">Blue</div>
+          <div class="color-value">#60A5FA</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background:#F97316;"></div>
+          <div class="color-name">Orange</div>
+          <div class="color-value">#F97316</div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background:#F87171;"></div>
+          <div class="color-name">Red</div>
+          <div class="color-value">#F87171</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 02 — Glass Surfaces ═══════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <span class="section-title">Glass Surfaces</span>
+      </div>
+      <p class="section-desc">
+        Translucent layers with backdrop blur create depth over dithered backgrounds.
+        Three blur tiers establish hierarchy: columns behind cards, cards behind popovers.
+      </p>
+
+      <div class="surface-grid">
+        <div class="surface-card" style="background:rgba(8,8,8,0.55); backdrop-filter:blur(16px);">
+          <div class="label">Column</div>
+          <div class="value">rgba(8,8,8,0.55) — blur 16px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(14,14,14,0.75); backdrop-filter:blur(12px);">
+          <div class="label">Card</div>
+          <div class="value">rgba(14,14,14,0.75) — blur 12px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(22,22,22,0.92); backdrop-filter:blur(12px);">
+          <div class="label">Card Hover</div>
+          <div class="value">rgba(22,22,22,0.92) — blur 12px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(16,16,16,0.65); backdrop-filter:blur(12px);">
+          <div class="label">Panel</div>
+          <div class="value">rgba(16,16,16,0.65) — blur 12px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(14,14,14,0.95); backdrop-filter:blur(20px);">
+          <div class="label">Popover</div>
+          <div class="value">rgba(14,14,14,0.95) — blur 20px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(10,10,10,0.75); backdrop-filter:blur(12px);">
+          <div class="label">Overlay</div>
+          <div class="value">rgba(10,10,10,0.75) — blur 12px</div>
+        </div>
+        <div class="surface-card" style="background:rgba(255,255,255,0.06);">
+          <div class="label">Input</div>
+          <div class="value">rgba(255,255,255,0.06)</div>
+        </div>
+        <div class="surface-card" style="background:rgba(255,255,255,0.03);">
+          <div class="label">Hover / Tab</div>
+          <div class="value">rgba(255,255,255,0.03)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 03 — Text Hierarchy ═══════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <span class="section-title">Text Hierarchy</span>
+      </div>
+      <p class="section-desc">
+        Eleven named steps from primary (#fff) to invisible (#333).
+        All text is JetBrains Mono. Color alone establishes hierarchy —
+        no opacity tricks.
+      </p>
+
+      <div class="subsection">
+        <div class="subsection-title">Color Ramp</div>
+        <div style="background:rgba(14,14,14,0.75); border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden;">
+          <div class="text-ramp">
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#ffffff;"></div>
+              <div class="text-ramp-name">Primary</div>
+              <div class="text-ramp-hex">#FFFFFF</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#ffffff;">Task titles, headings</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#dddddd;"></div>
+              <div class="text-ramp-name">Secondary</div>
+              <div class="text-ramp-hex">#DDDDDD</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#dddddd;">Descriptions</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#cccccc;"></div>
+              <div class="text-ramp-name">Tertiary</div>
+              <div class="text-ramp-hex">#CCCCCC</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#cccccc;">Button labels</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#aaaaaa;"></div>
+              <div class="text-ramp-name">Label</div>
+              <div class="text-ramp-hex">#AAAAAA</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#aaaaaa;">Section labels</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#999999;"></div>
+              <div class="text-ramp-name">Muted</div>
+              <div class="text-ramp-hex">#999999</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#999999;">Secondary actions</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#888888;"></div>
+              <div class="text-ramp-name">Dimmed</div>
+              <div class="text-ramp-hex">#888888</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#888888;">Metadata</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#777777;"></div>
+              <div class="text-ramp-name">Subtle</div>
+              <div class="text-ramp-hex">#777777</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#777777;">Descriptions, counts</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#666666;"></div>
+              <div class="text-ramp-name">Faint</div>
+              <div class="text-ramp-hex">#666666</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#666666;">Icons, chevrons</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#555555;"></div>
+              <div class="text-ramp-name">Ghost</div>
+              <div class="text-ramp-hex">#555555</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#555555;">Dates, footer text</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#444444;"></div>
+              <div class="text-ramp-name">Placeholder</div>
+              <div class="text-ramp-hex">#444444</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#444444;">Input placeholders</div>
+            </div>
+            <div class="text-ramp-row">
+              <div class="text-ramp-swatch" style="background:#333333;"></div>
+              <div class="text-ramp-name">Invisible</div>
+              <div class="text-ramp-hex">#333333</div>
+              <div style="flex:1;"></div>
+              <div style="font-size:11px; color:#333333;">Close buttons, dots</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Type Scale</div>
+        <div class="text-scale">
+          <div class="text-row">
+            <div class="meta">14px / 500</div>
+            <div class="sample" style="font-size:14px; font-weight:500; color:#fff; letter-spacing:0.42px;">RESCUE PRINCESS FIONA</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">13px / 500</div>
+            <div class="sample" style="font-size:13px; font-weight:500; color:#fff; letter-spacing:1.5px;">LET'S GET STARTED</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">12px / 700</div>
+            <div class="sample" style="font-size:12px; font-weight:700; color:#f1f1f1; letter-spacing:2px;">TO DO</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">11px / 400</div>
+            <div class="sample" style="font-size:11px; font-weight:400; color:#777; line-height:20px;">Navigate the castle ruins, find Fiona, escape with Donkey alive.</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">10px / 500</div>
+            <div class="sample" style="font-size:10px; font-weight:500; color:#aaa; letter-spacing:1px;">SECTION LABEL</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">10px / 400</div>
+            <div class="sample" style="font-size:10px; font-weight:400; color:#777;">Subtask item or card description text</div>
+          </div>
+          <div class="text-row">
+            <div class="meta">9px / 500</div>
+            <div class="sample" style="font-size:9px; font-weight:500; color:#555; letter-spacing:2px;">COLOR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 04 — Spacing ══════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <span class="section-title">Spacing</span>
+      </div>
+      <p class="section-desc">
+        Pixel-based spacing with a small set of recurring values.
+        Card padding is 17px. Column padding is 12px. Component gaps use 8px as the base unit.
+      </p>
+
+      <div class="spacing-grid">
+        <div class="spacing-row">
+          <div class="spacing-label">4px</div>
+          <div class="spacing-bar" style="width:16px;"></div>
+          <div class="spacing-px">Icon gaps</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">8px</div>
+          <div class="spacing-bar" style="width:32px;"></div>
+          <div class="spacing-px">Base unit</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">12px</div>
+          <div class="spacing-bar" style="width:48px;"></div>
+          <div class="spacing-px">Column pad, inputs</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">16px</div>
+          <div class="spacing-bar" style="width:64px;"></div>
+          <div class="spacing-px">Mobile gutter</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">17px</div>
+          <div class="spacing-bar" style="width:68px;"></div>
+          <div class="spacing-px">Card padding</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">20px</div>
+          <div class="spacing-bar" style="width:80px;"></div>
+          <div class="spacing-px">Column gap (sm)</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">24px</div>
+          <div class="spacing-bar" style="width:96px;"></div>
+          <div class="spacing-px">Tablet gutter</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">28px</div>
+          <div class="spacing-bar" style="width:112px;"></div>
+          <div class="spacing-px">Column gap (lg)</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">40px</div>
+          <div class="spacing-bar" style="width:160px;"></div>
+          <div class="spacing-px">Desktop gutter</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 05 — Border Radius ════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <span class="section-title">Border Radius</span>
+      </div>
+
+      <div class="radius-grid">
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:6px;"></div>
+          <div class="radius-label">6px — sm</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:8px;"></div>
+          <div class="radius-label">8px — md</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:10px;"></div>
+          <div class="radius-label">10px — lg</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:12px;"></div>
+          <div class="radius-label">12px — xl</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:15px;"></div>
+          <div class="radius-label">15px — 2xl</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:16px;"></div>
+          <div class="radius-label">16px — 3xl</div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-box" style="border-radius:9999px;"></div>
+          <div class="radius-label">full</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 06 — Shadows ══════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <span class="section-title">Shadows</span>
+      </div>
+
+      <div class="shadow-preview">
+        <div>
+          <div class="shadow-box" style="box-shadow: 0px 2px 8px rgba(0,0,0,0.4), 0px 10px 20px -5px rgba(0,0,0,0.3);">
+            <div class="label">Card</div>
+          </div>
+        </div>
+        <div>
+          <div class="shadow-box" style="box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
+            <div class="label">Popover</div>
+          </div>
+        </div>
+        <div>
+          <div class="shadow-box" style="box-shadow: none;">
+            <div class="label">Column</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 07 — Borders ══════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <span class="section-title">Borders</span>
+      </div>
+      <p class="section-desc">
+        White borders at low opacity define edges without hard lines.
+        Borders get stronger on interactive elements and focus states.
+      </p>
+
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>glass-border</td>
+            <td>rgba(255,255,255, 0.06)</td>
+            <td>Cards, columns, dividers</td>
+          </tr>
+          <tr>
+            <td>glass-border-subtle</td>
+            <td>rgba(255,255,255, 0.05)</td>
+            <td>Column containers</td>
+          </tr>
+          <tr>
+            <td>glass-border-button</td>
+            <td>rgba(255,255,255, 0.08)</td>
+            <td>Button default</td>
+          </tr>
+          <tr>
+            <td>glass-border-button-hover</td>
+            <td>rgba(255,255,255, 0.15)</td>
+            <td>Button hover</td>
+          </tr>
+          <tr>
+            <td>glass-border-input</td>
+            <td>rgba(255,255,255, 0.10)</td>
+            <td>Input default</td>
+          </tr>
+          <tr>
+            <td>glass-border-input-focus</td>
+            <td>rgba(255,255,255, 0.25)</td>
+            <td>Input focused</td>
+          </tr>
+          <tr>
+            <td>glass-border-input-strong</td>
+            <td>rgba(255,255,255, 0.20)</td>
+            <td>Emphasized inputs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ 08 — Priority System ══════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <span class="section-title">Priority System</span>
+      </div>
+      <p class="section-desc">
+        Priorities use the accent color at different opacities.
+        High is fully saturated. Medium and Low fade progressively
+        so the board doesn't scream at you.
+      </p>
+
+      <div class="subsection">
+        <div class="subsection-title">Card Badges</div>
+        <div class="priority-grid">
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,1); color:rgba(0,0,0,0.8);">High</div>
+            <div class="priority-label">opacity 1.0</div>
+          </div>
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,0.20); color:rgba(163,230,53,0.7);">Medium</div>
+            <div class="priority-label">opacity 0.20</div>
+          </div>
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,0.10); color:rgba(163,230,53,0.5);">Low</div>
+            <div class="priority-label">opacity 0.10</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Form Selectors</div>
+        <div class="priority-grid">
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,0.15); color:rgba(163,230,53,0.8);">High</div>
+            <div class="priority-label">opacity 0.15</div>
+          </div>
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,0.12); color:rgba(163,230,53,0.6);">Medium</div>
+            <div class="priority-label">opacity 0.12</div>
+          </div>
+          <div class="priority-item">
+            <div class="priority-box" style="background:rgba(163,230,53,0.06); color:rgba(163,230,53,0.4);">Low</div>
+            <div class="priority-label">opacity 0.06</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 09 — Components ═══════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <span class="section-title">Components</span>
+      </div>
+      <p class="section-desc">
+        Live previews of core UI elements using the exact token values
+        from the production codebase.
+      </p>
+
+      <!-- Task Card -->
+      <div class="subsection">
+        <div class="subsection-title">Task Card</div>
+        <div class="preview-container">
+          <div class="preview-card">
+            <div class="preview-card-header">
+              <div class="preview-card-title">RESCUE PRINCESS FIONA</div>
+            </div>
+            <div class="preview-card-desc">Retrieve the princess from the dragon-guarded tower for Lord Farquaad</div>
+            <div class="preview-card-footer">
+              <div class="preview-badge preview-badge-high">High</div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:10px; color:#777;">2/3</span>
+                <div class="preview-date">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Mar 1
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-card-header">
+              <div class="preview-card-title">TOURNAMENT IN DULOC</div>
+            </div>
+            <div class="preview-card-desc">Win Farquaad's tournament to earn the quest assignment</div>
+            <div class="preview-card-footer">
+              <div class="preview-badge preview-badge-low">Low</div>
+              <div class="preview-date">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Feb 22
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onboarding Tooltip -->
+      <div class="subsection">
+        <div class="subsection-title">Onboarding Tooltip</div>
+        <div class="preview-container">
+          <div class="preview-tooltip">
+            <div style="position:absolute; top:17px; right:17px; color:#333; font-size:14px; cursor:pointer;">&#x2715;</div>
+            <div class="preview-tooltip-content">
+              <div class="preview-tooltip-title">YOUR PROJECTS</div>
+              <div class="preview-tooltip-desc">Organize tasks into separate projects. Each can have its own color and background.</div>
+            </div>
+            <div class="preview-tooltip-footer">
+              <button class="preview-tooltip-nav">BACK</button>
+              <div class="preview-tooltip-dots">
+                <div class="preview-tooltip-dot" style="background:#A3E635;"></div>
+                <div class="preview-tooltip-dot" style="background:#A3E635;"></div>
+                <div class="preview-tooltip-dot" style="background:rgba(255,255,255,0.12);"></div>
+                <div class="preview-tooltip-dot" style="background:rgba(255,255,255,0.12);"></div>
+                <div class="preview-tooltip-dot" style="background:rgba(255,255,255,0.12);"></div>
+              </div>
+              <button class="preview-tooltip-nav" style="color:#999;">NEXT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column -->
+      <div class="subsection">
+        <div class="subsection-title">Kanban Column</div>
+        <div class="preview-container">
+          <div class="preview-column">
+            <div class="preview-column-header">
+              <div class="preview-column-title">TO DO</div>
+              <div class="preview-column-count">[3]</div>
+            </div>
+            <div class="preview-column-mini-card">
+              <div class="preview-column-mini-title">ESCORT FIONA TO DULOC</div>
+            </div>
+            <div class="preview-column-mini-card">
+              <div class="preview-column-mini-title">CONFRONT LORD FARQUAAD</div>
+            </div>
+            <div class="preview-column-mini-card">
+              <div class="preview-column-mini-title">CLEAR THE SWAMP</div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.05); margin-top:4px; cursor:pointer;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.95;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="subsection">
+        <div class="subsection-title">Buttons</div>
+        <div class="preview-container">
+          <div class="preview-buttons">
+            <button class="btn">Default</button>
+            <button class="btn btn-accent">Accent</button>
+            <button class="btn btn-ghost">Ghost</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="subsection">
+        <div class="subsection-title">Input</div>
+        <div class="preview-container">
+          <input type="text" class="preview-input" placeholder="Task title..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 10 — Tokens Reference ═════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <span class="section-title">Tokens Reference</span>
+      </div>
+      <p class="section-desc">
+        Complete list of CSS custom properties defined in theme.css.
+        All tokens are available globally and mapped into Tailwind via @theme.
+      </p>
+
+      <div class="subsection">
+        <div class="subsection-title">Typography</div>
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>--font-family-mono</td><td>'JetBrains_Mono', monospace</td></tr>
+            <tr><td>--font-family-sans</td><td>'Basis_Grotesque_Arabic_Pro', sans-serif</td></tr>
+            <tr><td>--font-size-base</td><td>16px</td></tr>
+            <tr><td>--font-weight-normal</td><td>400</td></tr>
+            <tr><td>--font-weight-medium</td><td>500</td></tr>
+            <tr><td>--font-weight-bold</td><td>700</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Radii</div>
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>--radius-sm</td><td>6px</td></tr>
+            <tr><td>--radius-md</td><td>8px</td></tr>
+            <tr><td>--radius-lg</td><td>10px</td></tr>
+            <tr><td>--radius-xl</td><td>12px</td></tr>
+            <tr><td>--radius-2xl</td><td>15px</td></tr>
+            <tr><td>--radius-3xl</td><td>16px</td></tr>
+            <tr><td>--radius-full</td><td>9999px</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Blur</div>
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>--glass-blur-sm</td><td>6px</td></tr>
+            <tr><td>--glass-blur</td><td>12px</td></tr>
+            <tr><td>--glass-blur-lg</td><td>16px</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Shadows</div>
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>--shadow-card</td><td>0px 2px 8px rgba(0,0,0,0.4), 0px 10px 20px -5px rgba(0,0,0,0.3)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">Scrollbar</div>
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>--scrollbar-thumb</td><td>rgba(255,255,255, 0.15)</td></tr>
+            <tr><td>--scrollbar-thumb-hover</td><td>rgba(255,255,255, 0.25)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ Footer ════════════════════════════════════════════ -->
+    <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+      <div style="font-size:10px; color:#444; letter-spacing:1.5px;">DITHER KANBAN DESIGN SYSTEM</div>
+      <div style="font-size:10px; color:#333; letter-spacing:1px;">
+        ditherkanban.de
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
