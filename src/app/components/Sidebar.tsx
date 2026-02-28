@@ -4,6 +4,7 @@ import { hexToRgba } from "@/utils/colors";
 import type { ViewMode, AccentColor } from "@/types";
 import { ACCENT_HEX } from "@/types";
 
+
 const GRID_ICON_PATHS = [
   "M7.5 2.5H3.33333C2.8731 2.5 2.5 2.8731 2.5 3.33333V7.5C2.5 7.96024 2.8731 8.33333 3.33333 8.33333H7.5C7.96024 8.33333 8.33333 7.96024 8.33333 7.5V3.33333C8.33333 2.8731 7.96024 2.5 7.5 2.5Z",
   "M16.6667 2.5H12.5C12.0398 2.5 11.6667 2.8731 11.6667 3.33333V7.5C11.6667 7.96024 12.0398 8.33333 12.5 8.33333H16.6667C17.1269 8.33333 17.5 7.96024 17.5 7.5V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5Z",
@@ -18,6 +19,7 @@ export { ACCENT_HEX };
 interface Project {
   id: string;
   name: string;
+  accentColor?: AccentColor;
 }
 
 interface SidebarProps {
@@ -120,7 +122,7 @@ export function Sidebar({
       )}
 
       {/* Projects Header */}
-      <div className="flex flex-col gap-[20px] items-start w-full relative z-10">
+      <div className="flex flex-col gap-[20px] items-start w-full relative z-10" data-onboarding="projects">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="flex items-center gap-[8px] w-full"
@@ -158,10 +160,14 @@ export function Sidebar({
                   style={isActive ? { backgroundColor: hexToRgba(accent, 0.06) } : {}}
                   onClick={() => onSelectProject(project.id)}
                 >
-                  {/* Accent dot */}
+                  {/* Accent dot — per-project color */}
                   <div
                     className="size-[5px] rounded-full shrink-0 mr-[10px] transition-colors"
-                    style={{ backgroundColor: isActive ? accent : "#333" }}
+                    style={{
+                      backgroundColor: isActive
+                        ? (project.accentColor ? ACCENT_HEX[project.accentColor] : accent)
+                        : (project.accentColor ? hexToRgba(ACCENT_HEX[project.accentColor], 0.4) : "#333"),
+                    }}
                   />
 
                   {editingProjectId === project.id ? (

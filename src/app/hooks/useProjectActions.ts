@@ -35,10 +35,12 @@ export function useProjectActions(setState: SetState, activeProjectId: string) {
     [setState],
   );
 
-  /** Change the global accent color theme. */
+  /** Change the accent color for the active project. */
   const setAccentColor = useCallback(
-    (color: AccentColor) => setState((s) => ({ ...s, accentColor: color })),
-    [setState],
+    (color: AccentColor) => {
+      updateProject(setState, activeProjectId, (p) => ({ ...p, accentColor: color }));
+    },
+    [setState, activeProjectId],
   );
 
   /** Update the user's displayed initials (1-3 uppercase letters). */

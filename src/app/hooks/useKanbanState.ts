@@ -36,8 +36,9 @@ export function useKanbanState() {
   const lastSyncedRef = useRef<string>("");
   const hasFetchedRef = useRef(false);
 
-  const { projects, activeProjectId, accentColor, userInitials } = state;
+  const { projects, activeProjectId, userInitials } = state;
   const activeProject = projects.find((p) => p.id === activeProjectId) || projects[0];
+  const accentColor = activeProject.accentColor ?? state.accentColor;
 
   // ── Load from Supabase when user authenticates ──────────────
   useEffect(() => {

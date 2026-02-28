@@ -51,6 +51,7 @@ export async function migrateLocalStorageToSupabase(
       name: project.name,
       columns: project.columns as unknown as Json,
       background_image_path: bgPath,
+      accent_color: project.accentColor || null,
       position: i,
     });
 

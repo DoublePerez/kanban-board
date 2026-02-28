@@ -66,6 +66,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
         <button
           onClick={() => setShowAddForm(true)}
           className="flex items-center justify-center px-[16px] py-[8px] rounded-[8px] relative hover:bg-[rgba(255,255,255,0.05)] transition-colors"
+          data-onboarding={id === "todo" ? "add-task" : undefined}
         >
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.05)] inset-0 pointer-events-none rounded-[8px]" />
           <Plus size={16} className="text-[#f1f1f1] opacity-95" />

@@ -240,7 +240,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 </div>
               </div>
               {task.description && (
-                <p className="font-mono font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none mt-[8px]">
+                <p className="font-mono font-normal text-[#777] text-[10px] leading-[18px] whitespace-pre-wrap select-none mt-[12px]">
                   {task.description}
                 </p>
               )}
@@ -262,7 +262,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                     {isExpanded ? <ChevronDown size={10} className="text-[#666]" /> : <ChevronRight size={10} className="text-[#666]" />}
                     <span
                       className="font-mono font-normal text-[10px] leading-[14px]"
-                      style={{ color: doneCount === totalSubs ? "#aaa" : "#777" }}
+                      style={{ color: "#777" }}
                     >
                       {doneCount}/{totalSubs}
                     </span>
@@ -270,7 +270,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 )}
               </div>
               {task.dueDate && (
-                <div className="flex items-center gap-[4px]" style={{ color: overdue ? "#999" : "#555" }}>
+                <div className="flex items-center gap-[4px]" style={{ color: overdue && task.columnId !== "done" ? "#a05050" : "#555" }}>
                   <Calendar size={11} />
                   <span className="font-mono font-normal text-[11px] leading-[14px]">
                     {formatDueDate(task.dueDate)}

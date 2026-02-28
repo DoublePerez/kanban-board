@@ -52,6 +52,8 @@ export interface Project {
   columns: Column[];
   /** Base64-encoded background image, or null for the default. */
   backgroundImage: string | null;
+  /** Per-project accent color. Falls back to global accentColor if undefined. */
+  accentColor?: AccentColor;
 }
 
 // ── Deleted Items (Undo) ───────────────────────────────────────

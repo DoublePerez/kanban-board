@@ -12,9 +12,12 @@ import { DitherProcessor } from "./components/DitherProcessor";
 import { Header } from "./components/Header";
 import { AuthPage } from "./components/AuthPage";
 import { MigrationDialog } from "./components/MigrationDialog";
+import { Onboarding } from "./components/Onboarding";
 import { useKanbanState } from "./hooks/useKanbanState";
 import { useAuth } from "./contexts/AuthContext";
 import imgV3 from "../assets/shrek.png";
+
+const ONBOARDING_KEY = "kanban_onboarding_completed";
 
 export default function App() {
   const {
@@ -56,6 +59,12 @@ export default function App() {
   const [calendarCombined, setCalendarCombined] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(() => !localStorage.getItem(ONBOARDING_KEY));
+
+  const handleOnboardingComplete = useCallback(() => {
+    localStorage.setItem(ONBOARDING_KEY, "true");
+    setShowOnboarding(false);
+  }, []);
 
   const accent = ACCENT_HEX[accentColor];
   const totalTasks = activeProject.tasks.length;
@@ -294,7 +303,7 @@ export default function App() {
             {/* View content */}
             <div className="flex-1 overflow-hidden">
               {viewMode === "board" && (
-                <div className="flex-1 overflow-x-auto overflow-y-auto sm:overflow-y-hidden h-full">
+                <div className="flex-1 overflow-x-auto overflow-y-auto sm:overflow-y-hidden h-full" data-onboarding="board">
                   <div className="flex flex-col sm:flex-row gap-[16px] sm:gap-[20px] lg:gap-[28px] sm:h-full sm:min-w-min">
                     {activeProject.columns.map((col) => (
                       <KanbanColumn
@@ -359,6 +368,11 @@ export default function App() {
             onUploadLocal={handleMigrateLocal}
             onUseCloud={handleUseCloud}
           />
+        )}
+
+        {/* Onboarding tooltips for first-time visitors */}
+        {showOnboarding && !isDataLoading && viewMode === "board" && (
+          <Onboarding accent={accent} onComplete={handleOnboardingComplete} />
         )}
       </div>
     </DndProvider>

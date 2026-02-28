@@ -42,6 +42,7 @@ export interface Database {
           name: string;
           columns: Json;
           background_image_path: string | null;
+          accent_color: string | null;
           position: number;
           created_at: string;
           updated_at: string;
@@ -52,6 +53,7 @@ export interface Database {
           name: string;
           columns?: Json;
           background_image_path?: string | null;
+          accent_color?: string | null;
           position?: number;
           created_at?: string;
           updated_at?: string;
@@ -62,6 +64,7 @@ export interface Database {
           name?: string;
           columns?: Json;
           background_image_path?: string | null;
+          accent_color?: string | null;
           position?: number;
           updated_at?: string;
         };

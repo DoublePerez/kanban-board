@@ -73,6 +73,7 @@ export async function fetchAppState(userId: string): Promise<AppState | null> {
     columns: parseColumns(row.columns),
     tasks: tasksByProject.get(row.id) ?? [],
     backgroundImage: row.background_image_path,
+    accentColor: (row.accent_color as AccentColor) || undefined,
   }));
 
   // Assemble deleted items
@@ -134,6 +135,7 @@ export async function syncAppState(userId: string, state: AppState): Promise<voi
       name: project.name,
       columns: project.columns as unknown as Json,
       background_image_path: project.backgroundImage,
+      accent_color: project.accentColor || null,
       position: i,
     });
 

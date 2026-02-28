@@ -52,7 +52,7 @@ export function AvatarPopover({
   useEffect(() => { setEditInitials(initials); }, [initials]);
 
   return (
-    <div className="relative" ref={popRef}>
+    <div className="relative" ref={popRef} data-onboarding="avatar">
       <button
         onClick={() => setOpen(!open)}
         className="bg-[rgba(20,20,20,0.6)] backdrop-blur-[8px] flex items-center justify-center rounded-[10px] px-[10px] h-[34px] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(30,30,30,0.7)] transition-colors"
@@ -86,7 +86,7 @@ export function AvatarPopover({
 
           {/* Accent color */}
           <div className="relative z-10 flex flex-col gap-[8px]">
-            <span className="font-mono text-[9px] text-[#555] tracking-[2px]">THEME</span>
+            <span className="font-mono text-[9px] text-[#555] tracking-[2px]">COLOR</span>
             <div className="flex gap-[2px]">
               {(Object.keys(ACCENT_HEX) as AccentColor[]).map((c) => (
                 <button
