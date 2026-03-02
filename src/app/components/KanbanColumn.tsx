@@ -56,7 +56,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
       {/* Column Header */}
       <div className="flex items-center justify-between pb-[16px] w-full">
         <div className="flex items-center gap-[8px]">
-          <span className="font-mono font-bold text-[12px] text-white tracking-[0.24px] uppercase leading-[24px]">
+          <span className="font-mono font-bold text-[12px] text-[#e0e0e0] tracking-[0.24px] uppercase leading-[24px]">
             {title}
           </span>
           <span className="font-mono font-normal text-[14px] text-[rgba(246,246,246,0.76)] tracking-[0.28px] leading-[20px]">
@@ -69,7 +69,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
           data-onboarding={id === "todo" ? "add-task" : undefined}
         >
           <div aria-hidden="true" className="absolute border border-[rgba(255,255,255,0.05)] inset-0 pointer-events-none rounded-[8px]" />
-          <Plus size={16} className="text-[#f1f1f1] opacity-95" />
+          <Plus size={16} className="text-[#e0e0e0]" />
         </button>
       </div>
 
@@ -117,7 +117,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   autoFocus
-                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-[#e0e0e0] text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                   onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />
@@ -126,7 +126,7 @@ export function KanbanColumn({ id, title, tasks, accent, onAddTask, onDeleteTask
                   placeholder="Description..."
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
-                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-white text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[12px] py-[8px] text-[#e0e0e0] text-[13px] font-mono placeholder:text-[#555] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                   onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />

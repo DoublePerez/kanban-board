@@ -244,7 +244,7 @@ export default function App() {
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           autoFocus
-                          className="bg-transparent text-white text-[13px] font-mono placeholder:text-[#444] outline-none w-full"
+                          className="bg-transparent text-[#e0e0e0] text-[13px] font-mono placeholder:text-[#444] outline-none w-full"
                         />
                         {searchQuery && (
                           <button

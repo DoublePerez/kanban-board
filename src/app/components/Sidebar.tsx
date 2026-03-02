@@ -134,7 +134,7 @@ export function Sidebar({
               ))}
             </svg>
           </div>
-          <span className="font-sans text-[24px] text-white tracking-[-0.72px] leading-[24px]">
+          <span className="font-sans text-[24px] text-[#e0e0e0] tracking-[-0.72px] leading-[24px]">
             Projects
           </span>
           <div className="ml-auto">
@@ -251,7 +251,7 @@ export function Sidebar({
                   autoFocus
                   onBlur={() => { if (!newProjectName.trim()) setShowNewProject(false); }}
                   onKeyDown={(e) => { if (e.key === "Escape") setShowNewProject(false); }}
-                  className="w-full bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[7px] text-white text-[13px] font-mono placeholder:text-[#444] border border-[rgba(255,255,255,0.1)] outline-none"
+                  className="w-full bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[7px] text-[#e0e0e0] text-[13px] font-mono placeholder:text-[#444] border border-[rgba(255,255,255,0.1)] outline-none"
                   onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
                 />
               </form>

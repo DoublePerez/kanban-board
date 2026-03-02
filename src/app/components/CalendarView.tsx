@@ -69,7 +69,7 @@ export function CalendarView({ projects, activeProjectId, accent, combined, onTo
           >
             <ChevronLeft size={18} />
           </button>
-          <h2 className="font-mono font-medium text-white text-[14px] sm:text-[18px] tracking-[1px] min-w-[160px] sm:min-w-[200px] text-center">
+          <h2 className="font-mono font-medium text-[#e0e0e0] text-[14px] sm:text-[18px] tracking-[1px] min-w-[160px] sm:min-w-[200px] text-center">
             {format(currentMonth, "MMMM yyyy").toUpperCase()}
           </h2>
           <button

@@ -130,7 +130,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
                 if (e.key === "Enter") handleSaveEdit();
                 if (e.key === "Escape") setIsEditing(false);
               }}
-              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-white text-[13px] font-mono font-medium tracking-[0.42px] border border-[rgba(255,255,255,0.12)] outline-none"
+              className="bg-[rgba(255,255,255,0.06)] rounded-[8px] px-[10px] py-[6px] text-[#e0e0e0] text-[13px] font-mono font-medium tracking-[0.42px] border border-[rgba(255,255,255,0.12)] outline-none"
               style={{ borderColor: undefined }}
               onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
               onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
@@ -195,7 +195,7 @@ export function TaskCard({ task, accent, onDelete, onMoveTask, onEditTask, index
               }}
             >
               <div className="flex items-start pb-[4px] w-full">
-                <p className="flex-1 font-mono font-medium text-[14px] text-white tracking-[0.42px] leading-[20px] whitespace-pre-wrap select-none">
+                <p className="flex-1 font-mono font-medium text-[14px] text-[#e0e0e0] tracking-[0.42px] leading-[20px] whitespace-pre-wrap select-none">
                   {task.title}
                 </p>
                 <div className="flex items-center gap-[4px] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ml-2 shrink-0 mt-0.5">

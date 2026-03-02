@@ -51,7 +51,7 @@ export function Onboarding({ accent, onComplete }: OnboardingProps) {
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0 z-[100] bg-black/75" onClick={onComplete} />
+      <div className="fixed inset-0 z-[100] bg-black/85" onClick={onComplete} />
 
       {/* Centered tooltip */}
       <div
@@ -73,7 +73,7 @@ export function Onboarding({ accent, onComplete }: OnboardingProps) {
 
         {/* Content */}
         <div className="relative z-10 px-[17px] pt-[17px] pb-[13px] pr-[34px]">
-          <h3 className="font-mono text-[13px] text-white font-medium tracking-[1.5px]">
+          <h3 className="font-mono text-[13px] text-[#e0e0e0] font-medium tracking-[1.5px]">
             {current.title}
           </h3>
           <p className="font-mono text-[11px] text-[#777] leading-[20px] mt-[12px]">

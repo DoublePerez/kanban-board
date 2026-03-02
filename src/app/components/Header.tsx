@@ -104,13 +104,13 @@ export function Header({
               if (e.key === "Enter") handleTitleChange((e.target as HTMLInputElement).value);
               if (e.key === "Escape") setIsEditingTitle(false);
             }}
-            className="bg-transparent text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
+            className="bg-transparent text-[#e0e0e0] text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] outline-none w-full max-w-[800px]"
             style={{ borderBottom: "2px solid rgba(255,255,255,0.2)" }}
           />
         ) : (
           <h1
             onClick={() => setIsEditingTitle(true)}
-            className="text-white text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
+            className="text-[#d0d0d0] text-[32px] sm:text-[72px] lg:text-[min(110px,8vw)] font-sans tracking-[-2px] sm:tracking-[-5px] lg:tracking-[-7px] leading-[1.18] cursor-pointer hover:opacity-80 transition-opacity truncate pr-[8px]"
             title="Click to rename project"
           >
             {projectName}
@@ -130,7 +130,7 @@ export function Header({
                 placeholder="Search tasks..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="bg-transparent text-white text-[13px] font-mono placeholder:text-[#444] outline-none w-[180px]"
+                className="bg-transparent text-[#e0e0e0] text-[13px] font-mono placeholder:text-[#444] outline-none w-[180px]"
               />
               <button
                 onClick={() => { setShowSearch(false); onSearchChange(""); }}

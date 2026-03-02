@@ -78,7 +78,7 @@ export function AvatarPopover({
                 if (v.length >= 1) onChangeInitials(v);
               }}
               maxLength={3}
-              className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[8px] py-[6px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.1)] outline-none w-full"
+              className="bg-[rgba(255,255,255,0.04)] rounded-[6px] px-[8px] py-[6px] text-[#e0e0e0] text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.1)] outline-none w-full"
               onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.25)")}
               onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
             />

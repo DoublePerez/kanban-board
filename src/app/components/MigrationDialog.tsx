@@ -34,7 +34,7 @@ export function MigrationDialog({ accent, onUploadLocal, onUseCloud }: Migration
           <button
             onClick={handleUpload}
             disabled={loading}
-            className="flex items-center justify-center gap-[8px] h-[42px] rounded-[8px] font-mono text-[11px] tracking-[1px] text-white transition-all disabled:opacity-50"
+            className="flex items-center justify-center gap-[8px] h-[42px] rounded-[8px] font-mono text-[11px] tracking-[1px] text-[#e0e0e0] transition-all disabled:opacity-50"
             style={{ backgroundColor: accent }}
           >
             {loading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}

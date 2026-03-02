@@ -114,7 +114,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] text-white text-[11px] font-mono border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
+                className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] text-[#e0e0e0] text-[11px] font-mono border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
                 placeholder="you@email.com"
                 onFocus={(e) => { e.target.style.borderColor = accent; }}
                 onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
@@ -132,7 +132,7 @@ export function AuthPage({ accent, onClose, onAuth, onResetPassword }: AuthPageP
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength={6}
-                    className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] pr-[32px] text-white text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
+                    className="bg-[rgba(255,255,255,0.03)] rounded-[6px] px-[10px] py-[7px] pr-[32px] text-[#e0e0e0] text-[11px] font-mono tracking-[2px] border border-[rgba(255,255,255,0.08)] outline-none transition-all w-full placeholder:text-[#2a2a2a]"
                     placeholder="••••••"
                     onFocus={(e) => { e.target.style.borderColor = accent; }}
                     onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}

@@ -70,7 +70,7 @@
   --glass-border-button-hover:    rgba(255, 255, 255, 0.15);
 
   /* Text (dark-on-glass hierarchy: white → ghost) */
-  --glass-text-primary:           #ffffff;
+  --glass-text-primary:           #e0e0e0;
   --glass-text-secondary:         #dddddd;
   --glass-text-tertiary:          #cccccc;
   --glass-text-label:             #aaaaaa;
